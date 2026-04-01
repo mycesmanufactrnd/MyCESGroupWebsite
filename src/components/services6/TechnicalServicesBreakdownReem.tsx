@@ -1,0 +1,165 @@
+"use client";
+
+import { Box, Grid, Heading, Flex, Text } from "@chakra-ui/react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useRef } from "react";
+import {
+  FiFileText,
+  FiCheckCircle,
+  FiUsers,
+  FiTrendingDown,
+} from "react-icons/fi";
+
+const MotionBox = motion(Box);
+const darkGreen = "#0B5D3B";
+
+const services = [
+  {
+    title: "EMIS Reporting",
+    icon: FiFileText,
+    items: [
+      "A service focused on the timely and accurate submission of energy consumption data to the Energy Commission via the Energy Management Information System (EMIS) every six months.",
+    ],
+  },
+  {
+    title: "Energy Management System Review",
+    icon: FiCheckCircle,
+    items: [
+      "An expert evaluation of your facility’s current energy policies and procedures to ensure alignment with EMEER 2008 and international best practices.",
+    ],
+  },
+  {
+    title: "Energy Management System Support",
+    icon: FiUsers,
+    items: [
+      "Ongoing professional guidance to support your energy team in maintaining, documenting, and improving the effectiveness of your established energy management framework.",
+    ],
+  },
+  {
+    title: "Energy Saving Measure Support",
+    icon: FiTrendingDown,
+    items: [
+      "Technical consultancy to identify, validate, and oversee the implementation of targeted energy-saving projects to ensure maximum return on investment.",
+    ],
+  },
+];
+
+export default function TechnicalServicesBreakdownReem() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  return (
+    <Box
+      ref={ref}
+      py={{ base: 20, md: 28 }}
+      px={{ base: 6, md: 20 }}
+      maxW="1400px"
+      mx="auto"
+    >
+      {/* MAIN HEADER */}
+      <MotionBox
+        initial={{ opacity: 0, y: 20 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        mb={100}
+        textAlign="center"
+      >
+        <Heading
+          as="h2"
+          fontSize={{ base: "xl", md: "3xl" }}
+          fontWeight="bold"
+          color={darkGreen}
+        >
+          REEM Consultancy Services Service Classification
+        </Heading>
+      </MotionBox>
+
+      {/* SERVICES GRID */}
+      <AnimatePresence>
+        <Grid
+          templateColumns={{
+            base: "1fr",
+            md: "repeat(2, 1fr)",
+            lg: "repeat(3, 1fr)",
+          }}
+          gap={14}
+        >
+          {services.map((service, index) => {
+            const Icon = service.icon;
+
+            return (
+              <MotionBox
+                key={service.title}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 50 }}
+                transition={{
+                  duration: 0.8,
+                  delay: index * 0.15,
+                  ease: [0.42, 0, 0.58, 1],
+                }}
+                role="group"
+              >
+                {/* ICON */}
+                <Flex mb={5}>
+                  <Box
+                    as={Icon}
+                    fontSize="36px"
+                    color={darkGreen}
+                    transition="all 0.3s ease"
+                    _groupHover={{
+                      transform: "scale(1.12)",
+                      filter:
+                        "drop-shadow(0 0 6px rgba(11,93,59,0.4))",
+                    }}
+                  />
+                </Flex>
+
+                {/* HEADING */}
+                <Heading
+                  as="h3"
+                  fontSize={{ base: "xl", md: "1.5xl" }}
+                  fontWeight="bold"
+                  color={darkGreen}
+                  position="relative"
+                  display="inline-block"
+                  mb={4}
+                >
+                  {service.title}
+
+                  {/* Animated underline */}
+                  <Box
+                    position="absolute"
+                    left="50%"
+                    bottom="-6px"
+                    h="1.5px"
+                    w="30%"
+                    bg="gray.300"
+                    transform="translateX(-50%)"
+                    transition="all 0.3s ease"
+                    _groupHover={{ w: "100%" }}
+                  />
+                </Heading>
+
+                {/* DESCRIPTION */}
+                <Box mt={4}>
+                  {service.items.map((item) => (
+                    <Text
+                      key={item}
+                      fontSize="md"
+                      color="gray.700"
+                      mb={2}
+                      textAlign="justify"
+                    >
+                      • {item}
+                    </Text>
+                  ))}
+                </Box>
+              </MotionBox>
+            );
+          })}
+        </Grid>
+      </AnimatePresence>
+    </Box>
+  );
+}

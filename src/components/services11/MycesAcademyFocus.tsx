@@ -1,0 +1,163 @@
+"use client";
+
+import { Box, Grid, Heading, Text } from "@chakra-ui/react";
+import { useState } from "react";
+
+const pillars = [
+  {
+    id: 1,
+    title: "Electronic Components & Tools Supply",
+    frontImage: "/academyservice/2.jpg",
+    details: [
+      "Supply of high-quality electronic components and tools for education and industry.",
+      "Products include microcontrollers, sensors, circuit boards, and prototyping kits.",
+      "Support for students, educators, and professionals in hands-on learning.",
+      "Enable innovation, experimentation, and project development.",
+    ],
+  },
+  {
+    id: 2,
+    title: "Coding Class & Technical Training",
+    frontImage: "/academyservice/3.jpg",
+    details: [
+      "STEM-based courses in coding, robotics, and technical skills.",
+      "Hands-on learning using Arduino, Raspberry Pi, and Micro:bit.",
+      "Develop problem-solving, critical thinking, and engineering skills.",
+      "Prepare learners for careers in science, technology, and digital industries.",
+    ],
+  },
+  {
+    id: 3,
+    title: "Training Provider for Diverse Industries",
+    frontImage: "/academyservice/4.jpg",
+    details: [
+      "HRD Corp-registered training provider offering structured and accredited programs.",
+      "Training across biomedical, manufacturing, engineering, and air-conditioning & electrical sectors.",
+      "Programs designed for corporate, institutional, and individual learners.",
+      "Focus on practical skills, industry-relevant knowledge, and workforce development.",
+    ],
+  },
+];
+
+export default function MycesAcademyFocus() {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  return (
+    <Box bg="gray.50" py={{ base: 16, md: 28 }} px={{ base: 6, md: 20 }}>
+      {/* SECTION HEADER */}
+      <Box textAlign="center" mb={{ base: 12, md: 16 }}>
+        <Heading fontSize={{ base: "1xl", md: "2xl" }} fontWeight="bold" mb={4} color="#1e4b16">
+          Our Main Focus Areas
+        </Heading>
+        <Text fontSize={{ base: "md", md: "lg" }} color="gray.600">
+          Empowering individuals and industries with practical skills and innovative solutions
+        </Text>
+      </Box>
+
+      {/* FLIP CARDS GRID */}
+      <Grid
+        templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
+        gap={{ base: 8, md: 10 }}
+        maxW="1300px"
+        mx="auto"
+      >
+        {pillars.map((pillar, index) => {
+          const isFlipped = activeIndex === index;
+
+          return (
+            <Box
+              key={pillar.id}
+              h="420px"
+              perspective="1200px"
+              onMouseEnter={() => setActiveIndex(index)}
+              onMouseLeave={() => setActiveIndex(null)}
+              onClick={() =>
+                setActiveIndex(isFlipped ? null : index)
+              } // mobile tap
+            >
+              <Box
+                position="relative"
+                w="100%"
+                h="100%"
+                transition="transform 0.7s ease-in-out"
+                transformStyle="preserve-3d"
+                transform={isFlipped ? "rotateY(180deg)" : "rotateY(0deg)"}
+                boxShadow="0 12px 40px rgba(0,0,0,0.08)"
+                borderRadius="16px"
+                cursor="pointer"
+              >
+                {/* FRONT FACE */}
+                <Box
+                  position="absolute"
+                  inset={0}
+                  bgImage={`url(${pillar.frontImage})`}
+                  bgSize="cover"
+                  bgPos="center"
+                  backfaceVisibility="hidden"
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="flex-end"
+                >
+                  <Box
+                    bgGradient="linear(to-t, rgba(0,0,0,0.6), transparent)"
+                    p={6}
+                  >
+                    <Text
+                      fontSize="3xl"
+                      fontWeight="extrabold"
+                      color="white"
+                      mb={2}
+                    >
+                      0{pillar.id}
+                    </Text>
+                    <Heading fontSize="xl" color="white">
+                      {pillar.title}
+                    </Heading>
+                  </Box>
+                </Box>
+
+                {/* BACK FACE */}
+                <Box
+                  position="absolute"
+                  inset={0}
+                  bg="#dde0dcb3"
+                  backfaceVisibility="hidden"
+                  transform="rotateY(180deg)"
+                  borderRadius="16px"
+                  p={6}
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="center"
+                >
+                  <Heading
+                    fontSize="lg"
+                    mb={4}
+                    color="green.800"
+                    textAlign="center"
+                  >
+                    {pillar.title}
+                  </Heading>
+                  <Box as="ul" pl={4}>
+                    {pillar.details.map((item, idx) => (
+                      <Box
+                        as="li"
+                        key={idx}
+                        mb={2}
+                        fontSize="sm"
+                        color="gray.700"
+                        lineHeight="1.6"
+                        _hover={{ ml: 2, transition: "0.2s" }}
+                      >
+                        • {item}
+                      </Box>
+                    ))}
+                  </Box>
+                </Box>
+              </Box>
+            </Box>
+          );
+        })}
+      </Grid>
+    </Box>
+  );
+}

@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "JobApplication" ALTER COLUMN "description" DROP NOT NULL,
+ALTER COLUMN "cvUrl" DROP NOT NULL,
+ALTER COLUMN "transcriptUrl" DROP NOT NULL,
+ALTER COLUMN "otherDocsUrl" DROP NOT NULL;

@@ -1,0 +1,94 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+
+}
+
+// ALL YOUR MODELS REMAIN EXACTLY THE SAME - don't change anything below
+model Contact {
+  id        Int      @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String
+  phone     String
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model Newsletter {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
+model JobApplication {
+  id            Int      @id @default(autoincrement())
+  vacancy       String
+  name          String
+  email         String
+  phone         String
+  description   String?
+  cvUrl         String?
+  transcriptUrl String?
+  otherDocsUrl  String?
+  createdAt     DateTime @default(now())
+}
+
+model InternshipApplication {
+  id             String   @id @default(uuid())
+  name           String
+  email          String
+  phone          String
+  university     String
+  course         String
+  duration       String
+  internshipType String   @default("Not specified")
+  description    String?
+  cvUrl          String?
+  transcriptUrl  String?
+  otherDocsUrl   String?
+  createdAt      DateTime @default(now())
+}
+
+model EquipmentRentalInquiry {
+  id        Int      @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String
+  phone     String
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model MeasurementVerificationInquiry {
+  id        Int      @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String
+  phone     String
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model ReemInquiry {
+  id        Int      @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String
+  phone     String
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model EMSInquiry {
+  id        Int      @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String
+  phone     String
+  message   String
+  createdAt DateTime @default(now())
+}

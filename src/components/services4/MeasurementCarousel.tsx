@@ -1,0 +1,151 @@
+"use client";
+
+import { Box, Text, Heading, Flex, IconButton } from "@chakra-ui/react";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
+
+const MotionBox = motion(Box);
+
+const features = [
+  {
+    title: "Baseline Energy Measurement",
+    description:
+      "Measuring energy consumption before improvements are implemented.",
+  },
+  {
+    title: "Post-Implementation Measurement",
+    description:
+      "Measuring energy use after energy-saving measures are applied.",
+  },
+  {
+    title: "Energy Savings Calculation",
+    description:
+      "Comparing baseline and post-implementation data to determine actual energy savings.",
+  },
+  {
+    title: "Savings Verification",
+    description:
+      "Confirming that the achieved savings are real, accurate, and reliable.",
+  },
+  {
+    title: "Adjustment for Operating Conditions",
+    description:
+      "Normalizes energy data for changes in weather, occupancy, or operating hours to ensure fair and comparable savings calculations.",
+  },
+];
+
+export default function MeasurementCarousel() {
+  const [centerIndex, setCenterIndex] = useState(0);
+  const total = features.length;
+
+  const prev = () => setCenterIndex((centerIndex - 1 + total) % total);
+  const next = () => setCenterIndex((centerIndex + 1) % total);
+
+  const getProps = (index: number) => {
+    const diff = ((index - centerIndex + total) % total);
+    if (diff === 0) return { scale: 1.2, x: 0, opacity: 1, zIndex: 3 };
+    if (diff === 1 || diff === total - 1) return { scale: 1, x: diff === 1 ? 260 : -260, opacity: 0.85, zIndex: 2 };
+    if (diff === 2 || diff === total - 2) return { scale: 0.85, x: diff === 2 ? 480 : -480, opacity: 0.6, zIndex: 1 };
+    return { scale: 0.7, x: diff > total / 2 ? -600 : 600, opacity: 0, zIndex: 0 };
+  };
+
+  return (
+    <Box w="full" py={{ base: 16, md: 24 }} px={{ base: 6, md: 20 }} bg="#dde0dcb3">
+      <Heading
+        fontSize={{ base: "xl", md: "2xl" }}
+        fontWeight="bold"
+        mb={24}
+        textAlign="center"
+        color="#15350f"
+      >
+        Importance Of Measurement And Verification
+      </Heading>
+
+      <Box position="relative" w="full" overflow="hidden">
+        <Flex justify="center" align="center" position="relative" h={{ base: "300px", md: "360px" }}>
+          {features.map((feature, index) => {
+            const { scale, x, opacity, zIndex } = getProps(index);
+
+            return (
+              <MotionBox
+                key={index}
+                position="absolute"
+                cursor="pointer"
+                w={{ base: "250px", md: "280px" }}
+                h={{ base: "220px", md: "280px" }}
+                bg="gray.100"
+                borderRadius="2xl"
+                shadow="md"
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="center"
+                textAlign="center"
+                p={4}
+                style={{ zIndex }}
+                initial={{ opacity: 0, y: 80 }} // start further below for smoother scroll effect
+                whileInView={{ transform: `translateX(${x}px) scale(${scale})`, opacity, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ type: "spring", stiffness: 150, damping: 28, delay: index * 0.12 }} // smoother entrance
+                whileHover={{
+                  scale: scale + 0.08,
+                  y: -10,
+                  boxShadow: "0px 20px 30px rgba(0,0,0,0.15)",
+                  transition: { type: "spring", stiffness: 300, damping: 20 },
+                }}
+              >
+                <Heading fontSize="lg" mb={2} color="#0F2A1D">{feature.title}</Heading>
+                <Text fontSize="sm" color="gray.700">{feature.description}</Text>
+              </MotionBox>
+            );
+          })}
+        </Flex>
+
+        {/* Navigation */}
+        <IconButton
+          aria-label="Previous"
+          icon={<ChevronLeftIcon boxSize={6} />}
+          position="absolute"
+          top="50%"
+          left={1}
+          transform="translateY(-50%)"
+          zIndex={10}
+          onClick={prev}
+          bg="white"
+          _hover={{ bg: "green.100" }}
+          boxShadow="md"
+        />
+        <IconButton
+          aria-label="Next"
+          icon={<ChevronRightIcon boxSize={6} />}
+          position="absolute"
+          top="50%"
+          right={1}
+          transform="translateY(-50%)"
+          zIndex={10}
+          onClick={next}
+          bg="white"
+          _hover={{ bg: "green.100" }}
+          boxShadow="md"
+        />
+
+        {/* Pagination */}
+        <Flex justify="center" mt={10} gap={3}>
+          {features.map((_, i) => (
+            <Box
+              key={i}
+              w={i === centerIndex ? 4 : 3}
+              h={i === centerIndex ? 4 : 3}
+              borderRadius="full"
+              bg={i === centerIndex ? "green.700" : "gray.400"}
+              cursor="pointer"
+              onClick={() => setCenterIndex(i)}
+              transition="all 0.3s"
+            />
+          ))}
+        </Flex>
+      </Box>
+    </Box>
+  );
+}
