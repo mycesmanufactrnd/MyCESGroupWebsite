@@ -1,60 +1,27 @@
 "use client";
 
-import {
-  Box,
-  Flex,
-  Text,
-  Heading,
-  Image,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Box, Flex, Text, Heading, Image } from "@chakra-ui/react";
 
-import { motion } from "framer-motion";
-import { FaPlay } from "react-icons/fa";
-import { useState, useEffect } from "react";
+import { motion, Transition } from "framer-motion";
+import { useState, useEffect, useCallback } from "react";
 import { supabaseStorageClient } from "@/src/supabase";
-
-/* ================= SLIDE DATA ================= */
-// const slides = [
-//   {
-//     image: "1.png",
-//     title: "Taking MyCES Global",
-//     subText: "Expanding to the Middle East through strategic energy collaboration",
-//     blockBg: "#0F2A1D",
-//     blockDirection: "left",
-//   },
-//   {
-//     image: "2.png",
-//     title: "Shaping MyCES Together",
-//     subText: "AGM 2026: Reviewing achievements and planning new initiatives for growth",
-//     blockBg: "#163F2D",
-//     blockDirection: "right",
-//   },
-//   {
-//     image: "3.png",
-//     title: "Driving Digital Healthcare",
-//     subText: "Partnering with MSQH to advance healthcare accreditation with AI-powered tools",
-//     blockBg: "#163F2D",
-//     blockDirection: "left",
-//   },
-// ];
 
 /* ================= BACKGROUND VARIANTS ================= */
 const bgVariants = [
   {
     initial: { clipPath: "inset(0 100% 0 0)" },
     animate: { clipPath: "inset(0 0% 0 0)" },
-    transition: { duration: 1.2, ease: "easeInOut" },
+    transition: { duration: 1.2, ease: "easeInOut" } as Transition,
   },
   {
     initial: { scale: 1.3, opacity: 0 },
     animate: { scale: 1, opacity: 1 },
-    transition: { duration: 1.2, ease: "easeOut" },
+    transition: { duration: 1.2, ease: "easeOut" } as Transition,
   },
   {
     initial: { y: "-100%", opacity: 0 },
     animate: { y: "0%", opacity: 1 },
-    transition: { duration: 1.2, ease: "easeInOut" },
+    transition: { duration: 1.2, ease: "easeInOut" } as Transition,
   },
 ];
 
@@ -63,15 +30,23 @@ const MotionFlex = motion(Flex);
 const MotionHeading = motion(Heading);
 const MotionText = motion(Text);
 
+interface Slide {
+  image: string;
+  title: string;
+  subText: string;
+  blockBg: string;
+  blockDirection: string;
+}
+
 /* ================= HERO COMPONENT ================= */
 export default function NewsHero() {
   const [current, setCurrent] = useState(0);
-  const [playActive, setPlayActive] = useState(false);
-  const [slides, setSlides] = useState([]);
-  const [hovered, setHovered] = useState(false); // Track hover for arrows
+  const [slides, setSlides] = useState<Slide[]>([]);
+  const [hovered, setHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [slideImages, setSlideImages] = useState<string[]>([]);
 
+  // Fetch slides data
   useEffect(() => {
     const fetchSlides = async () => {
       const { data, error } = await supabaseStorageClient
@@ -84,62 +59,99 @@ export default function NewsHero() {
         return;
       }
 
-      const slidesData = data.map((slide) => ({
-        image: slide.image_name,
-        title: slide.image_title,
-        subText: slide.image_subtext,
-        blockBg: slide.image_bg,
-        blockDirection: slide.image_direction,
-      }));
-
-      setSlides(slidesData);
+      if (data && data.length > 0) {
+        const slidesData: Slide[] = data.map((slide) => ({
+          image: slide.image_name,
+          title: slide.image_title,
+          subText: slide.image_subtext,
+          blockBg: slide.image_bg,
+          blockDirection: slide.image_direction,
+        }));
+        setSlides(slidesData);
+      }
     };
 
     fetchSlides();
   }, []);
 
-  const nextSlide = () => setCurrent((p) => (p + 1) % slides.length);
-  const prevSlide = () =>
-    setCurrent((p) => (p === 0 ? slides.length - 1 : p - 1));
-
-  useEffect(() => {
-    if (!slideImages.length) return;
-
-    const interval = setInterval(() => {
-      setCurrent((p) => (p + 1) % slides.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [slideImages, slides.length]);
-
+  // Fetch images after slides are loaded
   useEffect(() => {
     const fetchImages = async () => {
       if (!slides.length) return;
 
       const urls = await Promise.all(
         slides.map(async (slide) => {
-          const { data, error } = await supabaseStorageClient.storage
-            .from("news")
-            .download(slide.image);
+          try {
+            const { data, error } = await supabaseStorageClient.storage
+              .from("news")
+              .download(slide.image);
 
-          if (error || !data) {
-            console.error("Error downloading image:", error);
+            if (error || !data) {
+              console.error("Error downloading image:", error);
+              return null;
+            }
+
+            return URL.createObjectURL(data);
+          } catch (err) {
+            console.error("Failed to download image:", err);
             return null;
           }
-
-          return URL.createObjectURL(data);
         }),
       );
 
-      setSlideImages(urls as string[]);
+      // Filter out any null values
+      const validUrls = urls.filter((url): url is string => url !== null);
+      setSlideImages(validUrls);
     };
 
     fetchImages();
-  }, [slides]);
 
-  const slide = slides[current];
-  // const blockInitialX = slide.blockDirection === "left" ? "-100%" : "100%";
-  // const blockAnimateX = slide.blockDirection === "left" ? "100%" : "-100%";
+    // Cleanup function to revoke object URLs
+    return () => {
+      slideImages.forEach((url) => {
+        if (url) URL.revokeObjectURL(url);
+      });
+    };
+  }, [slides]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const nextSlide = useCallback(() => {
+    if (slides.length === 0) return;
+    setCurrent((prev) => (prev + 1) % slides.length);
+  }, [slides.length]);
+
+  const prevSlide = useCallback(() => {
+    if (slides.length === 0) return;
+    setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  }, [slides.length]);
+
+  // Auto-advance slides
+  useEffect(() => {
+    if (!slides.length) return;
+
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [slides.length, nextSlide]);
+
+  // Get current slide safely
+  const currentSlide = slides[current];
+  const currentImage = slideImages[current];
+
+  // If no slides are loaded yet, don't render
+  if (slides.length === 0) {
+    return (
+      <Box
+        minH="90vh"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Text color="white">Loading...</Text>
+      </Box>
+    );
+  }
 
   return (
     <Box
@@ -154,21 +166,16 @@ export default function NewsHero() {
         key={current}
         position="absolute"
         inset={0}
-        // bgImage={`url('${slide.image}')`}
-        bgImage={
-          slideImages[current] ? `url(${slideImages[current]})` : undefined
-        }
+        bgImage={currentImage ? `url(${currentImage})` : undefined}
         bgSize="cover"
         bgPos="center"
-        {...bgVariants[current % bgVariants.length]}
+        initial={bgVariants[current % bgVariants.length].initial}
+        animate={bgVariants[current % bgVariants.length].animate}
+        transition={bgVariants[current % bgVariants.length].transition}
       />
 
       {/* Dark Overlay for better text contrast */}
-      <Box
-        position="absolute"
-        inset={0}
-        bg="rgba(0,0,0,0.45)" // stronger dark overlay
-      />
+      <Box position="absolute" inset={0} bg="rgba(0,0,0,0.45)" />
 
       {/* ===== ARROWS WITH CUSTOM IMAGES ===== */}
       <MotionBox
@@ -215,7 +222,7 @@ export default function NewsHero() {
         justify="center"
         align="flex-start"
         minH="90vh"
-        px={{ base: 35, md: 32 }} // shift text slightly to the right
+        px={{ base: 35, md: 32 }}
         pt={{ base: "6vh", md: "8vh" }}
       >
         <Box maxW={{ base: "90%", md: "680px" }}>
@@ -224,16 +231,16 @@ export default function NewsHero() {
             fontSize={{ base: "lg", md: "xl" }}
             mb={4}
             textTransform="uppercase"
-            letterGap="wide"
+            letterSpacing="wide"
             textAlign="left"
             fontWeight="bold"
             color="white"
-            textShadow="1px 1px 4px rgba(0,0,0,0.7)" // subtle shadow for readability
+            textShadow="1px 1px 4px rgba(0,0,0,0.7)"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.6 }}
           >
-            {slide?.subText}
+            {currentSlide?.subText || ""}
           </MotionText>
 
           <MotionHeading
@@ -244,12 +251,12 @@ export default function NewsHero() {
             fontWeight="bold"
             lineHeight="1.2"
             textAlign="left"
-            textShadow="2px 2px 6px rgba(0,0,0,0.7)" // make title stand out
+            textShadow="2px 2px 6px rgba(0,0,0,0.7)"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            {slide?.title}
+            {currentSlide?.title || ""}
           </MotionHeading>
         </Box>
       </Flex>
@@ -277,12 +284,14 @@ export default function NewsHero() {
           flex="1"
           align="center"
           justify="flex-end"
-          pr={{ base: 6, md: 100 }} // add padding from right edge
+          pr={{ base: 6, md: 100 }}
           gap={4}
           color="white"
           cursor="pointer"
           onClick={() => setIsOpen(true)}
-        ></Flex>
+        >
+          {/* Add your CTA content here if needed */}
+        </Flex>
       </MotionFlex>
 
       {/* DOTS */}
@@ -306,6 +315,8 @@ export default function NewsHero() {
           />
         ))}
       </Flex>
+
+      {/* Video Modal */}
       {isOpen && (
         <Box
           position="fixed"
@@ -315,20 +326,22 @@ export default function NewsHero() {
           display="flex"
           alignItems="center"
           justifyContent="center"
-          onClick={() => setIsOpen(false)} // close when clicking outside
+          onClick={() => setIsOpen(false)}
         >
           <Box
             position="relative"
             w={{ base: "90%", md: "800px" }}
             h={{ base: "50%", md: "450px" }}
-            onClick={(e) => e.stopPropagation()} // prevent closing when clicking video
+            onClick={(e) => e.stopPropagation()}
           >
-            <Box
-              as="iframe"
+            <iframe
               src="/video/corporatemyces.mp4"
-              w="100%"
-              h="100%"
-              borderRadius="md"
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "0.375rem", // md in Chakra
+                border: "none",
+              }}
               allow="autoplay; fullscreen"
             />
             {/* Close Button */}

@@ -10,6 +10,7 @@ const MotionHeading = motion(Heading);
 const MotionText = motion(Text);
 const MotionButton = motion(Button);
 const MotionImage = motion(Image);
+const MotionLink = motion(Link);
 
 /* Baseline animation variants */
 const container = {
@@ -22,19 +23,22 @@ const container = {
 };
 
 const baselineItem = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 20 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.9, ease: "easeOut" },
+    transition: {
+      duration: 0.6,
+      ease: "easeOut" as const,
+    },
   },
-};
+} as const;
 
 export default function BenefitsRewardsSection() {
   return (
     <MotionBox
-      px={{ base: 6, md: 28 }}   // ⬆️ wider horizontal padding
-      py={{ base: 20, md: 28 }}  // ⬆️ taller section
+      px={{ base: 6, md: 28 }}
+      py={{ base: 20, md: 28 }}
       bg="#dde0dcb3"
       variants={container}
       initial="hidden"
@@ -45,7 +49,7 @@ export default function BenefitsRewardsSection() {
         direction={{ base: "column", md: "row" }}
         align="center"
         justify="space-between"
-        gap={{ base: 12, md: 20 }} // ⬆️ more space between text & image
+        gap={{ base: 12, md: 20 }}
       >
         {/* LEFT: TEXT */}
         <Box flex="1">
@@ -53,7 +57,7 @@ export default function BenefitsRewardsSection() {
             variants={baselineItem}
             color="#2C4F31"
             mb={6}
-            fontSize={{ base: "1.5xl", md: "2xl" }} // ⬆️ slightly bigger
+            fontSize={{ base: "1.5xl", md: "2xl" }}
             fontWeight="bold"
           >
             Benefits And Rewards
@@ -61,78 +65,84 @@ export default function BenefitsRewardsSection() {
 
           <MotionText
             variants={baselineItem}
-            fontSize={{ base: "md", md: "lg" }} // ⬆️ better readability
+            fontSize={{ base: "md", md: "lg" }}
             mb={10}
             color="gray.700"
             lineHeight="1.9"
             maxW="600px"
           >
-          We recognize and reward the contributions of our team members with a comprehensive benefits package, including:
+            We recognize and reward the contributions of our team members with a
+            comprehensive benefits package, including:
           </MotionText>
           <MotionText
             variants={baselineItem}
-            fontSize={{ base: "md", md: "lg" }} // ⬆️ better readability
+            fontSize={{ base: "md", md: "lg" }}
             mb={5}
             color="gray.700"
             lineHeight="1.9"
             maxW="600px"
           >
-          1. Competitive salaries and performance-based incentives
+            1. Competitive salaries and performance-based incentives
           </MotionText>
           <MotionText
             variants={baselineItem}
-            fontSize={{ base: "md", md: "lg" }} // ⬆️ better readability
+            fontSize={{ base: "md", md: "lg" }}
             mb={5}
             color="gray.700"
             lineHeight="1.9"
             maxW="600px"
           >
-          2. Professional training, certifications, and career development programs
+            2. Professional training, certifications, and career development
+            programs
           </MotionText>
           <MotionText
             variants={baselineItem}
-            fontSize={{ base: "md", md: "lg" }} // ⬆️ better readability
+            fontSize={{ base: "md", md: "lg" }}
             mb={5}
             color="gray.700"
             lineHeight="1.9"
             maxW="600px"
           >
-          3. Opportunities for growth and advancement within the company
+            3. Opportunities for growth and advancement within the company
           </MotionText>
           <MotionText
             variants={baselineItem}
-            fontSize={{ base: "md", md: "lg" }} // ⬆️ better readability
+            fontSize={{ base: "md", md: "lg" }}
             mb={5}
             color="gray.700"
             lineHeight="1.9"
             maxW="600px"
           >
-          4. Supportive work environment that values innovation, collaboration, and wellbeing
+            4. Supportive work environment that values innovation,
+            collaboration, and wellbeing
           </MotionText>
           <MotionText
             variants={baselineItem}
-            fontSize={{ base: "md", md: "lg" }} // ⬆️ better readability
+            fontSize={{ base: "md", md: "lg" }}
             mb={10}
             color="gray.700"
             lineHeight="1.9"
             maxW="600px"
           >
-          5. Recognition programs to celebrate achievements and milestones
+            5. Recognition programs to celebrate achievements and milestones
           </MotionText>
 
-          <MotionButton
-            variants={baselineItem}
-            bg="#2C4F31"
-            color="white"
-            px={7}
-            py={5}
-            fontSize="md"
-            _hover={{ bg: "#829672" }}
-            as={Link}
-            href="/cvprofessional"
-          >
-            Apply Now
-          </MotionButton>
+          <Link href="/cvprofessional" passHref>
+            <MotionBox
+              as="a"
+              variants={baselineItem}
+              bg="#2C4F31"
+              color="white"
+              px={7}
+              py={5}
+              fontSize="md"
+              _hover={{ bg: "#829672" }}
+              display="inline-block"
+              borderRadius="md"
+            >
+              Button Text
+            </MotionBox>
+          </Link>
         </Box>
 
         {/* RIGHT: IMAGE */}

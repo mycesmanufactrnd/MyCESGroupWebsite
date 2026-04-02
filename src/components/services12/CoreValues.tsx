@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Heading, Text, SimpleGrid, Image, Stack } from "@chakra-ui/react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 const MotionBox = motion(Box);
 
@@ -44,7 +44,7 @@ const coreValues = [
   },
 ];
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 50 },
   visible: (index: number) => ({
     opacity: 1,
@@ -66,7 +66,7 @@ export default function CoreValues() {
           fontSize={{ base: "2xl", md: "3xl" }}
           fontWeight="800"
           color="green.800"
-          letterGap="0.1em"
+          letterSpacing="0.1em"
           mb={4}
         >
           CORE VALUES

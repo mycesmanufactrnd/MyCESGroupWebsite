@@ -67,7 +67,7 @@ export default function BASHero() {
           lineHeight="1.3"
           textShadow="0 6px 24px rgba(0,0,0,0.45)" // professional readability
         >
-          Welcome to MyCES Aircond And Electrical Services Sdn Bhd
+          Welcome to MyCES Aircond And Electrical
         </Heading>
       </MotionBox>
     </Box>

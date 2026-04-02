@@ -72,7 +72,7 @@ export default function NewsletterAdmin() {
         Send company news and updates to all subscribers.
       </Text>
 
-      <VStack spacing={6} align="stretch">
+      <VStack gap={6} align="stretch">
         <Field.Root>
           <Field.Label>Subject</Field.Label>
           <Input

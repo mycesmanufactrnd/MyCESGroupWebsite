@@ -55,7 +55,7 @@ export default function OurSpecialties() {
         Our Specialties
       </Heading>
 
-      <VStack spacing={6} w="100%">
+      <VStack gap={6} w="100%">
         {items.map((item, index) => {
           const isExpanded = expandedIndex === index;
 

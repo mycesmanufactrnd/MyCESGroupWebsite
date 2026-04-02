@@ -1,14 +1,14 @@
 "use client";
 
 import { Box, Heading, Text, Stack, Grid } from "@chakra-ui/react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 /* Motion wrappers */
 const MotionBox = motion(Box);
 const MotionStack = motion(Stack);
 
 /* Animation variants */
-const containerVariant = {
+const containerVariant: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -19,14 +19,14 @@ const containerVariant = {
   },
 };
 
-const itemVariant = {
+const itemVariant: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.7,
-      ease: [0.22, 1, 0.36, 1], // professional easing
+      ease: "easeInOut",
     },
   },
 };
@@ -36,7 +36,7 @@ export default function CompanyOverview() {
     <Box bg="white" px={{ base: 6, md: 20 }} py={{ base: 16, md: 24 }}>
       {/* ===== SECTION HEADER ===== */}
       <MotionStack
-        spacing={6}
+        gap={6}
         maxW="4xl"
         mb={16}
         variants={containerVariant}
@@ -64,7 +64,7 @@ export default function CompanyOverview() {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <Stack spacing={6}>
+        <Stack gap={6}>
           <MotionBox variants={itemVariant}>
             <Heading fontSize={{ base: "xl", md: "xl" }} color="#163F2D">
               Who We Are
@@ -111,7 +111,7 @@ export default function CompanyOverview() {
       <Box h="1px" bg="gray.200" my={16} />
 
       {/* ===== MISSION & VISION ===== */}
-      <Grid templateColumns="1fr" spacing={14}>
+      <Grid templateColumns="1fr" gap={14}>
         {/* VISION */}
         <MotionBox
           variants={itemVariant}
@@ -119,7 +119,7 @@ export default function CompanyOverview() {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <Stack spacingcing={4}>
+          <Stack gap={4}>
             <Heading fontSize={{ base: "lg", md: "lg" }} color="#163F2D">
               Our Vision
             </Heading>
@@ -146,7 +146,7 @@ export default function CompanyOverview() {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <Stack spacing={4}>
+          <Stack gap={4}>
             <Heading fontSize={{ base: "lg", md: "lg" }} color="#163F2D">
               Our Mission
             </Heading>

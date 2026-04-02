@@ -10,12 +10,14 @@ import {
   Input,
   Textarea,
   Button,
-  Link,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
 const MotionBox = motion(Box);
+const MotionButton = motion(Button);
+
 const darkGreen = "#15350f";
 
 export default function MeasurementVerificationContact() {
@@ -28,13 +30,7 @@ export default function MeasurementVerificationContact() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = {
-      firstName,
-      lastName,
-      email,
-      phone,
-      message,
-    };
+    const formData = { firstName, lastName, email, phone, message };
 
     try {
       const response = await fetch("/api/measurement-verification-contact", {
@@ -60,7 +56,6 @@ export default function MeasurementVerificationContact() {
   return (
     <Box bg="gray.100" px={{ base: 6, md: 20 }} py={20}>
       <Grid templateColumns={{ base: "1fr", md: "40% 60%" }} gap={12}>
-        {/* LEFT COLUMN — M&V INFO */}
         <MotionBox
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -104,22 +99,20 @@ export default function MeasurementVerificationContact() {
 
             <Box>
               <Text fontWeight="bold">Email:</Text>
-              <Text>
-                <Link href="mailto:admin@mycesgroup.com">
-                  admin@mycesgroup.com
-                </Link>{" "}
-              </Text>
+              <ChakraLink href="mailto:admin@mycesgroup.com" color={darkGreen}>
+                admin@mycesgroup.com
+              </ChakraLink>
             </Box>
 
             <Box>
               <Text fontWeight="bold">Website:</Text>
-              <Link
+              <ChakraLink
                 href="https://www.mycesgroup.com"
-                color={darkGreen}
-                isExternal
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 www.mycesgroup.com
-              </Link>
+              </ChakraLink>
             </Box>
           </Stack>
         </MotionBox>
@@ -147,14 +140,10 @@ export default function MeasurementVerificationContact() {
                     onChange={(e) => setFirstName(e.target.value)}
                     bg="gray.100"
                     border="none"
-                    _focus={{
-                      bg: "white",
-                      boxShadow: "0 0 0 2px #0B5D3B",
-                    }}
+                    _focus={{ bg: "white", boxShadow: "0 0 0 2px #0B5D3B" }}
                     required
                   />
                 </GridItem>
-
                 <GridItem>
                   <Input
                     placeholder="Last Name"
@@ -162,10 +151,7 @@ export default function MeasurementVerificationContact() {
                     onChange={(e) => setLastName(e.target.value)}
                     bg="gray.100"
                     border="none"
-                    _focus={{
-                      bg: "white",
-                      boxShadow: "0 0 0 2px #0B5D3B",
-                    }}
+                    _focus={{ bg: "white", boxShadow: "0 0 0 2px #0B5D3B" }}
                     required
                   />
                 </GridItem>
@@ -179,10 +165,7 @@ export default function MeasurementVerificationContact() {
                 onChange={(e) => setEmail(e.target.value)}
                 bg="gray.100"
                 border="none"
-                _focus={{
-                  bg: "white",
-                  boxShadow: "0 0 0 2px #0B5D3B",
-                }}
+                _focus={{ bg: "white", boxShadow: "0 0 0 2px #0B5D3B" }}
                 required
               />
 
@@ -194,10 +177,7 @@ export default function MeasurementVerificationContact() {
                 onChange={(e) => setPhone(e.target.value)}
                 bg="gray.100"
                 border="none"
-                _focus={{
-                  bg: "white",
-                  boxShadow: "0 0 0 2px #0B5D3B",
-                }}
+                _focus={{ bg: "white", boxShadow: "0 0 0 2px #0B5D3B" }}
               />
 
               {/* MESSAGE */}
@@ -209,27 +189,23 @@ export default function MeasurementVerificationContact() {
                 border="none"
                 minH="150px"
                 resize="none"
-                _focus={{
-                  bg: "white",
-                  boxShadow: "0 0 0 2px #0B5D3B",
-                }}
+                _focus={{ bg: "white", boxShadow: "0 0 0 2px #0B5D3B" }}
                 required
               />
 
-              {/* SUBMIT */}
-              <Button
+              {/* SUBMIT BUTTON */}
+              <MotionButton
                 type="submit"
                 bg={darkGreen}
                 color="white"
                 size="lg"
                 borderRadius="md"
-                as={motion.button}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 _hover={{ bg: "#8FAF9B" }}
               >
                 Submit
-              </Button>
+              </MotionButton>
             </Stack>
           </form>
         </MotionBox>

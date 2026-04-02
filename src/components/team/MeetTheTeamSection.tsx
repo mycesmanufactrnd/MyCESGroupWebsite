@@ -14,7 +14,15 @@ import { CloseIcon } from "@chakra-ui/icons";
 
 const MotionBox = motion(Box);
 
-const teamMembers = [
+// Define the TeamMember interface
+interface TeamMember {
+  name: string;
+  role: string;
+  image: string;
+  quote: string;
+}
+
+const teamMembers: TeamMember[] = [
   {
     name: "Mohd. Faiz Bin Hasan",
     role: "Managing Director",
@@ -79,12 +87,10 @@ const teamMembers = [
     image: "/team/En_Amirul.png",
     quote: "“-”",
   },
-
-  // Add additional members if needed
 ];
 
 export default function MeetTheTeamSection() {
-  const [selectedMember, setSelectedMember] = useState(null);
+  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
 
   return (
     <Box
@@ -95,7 +101,7 @@ export default function MeetTheTeamSection() {
       bgSize="cover"
       bgPos="center"
       bgRepeat="no-repeat"
-      bgAttachment="fixed" // static background
+      bgAttachment="fixed"
       position="relative"
     >
       {/* Overlay */}
@@ -116,15 +122,15 @@ export default function MeetTheTeamSection() {
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           viewport={{ once: true }}
         >
-          <Heading fontSize={{ base: "1xl", md: "3xl" }} fontWeight="bold">
+          <Heading fontSize={{ base: "2xl", md: "3xl" }} fontWeight="bold">
             Meet the Team
           </Heading>
         </MotionBox>
 
         {/* TEAM GRID */}
-        <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} gap={0}>
+        <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} gap={6}>
           {teamMembers.map((member, index) => (
-            <Box key={`${member.name}-${index}`} p={3}>
+            <Box key={`${member.name}-${index}`}>
               <MotionBox
                 bg="white"
                 border="1px solid"
@@ -185,7 +191,7 @@ export default function MeetTheTeamSection() {
         </SimpleGrid>
       </Box>
 
-      {/* ================= MODAL ================= */}
+      {/* MODAL */}
       <AnimatePresence>
         {selectedMember && (
           <MotionBox
@@ -199,8 +205,9 @@ export default function MeetTheTeamSection() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             zIndex={9999}
+            onClick={() => setSelectedMember(null)}
           >
-            {/* Modal container */}
+            {/* Modal container - prevent click propagation */}
             <MotionBox
               bg="white"
               w={{ base: "90%", md: "70%", lg: "60%" }}
@@ -213,6 +220,7 @@ export default function MeetTheTeamSection() {
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
               position="relative"
+              onClick={(e) => e.stopPropagation()}
             >
               {/* Left Image */}
               <Box w={{ base: "100%", md: "50%" }}>
@@ -233,7 +241,6 @@ export default function MeetTheTeamSection() {
               >
                 {/* Close Button */}
                 <IconButton
-                  icon={<CloseIcon />}
                   colorScheme="red"
                   aria-label="Close modal"
                   position="absolute"
@@ -242,7 +249,9 @@ export default function MeetTheTeamSection() {
                   borderRadius="full"
                   onClick={() => setSelectedMember(null)}
                   _hover={{ transform: "scale(1.1)" }}
-                />
+                >
+                  <CloseIcon />
+                </IconButton>
 
                 {/* Quote */}
                 <Box textAlign="center" mt={6}>

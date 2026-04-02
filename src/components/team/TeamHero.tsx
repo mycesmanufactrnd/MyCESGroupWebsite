@@ -54,7 +54,7 @@ export default function TeamHero() {
             mb={6}
             textShadow="2px 2px 6px rgba(0,0,0,0.6)"
           >
-            Team Management
+            Board & Leadership
           </Heading>
         </MotionBox>
 
@@ -73,8 +73,8 @@ export default function TeamHero() {
             textShadow="1px 1px 4px rgba(0,0,0,0.5)"
           >
             At MyCES Group, our team management philosophy emphasizes strong
-            communication, seamless collaboration, and visionary leadership.
-            We believe that empowered teams drive innovation, operational
+            communication, seamless collaboration, and visionary leadership. We
+            believe that empowered teams drive innovation, operational
             excellence, and long-term sustainable growth.
           </Text>
         </MotionBox>

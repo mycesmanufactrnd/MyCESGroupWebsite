@@ -67,7 +67,7 @@ export default function BiomedicalHero() {
           lineHeight="1.3"
           textShadow="0 6px 24px rgba(0,0,0,0.45)" // professional readability
         >
-          Welcome to Biomedical Service
+          Welcome to MyCES Biomedical Engineering
         </Heading>
       </MotionBox>
     </Box>

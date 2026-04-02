@@ -9,12 +9,16 @@ import {
   Input,
   Textarea,
   Button,
+  chakra,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 
 // Motion wrapper
 const MotionBox = motion(Box);
+
+// Create a styled select component - CORRECT WAY
+const StyledSelect = chakra("select", {});
 
 export default function SendCVInternshipSection() {
   const [loading, setLoading] = useState(false);
@@ -152,7 +156,9 @@ export default function SendCVInternshipSection() {
           p={4}
           borderRadius="md"
           bg={notification.type === "success" ? "green.100" : "red.100"}
-          border={`1px solid ${notification.type === "success" ? "green.300" : "red.300"}`}
+          border={`1px solid ${
+            notification.type === "success" ? "green.300" : "red.300"
+          }`}
         >
           <Text fontWeight="bold" mb={1}>
             {notification.title}
@@ -161,7 +167,7 @@ export default function SendCVInternshipSection() {
         </Box>
       )}
 
-      <Stack spacing={3} mb={10}>
+      <Stack gap={3} mb={10}>
         <Heading fontSize={{ base: "2xl", md: "3xl" }} fontWeight="bold">
           SEND YOUR INTERNSHIP CV
         </Heading>
@@ -170,8 +176,9 @@ export default function SendCVInternshipSection() {
         </Text>
       </Stack>
 
-      <Stack spacing={8}>
-        <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} spacing={6}>
+      <Stack gap={8}>
+        {/* Name & Email */}
+        <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={6}>
           <Box>
             <Text mb={2} fontWeight="medium">
               Name
@@ -180,7 +187,9 @@ export default function SendCVInternshipSection() {
               bg="gray.100"
               placeholder="Your full name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setName(e.target.value)
+              }
             />
           </Box>
           <Box>
@@ -191,12 +200,15 @@ export default function SendCVInternshipSection() {
               bg="gray.100"
               placeholder="example@email.com"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setEmail(e.target.value)
+              }
             />
           </Box>
         </Grid>
 
-        <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} spacing={6}>
+        {/* Phone & University */}
+        <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={6}>
           <Box>
             <Text mb={2} fontWeight="medium">
               Phone
@@ -205,7 +217,9 @@ export default function SendCVInternshipSection() {
               bg="gray.100"
               placeholder="+60 XX-XXXXXXX"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setPhone(e.target.value)
+              }
             />
           </Box>
           <Box>
@@ -216,11 +230,14 @@ export default function SendCVInternshipSection() {
               bg="gray.100"
               placeholder="Your university"
               value={university}
-              onChange={(e) => setUniversity(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setUniversity(e.target.value)
+              }
             />
           </Box>
         </Grid>
 
+        {/* Course */}
         <Box>
           <Text mb={2} fontWeight="medium">
             Course / Program
@@ -229,24 +246,35 @@ export default function SendCVInternshipSection() {
             bg="gray.100"
             placeholder="Your course"
             value={course}
-            onChange={(e) => setCourse(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setCourse(e.target.value)
+            }
           />
         </Box>
 
+        {/* Internship Type */}
         <Box>
           <Text mb={2} fontWeight="medium">
             Internship Type
           </Text>
-          <Box
-            as="select"
+          <StyledSelect
             bg="gray.100"
             px={3}
             py={2}
             borderRadius="md"
             border="1px solid"
             borderColor="gray.200"
+            width="100%"
+            cursor="pointer"
+            _focus={{
+              outline: "none",
+              borderColor: "blue.500",
+              boxShadow: "0 0 0 1px var(--chakra-colors-blue-500)",
+            }}
             value={internshipType}
-            onChange={(e) => setInternshipType(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+              setInternshipType(e.target.value)
+            }
           >
             <option value="">Select type of internship</option>
             <option value="Engineering">Engineering</option>
@@ -254,9 +282,10 @@ export default function SendCVInternshipSection() {
             <option value="Design">Design</option>
             <option value="Administrative">Administrative</option>
             <option value="IT & Development">IT & Development</option>
-          </Box>
+          </StyledSelect>
         </Box>
 
+        {/* Duration */}
         <Box>
           <Text mb={2} fontWeight="medium">
             Internship Duration
@@ -265,10 +294,13 @@ export default function SendCVInternshipSection() {
             bg="gray.100"
             placeholder="E.g., 3 months"
             value={duration}
-            onChange={(e) => setDuration(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setDuration(e.target.value)
+            }
           />
         </Box>
 
+        {/* File Uploads */}
         <Box>
           <Text mb={2} fontWeight="medium">
             CV / Resume (Max 20MB)
@@ -276,7 +308,9 @@ export default function SendCVInternshipSection() {
           <Input
             type="file"
             bg="gray.100"
-            onChange={(e) => setCvFile(e.target.files?.[0] || null)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setCvFile(e.target.files?.[0] || null)
+            }
           />
         </Box>
 
@@ -287,7 +321,9 @@ export default function SendCVInternshipSection() {
           <Input
             type="file"
             bg="gray.100"
-            onChange={(e) => setTranscriptFile(e.target.files?.[0] || null)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setTranscriptFile(e.target.files?.[0] || null)
+            }
           />
         </Box>
 
@@ -298,10 +334,13 @@ export default function SendCVInternshipSection() {
           <Input
             type="file"
             bg="gray.100"
-            onChange={(e) => setOtherFile(e.target.files?.[0] || null)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setOtherFile(e.target.files?.[0] || null)
+            }
           />
         </Box>
 
+        {/* About */}
         <Box>
           <Text mb={2} fontWeight="medium">
             About Yourself
@@ -311,10 +350,13 @@ export default function SendCVInternshipSection() {
             rows={5}
             placeholder="Tell us about yourself..."
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+              setDescription(e.target.value)
+            }
           />
         </Box>
 
+        {/* Submit */}
         <Button
           alignSelf="flex-start"
           bg="gray.700"
@@ -322,7 +364,7 @@ export default function SendCVInternshipSection() {
           px={8}
           _hover={{ bg: "gray.800" }}
           transition="0.3s"
-          isLoading={loading}
+          loading={loading}
           onClick={handleSubmit}
         >
           SEND

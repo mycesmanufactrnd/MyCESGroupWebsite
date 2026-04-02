@@ -5,14 +5,35 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 
+type SafeIconButtonProps = React.ComponentProps<typeof IconButton> & {
+  icon: React.ReactElement;
+};
+
 const MotionBox = motion(Box);
 
 const features = [
-  { title: "Real-Time Monitoring", description: "Track energy consumption instantly across all systems." },
-  { title: "Custom Reports", description: "Generate detailed, actionable reports tailored to your needs." },
-  { title: "Predictive Analysis", description: "Forecast energy trends using advanced analytics and AI." },
-  { title: "Cost Optimization", description: "Identify inefficiencies and reduce energy expenditure." },
-  { title: "Sustainability Insights", description: "Measure carbon footprint and optimize eco-friendly strategies." },
+  {
+    title: "Real-Time Monitoring",
+    description: "Track energy consumption instantly across all systems.",
+  },
+  {
+    title: "Custom Reports",
+    description:
+      "Generate detailed, actionable reports tailored to your needs.",
+  },
+  {
+    title: "Predictive Analysis",
+    description: "Forecast energy trends using advanced analytics and AI.",
+  },
+  {
+    title: "Cost Optimization",
+    description: "Identify inefficiencies and reduce energy expenditure.",
+  },
+  {
+    title: "Sustainability Insights",
+    description:
+      "Measure carbon footprint and optimize eco-friendly strategies.",
+  },
 ];
 
 export default function AgricultureCarousel() {
@@ -23,11 +44,23 @@ export default function AgricultureCarousel() {
   const next = () => setCenterIndex((centerIndex + 1) % total);
 
   const getProps = (index: number) => {
-    const diff = ((index - centerIndex + total) % total);
+    const diff = (index - centerIndex + total) % total;
     if (diff === 0) return { scale: 1.2, x: 0, opacity: 1, zIndex: 3 };
-    if (diff === 1 || diff === total - 1) return { scale: 1, x: diff === 1 ? 260 : -260, opacity: 0.85, zIndex: 2 };
-    if (diff === 2 || diff === total - 2) return { scale: 0.85, x: diff === 2 ? 480 : -480, opacity: 0.6, zIndex: 1 };
-    return { scale: 0.7, x: diff > total / 2 ? -600 : 600, opacity: 0, zIndex: 0 };
+    if (diff === 1 || diff === total - 1)
+      return { scale: 1, x: diff === 1 ? 260 : -260, opacity: 0.85, zIndex: 2 };
+    if (diff === 2 || diff === total - 2)
+      return {
+        scale: 0.85,
+        x: diff === 2 ? 480 : -480,
+        opacity: 0.6,
+        zIndex: 1,
+      };
+    return {
+      scale: 0.7,
+      x: diff > total / 2 ? -600 : 600,
+      opacity: 0,
+      zIndex: 0,
+    };
   };
 
   return (
@@ -42,7 +75,12 @@ export default function AgricultureCarousel() {
       </Heading>
 
       <Box position="relative" w="full" overflow="hidden">
-        <Flex justify="center" align="center" position="relative" h={{ base: "300px", md: "360px" }}>
+        <Flex
+          justify="center"
+          align="center"
+          position="relative"
+          h={{ base: "300px", md: "360px" }}
+        >
           {features.map((feature, index) => {
             const { scale, x, opacity, zIndex } = getProps(index);
 
@@ -64,9 +102,18 @@ export default function AgricultureCarousel() {
                 p={4}
                 style={{ zIndex }}
                 initial={{ opacity: 0, y: 80 }} // start further below for smoother scroll effect
-                whileInView={{ transform: `translateX(${x}px) scale(${scale})`, opacity, y: 0 }}
+                whileInView={{
+                  transform: `translateX(${x}px) scale(${scale})`,
+                  opacity,
+                  y: 0,
+                }}
                 viewport={{ once: true, amount: 0.3 }}
-                transition={{ type: "spring", stiffness: 150, damping: 28, delay: index * 0.12 }} // smoother entrance
+                transition={{
+                  type: "spring",
+                  stiffness: 150,
+                  damping: 28,
+                  delay: index * 0.12,
+                }} // smoother entrance
                 whileHover={{
                   scale: scale + 0.08,
                   y: -10,
@@ -74,8 +121,12 @@ export default function AgricultureCarousel() {
                   transition: { type: "spring", stiffness: 300, damping: 20 },
                 }}
               >
-                <Heading fontSize="lg" mb={2} color="#0F2A1D">{feature.title}</Heading>
-                <Text fontSize="sm" color="gray.700">{feature.description}</Text>
+                <Heading fontSize="lg" mb={2} color="#0F2A1D">
+                  {feature.title}
+                </Heading>
+                <Text fontSize="sm" color="gray.700">
+                  {feature.description}
+                </Text>
               </MotionBox>
             );
           })}
@@ -83,8 +134,10 @@ export default function AgricultureCarousel() {
 
         {/* Navigation */}
         <IconButton
+          {...({
+            icon: <ChevronLeftIcon boxSize={6} />,
+          } as SafeIconButtonProps)}
           aria-label="Previous"
-          icon={<ChevronLeftIcon boxSize={6} />}
           position="absolute"
           top="50%"
           left={1}
@@ -96,8 +149,10 @@ export default function AgricultureCarousel() {
           boxShadow="md"
         />
         <IconButton
+          {...({
+            icon: <ChevronRightIcon boxSize={6} />,
+          } as SafeIconButtonProps)}
           aria-label="Next"
-          icon={<ChevronRightIcon boxSize={6} />}
           position="absolute"
           top="50%"
           right={1}
@@ -108,7 +163,6 @@ export default function AgricultureCarousel() {
           _hover={{ bg: "green.100" }}
           boxShadow="md"
         />
-
         {/* Pagination */}
         <Flex justify="center" mt={10} gap={3}>
           {features.map((_, i) => (

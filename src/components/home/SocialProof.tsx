@@ -1,12 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
-import { motion } from "framer-motion"; // add this at the top
+import { motion } from "framer-motion";
 
-const MotionBox = motion(Box); // create motion wrapper
+const MotionBox = motion(Box);
+
 const LOGO_BOX_WIDTH = 100;
 const LOGO_BOX_HEIGHT = 60;
+const LOGO_WIDTH = 160;
 
 const logos = [
   "/logos/1.png",
@@ -20,45 +22,68 @@ const logos = [
   "/logos/9.png",
   "/logos/10.png",
   "/logos/11.png",
-  "/logos/4.png",
-  "/logos/5.png",
-  "/logos/6.png",
-  "/logos/7.png",
-  "/logos/8.png",
-  "/logos/1.png",
-  "/logos/2.png",
-  "/logos/3.png",
-  "/logos/4.png",
-  "/logos/5.png",
-  "/logos/6.png",
-  "/logos/7.png",
-  "/logos/8.png",
-  "/logos/9.png",
-  "/logos/10.png",
-  "/logos/11.png",
-  "/logos/4.png",
-  "/logos/5.png",
-  "/logos/6.png",
-  "/logos/7.png",
-  "/logos/8.png",
+  "/logos/12.png",
+  "/logos/13.png",
+  "/logos/14.png",
+  "/logos/15.png",
+  "/logos/16.png",
+  "/logos/17.png",
+  "/logos/18.png",
+  "/logos/19.png",
+  "/logos/20.png",
+  "/logos/21.png",
+  "/logos/22.png",
+  "/logos/23.png",
+  "/logos/24.png",
+  "/logos/25.png",
+  "/logos/26.png",
+  "/logos/27.png",
+  "/logos/28.png",
 ];
-
-const LOGO_WIDTH = 160; // width of each logo + spacing
 
 export default function SocialProof() {
   const [current, setCurrent] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(true);
+  const containerRef = useRef(null);
 
-  // Automatic sliding (slow, one by one)
+  const loopedLogos = [...logos, ...logos];
+
+  // Auto slide
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % logos.length);
-    }, 2200); // was 3000
+      setCurrent((prev) => prev + 1);
+      setIsTransitioning(true);
+    }, 2200);
+
     return () => clearInterval(interval);
   }, []);
 
-  const next = () => setCurrent((prev) => (prev + 1) % logos.length);
-  const prev = () =>
-    setCurrent((prev) => (prev === 0 ? logos.length - 1 : prev - 1));
+  useEffect(() => {
+    if (current === logos.length) {
+      setTimeout(() => {
+        setIsTransitioning(false);
+        setCurrent(0);
+      }, 550);
+    }
+  }, [current]);
+
+  const next = () => {
+    setCurrent((prev) => prev + 1);
+    setIsTransitioning(true);
+  };
+
+  const prev = () => {
+    if (current === 0) {
+      setIsTransitioning(false);
+      setCurrent(logos.length);
+      setTimeout(() => {
+        setIsTransitioning(true);
+        setCurrent(logos.length - 1);
+      }, 50);
+    } else {
+      setCurrent((prev) => prev - 1);
+    }
+  };
 
   return (
     <Box
@@ -68,11 +93,10 @@ export default function SocialProof() {
       overflow="hidden"
       position="relative"
     >
+      {/* HEADER */}
       <Flex align="center" mb={6} px={{ base: 4, md: 16 }} gap={4}>
-        {/* LEFT LINE */}
         <Box flex="1" h="1px" bg="gray.400" />
 
-        {/* TEXT */}
         <Text
           fontWeight="bold"
           fontSize={{ base: "sm", md: "md" }}
@@ -82,31 +106,30 @@ export default function SocialProof() {
           Trusted by World Class Brands and Organization
         </Text>
 
-        {/* RIGHT LINE */}
         <Box flex="1" h="1px" bg="gray.400" />
       </Flex>
 
-      {/* Carousel Window */}
+      {/* CAROUSEL */}
       <MotionBox
         overflow="hidden"
         mx="auto"
-        w="calc(100% - 160px)" // space for left + right buttons
-        initial={{ opacity: 0, y: 50, scale: 0.95 }} // more noticeable
-        animate={{ opacity: 1, y: 0, scale: 1 }} // end state
-        transition={{ duration: 0.5, ease: "easeOut" }} // faster
+        w="calc(100% - 160px)"
+        initial={{ opacity: 0, y: 50, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
       >
         <Flex
+          ref={containerRef}
           transform={`translateX(-${current * LOGO_WIDTH}px)`}
-          transition="transform 0.55s ease-in-out"
+          transition={isTransitioning ? "transform 0.55s ease-in-out" : "none"}
         >
-          {logos.map((logo, index) => (
+          {loopedLogos.map((logo, index) => (
             <Flex
               key={index}
               minW={`${LOGO_WIDTH}px`}
               justify="center"
               align="center"
             >
-              {/* FIXED LOGO BOX */}
               <Box
                 w={`${LOGO_BOX_WIDTH}px`}
                 h={`${LOGO_BOX_HEIGHT}px`}
@@ -128,7 +151,7 @@ export default function SocialProof() {
         </Flex>
       </MotionBox>
 
-      {/* LEFT ARROW */}
+      {/* LEFT BUTTON */}
       <Box
         as="button"
         position="absolute"
@@ -143,7 +166,7 @@ export default function SocialProof() {
         <Image src="images/hero2.png" alt="previous" w={5} h={5} />
       </Box>
 
-      {/* RIGHT ARROW */}
+      {/* RIGHT BUTTON */}
       <Box
         as="button"
         position="absolute"
@@ -158,7 +181,7 @@ export default function SocialProof() {
         <Image src="images/hero1.png" alt="next" w={8} h={8} />
       </Box>
 
-      {/* Bullets */}
+      {/* BULLETS */}
       <Flex justify="center" mt={4} gap={2}>
         {logos.map((_, index) => (
           <Box
@@ -166,7 +189,7 @@ export default function SocialProof() {
             w={3}
             h={3}
             borderRadius="full"
-            bg={current === index ? "white" : "transparent"}
+            bg={current % logos.length === index ? "white" : "transparent"}
             border="1px solid white"
             cursor="pointer"
             transition="all 0.3s"

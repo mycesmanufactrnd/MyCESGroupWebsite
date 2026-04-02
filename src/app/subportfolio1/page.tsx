@@ -9,9 +9,8 @@ import ScrollBullets16 from "../../components/subportfolio/ScrollBullets16";
 export default function SubPortfolioPage() {
   return (
     <>
-
       <Box id="subportfolio-hero">
-        <ProjectHeaderProps2 />
+        <ProjectHeaderProps2 title="My Project" category="Web Development" />
       </Box>
 
       <Box id="descriptionsubportfolio">

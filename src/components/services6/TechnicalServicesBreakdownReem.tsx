@@ -70,7 +70,7 @@ export default function TechnicalServicesBreakdownReem() {
           fontWeight="bold"
           color={darkGreen}
         >
-          REEM Consultancy Services Service Classification
+          REM Consultancy Services Service Classification
         </Heading>
       </MotionBox>
 
@@ -109,8 +109,7 @@ export default function TechnicalServicesBreakdownReem() {
                     transition="all 0.3s ease"
                     _groupHover={{
                       transform: "scale(1.12)",
-                      filter:
-                        "drop-shadow(0 0 6px rgba(11,93,59,0.4))",
+                      filter: "drop-shadow(0 0 6px rgba(11,93,59,0.4))",
                     }}
                   />
                 </Flex>

@@ -2,7 +2,7 @@
 
 import { Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 /* Motion wrappers */
 const MotionBox = motion(Box);
@@ -21,7 +21,7 @@ const container = {
   },
 };
 
-const baselineItem = {
+const baselineItem: Variants = {
   hidden: { opacity: 0, y: 30 },
   show: {
     opacity: 1,
@@ -45,7 +45,7 @@ export default function BenefitsRewardsSection2() {
         direction={{ base: "column", md: "row" }}
         align="center"
         justify="space-between"
-        spacing={{ base: 12, md: 20 }} // ⬆️ more space between text & image
+        gap={{ base: 12, md: 20 }} // ⬆️ more space between text & image
       >
         {/* LEFT: TEXT */}
         <Box flex="1">
@@ -121,19 +121,19 @@ export default function BenefitsRewardsSection2() {
             5. Certificate of completion and potential career opportunities
             within the company
           </MotionText>
-          <MotionButton
-            variants={baselineItem}
-            bg="#2C4F31"
-            color="white"
-            px={7}
-            py={5}
-            fontSize="md"
-            _hover={{ bg: "#829672" }}
-            as={Link}
-            href="/cvinternship"
-          >
-            Apply Now
-          </MotionButton>
+          <Link href="/cvinternship" passHref>
+            <MotionButton
+              variants={baselineItem}
+              bg="#2C4F31"
+              color="white"
+              px={7}
+              py={5}
+              fontSize="md"
+              _hover={{ bg: "#829672" }}
+            >
+              Apply Now
+            </MotionButton>
+          </Link>
         </Box>
 
         {/* RIGHT: IMAGE */}

@@ -34,19 +34,22 @@ export default function ReemconsultancyFeature() {
               color="#0F2A1D" // deep forest green
               mb={4}
             >
-              Reem Consultancy
+              REM Consultancy
             </Heading>
             <Text
               fontSize={{ base: "md", md: "lg" }}
               color="#1F2A1D"
               lineHeight="1.9"
             >
-              A Registered Electrical Energy Manager (REEM) consultancy helps organizations monitor and optimize electrical energy use.
-              The consultant identifies energy wastage and implements efficiency measures to reduce operational costs.
-              Ensures compliance with Efficient Management of Electrical Energy Regulations (EMEER) for large energy consumers.
-              Prepares detailed energy performance reports and supports technical audits.
-              Helps organizations achieve both regulatory compliance and sustainability goals.  
-          </Text>
+              A Registered Electrical Energy Manager (REM) consultancy helps
+              organizations monitor and optimize electrical energy use. The
+              consultant identifies energy wastage and implements efficiency
+              measures to reduce operational costs. Ensures compliance with
+              Efficient Management of Electrical Energy Regulations (EMEER) for
+              large energy consumers. Prepares detailed energy performance
+              reports and supports technical audits. Helps organizations achieve
+              both regulatory compliance and sustainability goals.
+            </Text>
           </Box>
 
           {/* RIGHT — Image */}

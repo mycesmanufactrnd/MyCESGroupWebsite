@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Text, Heading, Flex } from "@chakra-ui/react";
+import { Box, Text, Heading, Flex, Image } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
 const MotionBox = motion(Box);
@@ -48,7 +48,8 @@ export default function DifferentiatorsSection() {
           What Differentiates Us From The Rest ?
         </Heading>
         <Text textAlign="center" color="gray.500" mb={16}>
-          Our unique strengths that set us apart in the corporate services landscape
+          Our unique strengths that set us apart in the corporate services
+          landscape
         </Text>
       </MotionBox>
 
@@ -80,8 +81,7 @@ export default function DifferentiatorsSection() {
                   overflow="hidden"
                   borderRadius="lg"
                 >
-                  <Box
-                    as="img"
+                  <Image
                     src={item.image}
                     alt={item.title}
                     w="100%"

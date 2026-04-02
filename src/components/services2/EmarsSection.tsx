@@ -22,7 +22,7 @@ const features = [
     title: "IoT Integration",
     icon: FiActivity,
     description:
-      "Seamlessly connects with hardware such as the MyCES D-Logger (D-WS500 & DLS500) and Digital Power Meters (DPM) for automated data collection.",
+      "Seamlessly connects with hardware such as the MyCES D-Logger and Digital Power Meters (DPM) for automated data collection.",
   },
   {
     id: 1,
@@ -92,7 +92,7 @@ export default function EmarsSection() {
         >
           MYCES E-MARS (Energy Monitoring, Analysis and Reporting System) is a
           specialized digital platform designed for the continuous tracking and
-          analysis of energy consumption within a building's electrical system.
+          analysis of energy consumption within a buildings electrical system.
           It enables organizations to monitor utility costs in real-time,
           identify inefficiencies, and generate professional reports for energy
           audits.
@@ -101,7 +101,11 @@ export default function EmarsSection() {
 
       {/* FLIP CARDS GRID */}
       <Grid
-        templateColumns={{ base: "1fr", md: "repeat(3, 1fr)", lg: "repeat(4, 1fr)" }}
+        templateColumns={{
+          base: "1fr",
+          md: "repeat(3, 1fr)",
+          lg: "repeat(4, 1fr)",
+        }}
         gap={10}
         maxW="1300px"
         mx="auto"
@@ -144,7 +148,12 @@ export default function EmarsSection() {
                   boxShadow="md"
                 >
                   <Flex as={Icon} fontSize="36px" color={darkGreen} mb={4} />
-                  <Heading as="h3" fontSize="lg" textAlign="center" color={darkGreen}>
+                  <Heading
+                    as="h3"
+                    fontSize="lg"
+                    textAlign="center"
+                    color={darkGreen}
+                  >
                     {item.title}
                   </Heading>
                 </Box>
@@ -165,10 +174,21 @@ export default function EmarsSection() {
                   p={6}
                   boxShadow="lg"
                 >
-                  <Heading as="h4" fontSize="md" color={darkGreen} mb={3} textAlign="left">
+                  <Heading
+                    as="h4"
+                    fontSize="md"
+                    color={darkGreen}
+                    mb={3}
+                    textAlign="left"
+                  >
                     {item.title}
                   </Heading>
-                  <Text fontSize="sm" color="#1A1A1A" lineHeight="1.6" textAlign="left">
+                  <Text
+                    fontSize="sm"
+                    color="#1A1A1A"
+                    lineHeight="1.6"
+                    textAlign="left"
+                  >
                     {item.description}
                   </Text>
                 </Box>

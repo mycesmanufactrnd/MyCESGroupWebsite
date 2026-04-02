@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Heading, Text, Stack, Grid } from "@chakra-ui/react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 /* Motion wrappers */
 const MotionBox = motion(Box);
@@ -19,14 +19,14 @@ const containerVariant = {
   },
 };
 
-const itemVariant = {
+const itemVariant: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.7,
-      ease: [0.22, 1, 0.36, 1], // professional easing
+      ease: [0.22, 1, 0.36, 1],
     },
   },
 };

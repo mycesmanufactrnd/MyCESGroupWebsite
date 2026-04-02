@@ -67,7 +67,7 @@ export default function AcademyHero() {
           lineHeight="1.3"
           textShadow="0 6px 24px rgba(0,0,0,0.45)" // professional readability
         >
-          Welcome to MyCES Academy Sdn Bhd
+          Welcome to MyCES Academy
         </Heading>
       </MotionBox>
     </Box>

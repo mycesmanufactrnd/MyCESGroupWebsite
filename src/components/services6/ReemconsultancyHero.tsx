@@ -67,7 +67,7 @@ export default function ReemconsultancyHero() {
           lineHeight="1.3"
           textShadow="0 6px 24px rgba(0,0,0,0.45)" // professional readability
         >
-          Welcome to Reem Consultancy Service
+          Welcome to REM Consultancy Service
         </Heading>
       </MotionBox>
     </Box>

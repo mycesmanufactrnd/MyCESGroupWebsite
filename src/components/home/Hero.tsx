@@ -1,15 +1,7 @@
 "use client";
 
-import {
-  Box,
-  Flex,
-  Text,
-  Heading,
-  Image,
-  useDisclosure,
-} from "@chakra-ui/react";
-
-import { motion } from "framer-motion";
+import { Box, Flex, Text, Heading, Image, chakra } from "@chakra-ui/react";
+import { motion, Transition } from "framer-motion";
 import { FaPlay } from "react-icons/fa";
 import { useState, useEffect } from "react";
 
@@ -36,7 +28,6 @@ const slides = [
     blockBg: "#163F2D",
     blockDirection: "left",
   },
-  // Energy-focused
   {
     image: "home/6.jpg",
     title: "Energy Intelligence Solutions",
@@ -44,8 +35,6 @@ const slides = [
     blockBg: "#163F2D",
     blockDirection: "right",
   },
-
-  // Digital / System-focused
   {
     image: "home/4.jpg",
     title: "Digitalizing Building Performance",
@@ -53,8 +42,6 @@ const slides = [
     blockBg: "#163F2D",
     blockDirection: "left",
   },
-
-  // Corporate / Group branding
   {
     image: "home/5.jpg",
     title: "Integrated Engineering Excellence",
@@ -64,8 +51,14 @@ const slides = [
   },
 ];
 
-/* ================= BACKGROUND VARIANTS ================= */
-const bgVariants = [
+/* ================= BACKGROUND VARIANTS WITH PROPER TYPING ================= */
+type VariantProps = {
+  initial: Record<string, string | number>;
+  animate: Record<string, string | number>;
+  transition: Transition;
+};
+
+const bgVariants: VariantProps[] = [
   {
     initial: { clipPath: "inset(0 100% 0 0)" },
     animate: { clipPath: "inset(0 0% 0 0)" },
@@ -92,7 +85,7 @@ const MotionText = motion(Text);
 export default function Hero() {
   const [current, setCurrent] = useState(0);
   const [playActive, setPlayActive] = useState(false);
-  const [hovered, setHovered] = useState(false); // Track hover for arrows
+  const [hovered, setHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   const nextSlide = () => setCurrent((p) => (p + 1) % slides.length);
@@ -103,13 +96,12 @@ export default function Hero() {
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
-    }, 5000); // change slide every 5 seconds
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
   const slide = slides[current];
-  const blockInitialX = slide.blockDirection === "left" ? "-100%" : "100%";
-  const blockAnimateX = slide.blockDirection === "left" ? "100%" : "-100%";
+  const currentVariant = bgVariants[current % bgVariants.length];
 
   return (
     <Box
@@ -127,19 +119,16 @@ export default function Hero() {
         bgImage={`url('${slide.image}')`}
         bgSize="cover"
         bgPos="center"
-        {...bgVariants[current % bgVariants.length]}
+        initial={currentVariant.initial}
+        animate={currentVariant.animate}
+        transition={currentVariant.transition}
       />
 
       {/* Dark Overlay for better text contrast */}
-      <Box
-        position="absolute"
-        inset={0}
-        bg="rgba(0,0,0,0.45)" // stronger dark overlay
-      />
+      <Box position="absolute" inset={0} bg="rgba(0,0,0,0.45)" />
 
       {/* ===== ARROWS WITH CUSTOM IMAGES ===== */}
-      <MotionBox
-        as="button"
+      <chakra.button
         position="absolute"
         left={6}
         top="50%"
@@ -149,15 +138,14 @@ export default function Hero() {
         borderRadius="full"
         p={2}
         onClick={prevSlide}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: hovered ? 1 : 0 }}
-        transition={{ duration: 0.4, ease: "easeInOut" }}
+        style={{ opacity: hovered ? 1 : 0 }}
+        transition="opacity 0.4s ease-in-out"
+        _hover={{ transform: "translateY(-50%) scale(1.05)" }}
       >
         <Image src="images/hero2.png" alt="left" w={4} h={4} />
-      </MotionBox>
+      </chakra.button>
 
-      <MotionBox
-        as="button"
+      <chakra.button
         position="absolute"
         right={6}
         top="50%"
@@ -167,12 +155,12 @@ export default function Hero() {
         borderRadius="full"
         p={2}
         onClick={nextSlide}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: hovered ? 1 : 0 }}
-        transition={{ duration: 0.4, ease: "easeInOut" }}
+        style={{ opacity: hovered ? 1 : 0 }}
+        transition="opacity 0.4s ease-in-out"
+        _hover={{ transform: "translateY(-50%) scale(1.05)" }}
       >
         <Image src="images/hero1.png" alt="right" w={6} h={6} />
-      </MotionBox>
+      </chakra.button>
 
       {/* ===== TEXT CONTENT ===== */}
       <Flex
@@ -182,7 +170,7 @@ export default function Hero() {
         justify="center"
         align="flex-start"
         minH="90vh"
-        px={{ base: 35, md: 32 }} // shift text slightly to the right
+        px={{ base: 35, md: 32 }}
         pt={{ base: "6vh", md: "8vh" }}
       >
         <Box maxW={{ base: "90%", md: "680px" }}>
@@ -195,7 +183,7 @@ export default function Hero() {
             textAlign="left"
             fontWeight="bold"
             color="white"
-            textShadow="1px 1px 4px rgba(0,0,0,0.7)" // subtle shadow for readability
+            textShadow="1px 1px 4px rgba(0,0,0,0.7)"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.6 }}
@@ -211,7 +199,7 @@ export default function Hero() {
             fontWeight="bold"
             lineHeight="1.2"
             textAlign="left"
-            textShadow="2px 2px 6px rgba(0,0,0,0.7)" // make title stand out
+            textShadow="2px 2px 6px rgba(0,0,0,0.7)"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
@@ -234,7 +222,7 @@ export default function Hero() {
         align="center"
         justify="space-between"
         direction={{ base: "column", md: "row" }}
-        spacing={{ base: 6, md: 0 }}
+        gap={{ base: 6, md: 0 }}
         zIndex={3}
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -244,8 +232,8 @@ export default function Hero() {
           flex="1"
           align="center"
           justify="flex-end"
-          pr={{ base: 6, md: 100 }} // add padding from right edge
-          spacing={4}
+          pr={{ base: 6, md: 100 }}
+          gap={4}
           color="white"
           cursor="pointer"
           onClick={() => setIsOpen(true)}
@@ -304,7 +292,7 @@ export default function Hero() {
         bottom={2}
         left="50%"
         transform="translateX(-50%)"
-        spacing={2}
+        gap={2}
         zIndex={3}
       >
         {slides.map((_, i) => (
@@ -316,9 +304,13 @@ export default function Hero() {
             bg={current === i ? "white" : "gray.400"}
             cursor="pointer"
             onClick={() => setCurrent(i)}
+            transition="all 0.3s ease"
+            _hover={{ transform: "scale(1.2)" }}
           />
         ))}
       </Flex>
+
+      {/* Video Modal */}
       {isOpen && (
         <Box
           position="fixed"
@@ -328,16 +320,16 @@ export default function Hero() {
           display="flex"
           alignItems="center"
           justifyContent="center"
-          onClick={() => setIsOpen(false)} // close when clicking outside
+          onClick={() => setIsOpen(false)}
         >
           <Box
             position="relative"
             w={{ base: "90%", md: "800px" }}
             h={{ base: "50%", md: "450px" }}
-            onClick={(e) => e.stopPropagation()} // prevent closing when clicking video
+            onClick={(e) => e.stopPropagation()}
           >
-            <Box
-              as="iframe"
+            {/* Use chakra.iframe instead of Box with as="iframe" */}
+            <chakra.iframe
               src="/video/corporatemyces.mp4"
               w="100%"
               h="100%"
@@ -359,6 +351,8 @@ export default function Hero() {
               cursor="pointer"
               fontWeight="bold"
               onClick={() => setIsOpen(false)}
+              _hover={{ transform: "scale(1.1)", bg: "gray.100" }}
+              transition="all 0.2s ease"
             >
               ✕
             </Box>

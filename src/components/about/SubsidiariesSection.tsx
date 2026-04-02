@@ -15,9 +15,6 @@ import { motion } from "framer-motion";
 
 const MotionBox = motion(Box);
 
-/* =======================
-   SUBSIDIARIES DATA
-======================= */
 const subsidiaries = [
   {
     name: "MYCES Sdn Bhd",
@@ -26,22 +23,18 @@ const subsidiaries = [
   {
     name: "MYCES Biomedical Engineering Sdn Bhd",
     image: "/subsidiaries/2.jpg",
-    url: "",
   },
   {
     name: "MYCES Ventures Sdn Bhd",
     image: "/subsidiaries/3.jpg",
-    url: "",
   },
   {
     name: "MYCES Manufacturing Sdn Bhd",
     image: "/subsidiaries/4.jpg",
-    url: "",
   },
   {
     name: "MYCES Academy Sdn Bhd",
     image: "/subsidiaries/5.jpg",
-    url: "",
   },
   {
     name: "MYCES Aircond & Electrical Services Sdn Bhd",
@@ -49,14 +42,10 @@ const subsidiaries = [
   },
   {
     name: "MYCES Engineering Sdn Bhd",
-    url: "",
     image: "/subsidiaries/7.jpg",
   },
 ];
 
-/* =======================
-   MAIN COMPONENT
-======================= */
 export default function SubsidiariesSection() {
   const isMobile = useBreakpointValue({ base: true, md: false });
 
@@ -66,7 +55,7 @@ export default function SubsidiariesSection() {
         maxW="1200px"
         mx="auto"
         px={{ base: 6, md: 8 }}
-        spacing={{ base: 120, md: 16 }}
+        gap={{ base: 10, md: 16 }}
         direction={{ base: "column", md: "row" }}
       >
         {/* LEFT STICKY HEADER */}
@@ -77,7 +66,7 @@ export default function SubsidiariesSection() {
           alignSelf="flex-start"
           transform={{ base: "none", md: "translateX(-40px)" }}
         >
-          <Stack spacing={5}>
+          <Stack gap={5}>
             <Heading size="2xl" color="#223c26" fontWeight="bold">
               Our Subsidiaries
             </Heading>
@@ -90,12 +79,11 @@ export default function SubsidiariesSection() {
         </Box>
 
         {/* RIGHT COLUMN — ONE COLUMN ONLY */}
-        <Grid flex="1" templateColumns="1fr" spacing={6}>
+        <Grid flex="1" templateColumns="1fr" gap={6}>
           {subsidiaries.map((item, index) => (
             <SubsidiaryCard
               key={item.name}
               title={item.name}
-              url={item.url}
               image={item.image}
               delay={index * 0.1}
             />
@@ -111,12 +99,10 @@ export default function SubsidiariesSection() {
 ======================= */
 function SubsidiaryCard({
   title,
-  url,
   image,
   delay,
 }: {
   title: string;
-  url: string;
   image: string;
   delay: number;
 }) {
@@ -157,10 +143,10 @@ function SubsidiaryCard({
             justify="center"
             textAlign="center"
             px={6}
-            spacing={2}
+            gap={2}
           >
             <Heading fontSize="md" color="white" fontWeight="semibold">
-              <LinkOverlay href={url}>{title}</LinkOverlay>
+              <LinkOverlay href="#">{title}</LinkOverlay>
             </Heading>
           </Stack>
         </Box>

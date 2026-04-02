@@ -34,14 +34,21 @@ export default function BiomedicalFeature() {
               color="#0F2A1D" // deep forest green
               mb={4}
             >
-              Biomedical
+              Biomedical Engineering
             </Heading>
             <Text
               fontSize={{ base: "md", md: "lg" }}
               color="#1F2A1D"
               lineHeight="1.9"
             >
-              MyCES Biomedical Engineering Sdn Bhd is a leading specialist providing comprehensive healthcare equipment solutions. With a core expertise in Biomedical Engineering Maintenance Services (BEMS) and Facility Engineering Maintenance Services (FEMS), the company acts as a trusted partner in delivering high-quality products and maintenance excellence. Their mission is to set the benchmark for superior service quality, ensuring client operations are seamless and outcomes are exceptional.
+              Leading specialist providing comprehensive healthcare equipment
+              solutions. With a core expertise in Biomedical Engineering
+              Maintenance Services (BEMS) and Facility Engineering Maintenance
+              Services (FEMS), the company acts as a trusted partner in
+              delivering high-quality products and maintenance excellence. Their
+              mission is to set the benchmark for superior service quality,
+              ensuring client operations are seamless and outcomes are
+              exceptional.
             </Text>
           </Box>
 

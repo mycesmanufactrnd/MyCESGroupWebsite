@@ -1,39 +1,38 @@
 "use client";
 
-import { Box, Text, Heading, Flex } from "@chakra-ui/react";
+import { Box, Text, Heading, Flex, Image } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
 const MotionBox = motion(Box);
 
 const differentiators = [
-  {
-    title: "Validation of Energy Savings",
-    description:
-      "Ensures that energy-saving claims are accurate and verifiable.",
-    image: "/mvservice/new1mv.jpg",
-    imageLeft: true,
-  },
-  {
-    title: "Accurate Savings Assessment",
-    description:
-      "Prevents overestimated or assumed energy savings.",
-    image: "/mvservice/4.jpg",
-    imageLeft: false,
-  },
-  {
-    title: "Investment Justification",
-    description:
-      "Provides reliable data to support management decision-making and investments.",
-    image: "/mvservice/5.jpg",
-    imageLeft: true,
-  },
-  {
-    title: "Standards and Contract Compliance",
-    description:
-      "Supports compliance with performance contracts and ISO 50001 requirements.",
-    image: "/mvservice/6.jpg",
-    imageLeft: false,
-  },
+  {
+    title: "Validation of Energy Savings",
+    description:
+      "Ensures that energy-saving claims are accurate and verifiable.",
+    image: "/mvservice/new1mv.jpg",
+    imageLeft: true,
+  },
+  {
+    title: "Accurate Savings Assessment",
+    description: "Prevents overestimated or assumed energy savings.",
+    image: "/mvservice/4.jpg",
+    imageLeft: false,
+  },
+  {
+    title: "Investment Justification",
+    description:
+      "Provides reliable data to support management decision-making and investments.",
+    image: "/mvservice/5.jpg",
+    imageLeft: true,
+  },
+  {
+    title: "Standards and Contract Compliance",
+    description:
+      "Supports compliance with performance contracts and ISO 50001 requirements.",
+    image: "/mvservice/6.jpg",
+    imageLeft: false,
+  },
 ];
 
 export default function DifferentiatorsSection4() {
@@ -55,7 +54,8 @@ export default function DifferentiatorsSection4() {
           What Differentiates Us From The Rest ?
         </Heading>
         <Text textAlign="center" color="gray.500" mb={16}>
-          Our unique strengths that set us apart in the corporate services landscape
+          Our unique strengths that set us apart in the corporate services
+          landscape
         </Text>
       </MotionBox>
 
@@ -87,7 +87,7 @@ export default function DifferentiatorsSection4() {
                   overflow="hidden"
                   borderRadius="lg"
                 >
-                  <Box
+                  <Image
                     as="img"
                     src={item.image}
                     alt={item.title}

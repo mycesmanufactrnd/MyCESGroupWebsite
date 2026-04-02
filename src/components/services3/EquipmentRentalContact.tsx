@@ -10,15 +10,29 @@ import {
   Input,
   Textarea,
   Button,
+  ButtonProps,
   Link,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 
+// Motion-enabled Chakra components
 const MotionBox = motion(Box);
+
+// Dark green color
 const darkGreen = "#0B5D3B";
 
+// Motion-enabled Chakra Button with ref forwarding
+const ButtonWithRef = forwardRef<HTMLButtonElement, ButtonProps>(
+  (props, ref) => <Button ref={ref} {...props} />,
+);
+ButtonWithRef.displayName = "ButtonWithRef";
+
+const MotionButton = motion(ButtonWithRef);
+MotionButton.displayName = "MotionButton";
+
 export default function EquipmentRentalContact() {
+  // ✅ Hooks must be inside the component
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -27,19 +41,17 @@ export default function EquipmentRentalContact() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const formData = { firstName, lastName, email, phone, message };
-
     try {
       const response = await fetch("/api/equipment-rental-contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
       const data = await response.json();
       alert(data.message);
 
+      // reset form
       setFirstName("");
       setLastName("");
       setEmail("");
@@ -54,7 +66,7 @@ export default function EquipmentRentalContact() {
   return (
     <Box bg="white" px={{ base: 6, md: 20 }} py={20}>
       <Grid templateColumns={{ base: "1fr", md: "40% 60%" }} gap={12}>
-        {/* LEFT COLUMN - Contact Info */}
+        {/* LEFT COLUMN */}
         <MotionBox
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -92,8 +104,7 @@ export default function EquipmentRentalContact() {
               <Text>
                 <Link href="mailto:admin@mycesgroup.com">
                   admin@mycesgroup.com
-                </Link>{" "}
-                or{" "}
+                </Link>
               </Text>
             </Box>
 
@@ -102,7 +113,7 @@ export default function EquipmentRentalContact() {
               <Link
                 href="https://www.mycesgroup.com"
                 color={darkGreen}
-                isExternal
+                target="_blank"
               >
                 www.mycesgroup.com
               </Link>
@@ -115,8 +126,8 @@ export default function EquipmentRentalContact() {
           bg="white"
           p={10}
           borderRadius="2xl"
-          shadow="lg" // soft shadow
-          _hover={{ shadow: "xl" }} // larger shadow on hover
+          shadow="lg"
+          _hover={{ shadow: "xl" }}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
@@ -124,7 +135,6 @@ export default function EquipmentRentalContact() {
         >
           <form onSubmit={handleSubmit}>
             <Stack gap={6}>
-              {/* FIRST + LAST NAME */}
               <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={4}>
                 <GridItem>
                   <Input
@@ -133,10 +143,7 @@ export default function EquipmentRentalContact() {
                     onChange={(e) => setFirstName(e.target.value)}
                     bg="gray.100"
                     border="none"
-                    _focus={{
-                      bg: "white",
-                      boxShadow: "0 0 0 2px #0B5D3B",
-                    }}
+                    _focus={{ bg: "white", boxShadow: "0 0 0 2px #0B5D3B" }}
                   />
                 </GridItem>
                 <GridItem>
@@ -146,15 +153,11 @@ export default function EquipmentRentalContact() {
                     onChange={(e) => setLastName(e.target.value)}
                     bg="gray.100"
                     border="none"
-                    _focus={{
-                      bg: "white",
-                      boxShadow: "0 0 0 2px #0B5D3B",
-                    }}
+                    _focus={{ bg: "white", boxShadow: "0 0 0 2px #0B5D3B" }}
                   />
                 </GridItem>
               </Grid>
 
-              {/* EMAIL */}
               <Input
                 type="email"
                 placeholder="Email"
@@ -162,13 +165,9 @@ export default function EquipmentRentalContact() {
                 onChange={(e) => setEmail(e.target.value)}
                 bg="gray.100"
                 border="none"
-                _focus={{
-                  bg: "white",
-                  boxShadow: "0 0 0 2px #0B5D3B",
-                }}
+                _focus={{ bg: "white", boxShadow: "0 0 0 2px #0B5D3B" }}
               />
 
-              {/* PHONE */}
               <Input
                 type="tel"
                 placeholder="Phone Number"
@@ -176,13 +175,9 @@ export default function EquipmentRentalContact() {
                 onChange={(e) => setPhone(e.target.value)}
                 bg="gray.100"
                 border="none"
-                _focus={{
-                  bg: "white",
-                  boxShadow: "0 0 0 2px #0B5D3B",
-                }}
+                _focus={{ bg: "white", boxShadow: "0 0 0 2px #0B5D3B" }}
               />
 
-              {/* MESSAGE */}
               <Textarea
                 placeholder="Message"
                 value={message}
@@ -191,14 +186,11 @@ export default function EquipmentRentalContact() {
                 border="none"
                 minH="150px"
                 resize="none"
-                _focus={{
-                  bg: "white",
-                  boxShadow: "0 0 0 2px #0B5D3B",
-                }}
+                _focus={{ bg: "white", boxShadow: "0 0 0 2px #0B5D3B" }}
               />
 
               {/* SUBMIT BUTTON */}
-              <Button
+              <MotionButton
                 type="submit"
                 bg={darkGreen}
                 color="white"
@@ -207,10 +199,9 @@ export default function EquipmentRentalContact() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 _hover={{ bg: "#CCD5C5" }}
-                as={motion.button}
               >
                 Submit
-              </Button>
+              </MotionButton>
             </Stack>
           </form>
         </MotionBox>

@@ -9,10 +9,10 @@ import {
   Input,
   Textarea,
   Button,
-  Alert, // Only Alert is imported
+  chakra, // Add chakra import
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, ChangeEvent } from "react"; // Add ChangeEvent
 
 // Motion wrapper
 const MotionBox = motion(Box);
@@ -42,7 +42,6 @@ export default function SendCVSection() {
       reader.readAsDataURL(file);
       reader.onload = () => {
         const result = reader.result as string;
-        // Use a more robust split in case of different file types
         const base64 = result.substring(result.indexOf(",") + 1);
         resolve(base64);
       };
@@ -62,7 +61,6 @@ export default function SendCVSection() {
     try {
       setLoading(true);
 
-      // Convert files to base64
       const cvBase64 = cvFile ? await toBase64(cvFile) : undefined;
       const transcriptBase64 = transcriptFile
         ? await toBase64(transcriptFile)
@@ -138,7 +136,9 @@ export default function SendCVSection() {
           p={4}
           borderRadius="md"
           bg={notification.type === "success" ? "green.100" : "red.100"}
-          border={`1px solid ${notification.type === "success" ? "green.300" : "red.300"}`}
+          border={`1px solid ${
+            notification.type === "success" ? "green.300" : "red.300"
+          }`}
         >
           <Text fontWeight="bold" mb={1}>
             {notification.title}
@@ -148,7 +148,7 @@ export default function SendCVSection() {
       )}
 
       {/* Header */}
-      <Stack spacing={3} mb={10}>
+      <Stack gap={3} mb={10}>
         <Heading fontSize={{ base: "2xl", md: "3xl" }} fontWeight="bold">
           SEND YOUR CV
         </Heading>
@@ -164,27 +164,34 @@ export default function SendCVSection() {
       </Stack>
 
       {/* Form */}
-      <Stack spacing={8}>
-        {/* Vacancy */}
+      <Stack gap={8}>
+        {/* Vacancy - Fixed select component */}
         <Box>
           <Text mb={2} fontWeight="medium">
             Vacancy of Interest
           </Text>
-          <Box
-            as="select"
+          <chakra.select
             bg="gray.100"
             px={3}
             py={2}
             borderRadius="md"
             border="1px solid"
             borderColor="gray.200"
+            width="100%"
             value={vacancy}
-            onChange={(e) => setVacancy(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+              setVacancy(e.target.value)
+            }
+            _focus={{
+              outline: "none",
+              borderColor: "blue.500",
+              boxShadow: "0 0 0 1px var(--chakra-colors-blue-500)",
+            }}
           >
             <option value="">Select a position</option>
             <option value="Energy Engineer">Energy Engineer</option>
             <option value="Business Developer">Business Developer</option>
-          </Box>
+          </chakra.select>
         </Box>
 
         {/* Name */}
@@ -196,12 +203,14 @@ export default function SendCVSection() {
             bg="gray.100"
             placeholder="Your full name"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setName(e.target.value)
+            }
           />
         </Box>
 
         {/* Email & Phone */}
-        <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} spacing={6}>
+        <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={6}>
           <Box>
             <Text mb={2} fontWeight="medium">
               Email
@@ -210,7 +219,9 @@ export default function SendCVSection() {
               bg="gray.100"
               placeholder="example@email.com"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setEmail(e.target.value)
+              }
             />
           </Box>
 
@@ -222,7 +233,9 @@ export default function SendCVSection() {
               bg="gray.100"
               placeholder="+60 XX-XXXXXXX"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setPhone(e.target.value)
+              }
             />
           </Box>
         </Grid>
@@ -235,7 +248,9 @@ export default function SendCVSection() {
           <Input
             type="file"
             bg="gray.100"
-            onChange={(e) => setCvFile(e.target.files?.[0] || null)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setCvFile(e.target.files?.[0] || null)
+            }
           />
         </Box>
 
@@ -247,7 +262,9 @@ export default function SendCVSection() {
           <Input
             type="file"
             bg="gray.100"
-            onChange={(e) => setTranscriptFile(e.target.files?.[0] || null)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setTranscriptFile(e.target.files?.[0] || null)
+            }
           />
         </Box>
 
@@ -259,7 +276,9 @@ export default function SendCVSection() {
           <Input
             type="file"
             bg="gray.100"
-            onChange={(e) => setOtherFile(e.target.files?.[0] || null)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setOtherFile(e.target.files?.[0] || null)
+            }
           />
         </Box>
 
@@ -273,7 +292,9 @@ export default function SendCVSection() {
             rows={5}
             placeholder="Tell us about yourself..."
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+              setDescription(e.target.value)
+            }
           />
         </Box>
 
@@ -285,7 +306,7 @@ export default function SendCVSection() {
           px={8}
           _hover={{ bg: "gray.800" }}
           transition="0.3s"
-          isLoading={loading}
+          loading={loading}
           onClick={handleSubmit}
         >
           SEND

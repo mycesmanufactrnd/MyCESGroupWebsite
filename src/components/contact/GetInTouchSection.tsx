@@ -119,7 +119,7 @@ export default function GetInTouchSection() {
       <form onSubmit={handleSubmit}>
         <Grid
           templateColumns={{ base: "1fr", md: "45% 55%" }}
-          spacing={20}
+          gap={20}
           alignItems="center"
         >
           {/* LEFT SIDE */}
@@ -146,7 +146,7 @@ export default function GetInTouchSection() {
             </Text>
 
             {/* CONTACT INFO */}
-            <VStack align="start" spacing={6}>
+            <VStack align="start" gap={6}>
               <HStack>
                 <Icon as={Mail} color="#163F2D" />
                 <Text fontSize="md" color="gray.700" lineHeight="1.9" mb={4}>
@@ -201,7 +201,7 @@ export default function GetInTouchSection() {
               ease: "easeInOut",
             }}
           >
-            <Stack spacing={6}>
+            <Stack gap={6}>
               {success && (
                 <Box
                   bg="green.50"
@@ -216,10 +216,7 @@ export default function GetInTouchSection() {
                 </Box>
               )}
 
-              <Grid
-                templateColumns={{ base: "1fr", md: "1fr 1fr" }}
-                spacing={4}
-              >
+              <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={4}>
                 <Field.Root>
                   <Field.Label>First Name</Field.Label>
                   <Input

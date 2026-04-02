@@ -30,32 +30,24 @@ export default function EnergyAuditStats() {
   }, []);
 
   return (
-    <Box w="full" py={{ base: 16, md: 20 }} bg="#CCD5C5">
+    <Box w="full" py={{ base: 16, md: 20 }} bg="gray.50">
       <Box maxW="6xl" mx="auto" px={6}>
-        <SimpleGrid
-          columns={{ base: 1, md: 3 }}
-          gap={0}
-          border="1px solid"
-          borderColor="gray.200"
-          borderRadius="lg"
-          overflow="hidden"
-        >
+        <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 6, md: 8 }}>
           {stats.map((item, index) => (
             <Box
               key={item.label}
               textAlign="center"
               py={{ base: 12, md: 16 }}
               px={6}
-              bg="white"
-              borderRight={
-                index !== stats.length - 1
-                  ? "1px solid rgba(0,0,0,0.06)"
-                  : "none"
-              }
+              bg="gray.50"
+              boxShadow="0 10px 40px rgba(44, 79, 49, 0.15)"
+              border="1px solid rgba(40, 49, 41, 0.1)"
+              borderColor="gray.200"
+              borderRadius="lg"
               transition="all 0.35s ease"
               _hover={{
                 transform: "translateY(-6px)",
-                boxShadow: "0 20px 40px rgba(0,0,0,0.08)",
+                boxShadow: "0 20px 40px rgba(0,0,0,0.12)",
               }}
               data-aos="fade-up"
               data-aos-delay={index * 200}
@@ -88,6 +80,7 @@ export default function EnergyAuditStats() {
                 h="2px"
                 bg="#1B4D2E"
                 opacity={0.6}
+                borderRadius="full"
               />
             </Box>
           ))}

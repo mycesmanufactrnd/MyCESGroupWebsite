@@ -63,7 +63,7 @@ export default function ScrollBullets() {
       top="50%"
       right="2rem"
       transform="translateY(-50%)"
-      spacing={4}
+      gap={4}
       zIndex={100}
     >
       {sections.map((sec) => (

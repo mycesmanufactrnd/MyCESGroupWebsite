@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, SimpleGrid, Heading, Text, Flex } from "@chakra-ui/react";
-import { motion } from "framer-motion";
+import { easeInOut, motion } from "framer-motion";
 
 const MotionBox = motion(Box);
 
@@ -87,7 +87,7 @@ export default function AdvancedTestersSection() {
               borderColor="gray.200"
               p={6}
               minH="120px"
-              transition="all 0.3s ease"
+              transition={{ ease: easeInOut }}
               _hover={{
                 bg: "#F1F8F6", // light medical green
                 borderColor: "#0B5D3B",

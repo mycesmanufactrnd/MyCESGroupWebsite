@@ -57,7 +57,7 @@ export default function GeologicalsurveyHero() {
           color="black"
           lineHeight="1.3"
         >
-          Welcome to MyCES Reem Consultancy Service
+          Welcome to MyCES REM Consultancy Service
         </Heading>
       </MotionBox>
     </Box>

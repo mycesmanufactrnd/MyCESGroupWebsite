@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Grid, Heading, Text, Flex, Link, Image } from "@chakra-ui/react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { FiArrowRightCircle } from "react-icons/fi";
 
 interface ServiceProps {
@@ -52,7 +52,7 @@ export default function ServicesSection() {
           fontWeight="800"
           mb={4}
           color="green.800"
-          letterGap="0.1em"
+          letterSpacing="0.1em"
         >
           OUR SERVICES
         </Heading>
@@ -84,7 +84,7 @@ function ServiceBlock({
   link,
   reverse,
 }: ServiceProps) {
-  const imageVariants = {
+  const imageVariants: Variants = {
     hidden: { y: -100, opacity: 0 },
     visible: {
       y: 0,
@@ -93,7 +93,7 @@ function ServiceBlock({
     },
   };
 
-  const contentVariants = {
+  const contentVariants: Variants = {
     hidden: { x: 80, opacity: 0 },
     visible: {
       x: 0,

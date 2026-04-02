@@ -9,7 +9,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { FaPlay } from "react-icons/fa";
 import { useState, useEffect } from "react";
 
@@ -66,21 +66,20 @@ const slides = [
 ];
 
 /* ================= BACKGROUND VARIANTS ================= */
-const bgVariants = [
+const bgVariants: Variants[] = [
   {
-    initial: { clipPath: "inset(0 100% 0 0)" },
-    animate: { clipPath: "inset(0 0% 0 0)" },
-    transition: { duration: 1.2, ease: "easeInOut" },
+    hidden: { clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" },
+    visible: {
+      clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+      transition: { duration: 1, ease: "easeInOut" },
+    },
   },
   {
-    initial: { scale: 1.3, opacity: 0 },
-    animate: { scale: 1, opacity: 1 },
-    transition: { duration: 1.2, ease: "easeOut" },
-  },
-  {
-    initial: { y: "-100%", opacity: 0 },
-    animate: { y: "0%", opacity: 1 },
-    transition: { duration: 1.2, ease: "easeInOut" },
+    hidden: { clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)" },
+    visible: {
+      clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+      transition: { duration: 1, ease: "easeInOut" },
+    },
   },
 ];
 

@@ -7,29 +7,21 @@ import {
   Button,
   Heading,
   Badge,
-  Stack,
   Container,
   Icon,
   AspectRatio,
   Skeleton,
+  chakra,
 } from "@chakra-ui/react";
-// import { useColorModeValue } from "@chakra-ui/react";
-import { CloseIcon } from "@chakra-ui/icons";
 import Link from "next/link";
-import { motion, AnimatePresence, easeInOut } from "framer-motion";
-import {
-  FiArrowRight,
-  FiCalendar,
-  FiBookOpen,
-  FiShare2,
-  FiBookmark,
-} from "react-icons/fi";
+import { motion, Variants, easeInOut } from "framer-motion";
+import { FiArrowRight, FiCalendar, FiBookmark } from "react-icons/fi";
 import { useState } from "react";
 import NextImage from "next/image";
-import { supabaseStorageClient } from "@/src/supabase";
 
 const MotionBox = motion(Box);
 const MotionFlex = motion(Flex);
+const Time = chakra("time");
 
 const newsData = [
   {
@@ -76,7 +68,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
@@ -88,12 +80,10 @@ const itemVariants = {
 export default function NewsAbout() {
   const [imageLoaded, setImageLoaded] = useState<Record<string, boolean>>({});
   const [bookmarked, setBookmarked] = useState<Record<string, boolean>>({});
-  //   const prefersReducedMotion = usePrefersReducedMotion();
 
   const bgColor = "white";
   const textColor = "gray.600";
   const titleColor = "gray.800";
-  const borderColor = "gray.100";
   const cardShadow = "lg";
 
   const handleImageLoad = (title: string) => {
@@ -103,11 +93,6 @@ export default function NewsAbout() {
   const toggleBookmark = (title: string) => {
     setBookmarked((prev) => ({ ...prev, [title]: !prev[title] }));
   };
-
-  // Respect user's motion preferences
-  //   const animationProps = prefersReducedMotion
-  //     ? { initial: false, animate: true, whileInView: undefined, viewport: undefined }
-  //     : {};
 
   const animationProps = {};
 
@@ -139,7 +124,7 @@ export default function NewsAbout() {
 
       <Container maxW="1200px" position="relative" zIndex={1}>
         {/* Header Section with improved semantics */}
-        <Box
+        <MotionBox
           as="header"
           textAlign="center"
           mb={16}
@@ -180,10 +165,10 @@ export default function NewsAbout() {
           >
             Stay updated with our latest news, events, and company milestones
           </Text>
-        </Box>
+        </MotionBox>
 
         {/* News Grid with optimized animations */}
-        <Flex
+        <MotionFlex
           as="section"
           direction="column"
           gap={16}
@@ -203,7 +188,6 @@ export default function NewsAbout() {
               gap={12}
               align="center"
               variants={itemVariants}
-              //   whileHover={!prefersReducedMotion ? { y: -4 } : undefined}
               transition={{ duration: 0.2 }}
               role="article"
               aria-label={`News article: ${news.title}`}
@@ -226,25 +210,10 @@ export default function NewsAbout() {
                         left={0}
                         w="100%"
                         h="100%"
-                        startColor="gray.200"
-                        endColor="gray.300"
                         borderRadius="2xl"
+                        bg="gray.200"
                       />
                     )}
-                    {/* <Image
-                      as={NextImage}
-                      src={news.image}
-                      alt={news.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      style={{
-                        objectFit: "cover",
-                        transition: "transform 0.5s ease",
-                      }}
-                      onLoad={() => handleImageLoad(news.title)}
-                      fallback={<Skeleton w="100%" h="100%" />}
-                      priority={index === 0}
-                    /> */}
                     <Box
                       position="relative"
                       width="100%"
@@ -256,6 +225,7 @@ export default function NewsAbout() {
                         alt={news.title}
                         fill
                         style={{ objectFit: "cover" }}
+                        onLoad={() => handleImageLoad(news.title)}
                         priority={index === 0}
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
@@ -318,13 +288,7 @@ export default function NewsAbout() {
                 >
                   <Flex align="center" gap={1}>
                     <Icon as={FiCalendar} boxSize={4} />
-                    <Text as="time" dateTime={news.date}>
-                      {news.date}
-                    </Text>
-                  </Flex>
-                  <Flex align="center" gap={1}>
-                    <Icon as={FiBookOpen} boxSize={4} />
-                    <Text>{news.readTime}</Text>
+                    <time dateTime={news.date as string}>{news.date}</time>
                   </Flex>
                 </Flex>
 
@@ -335,7 +299,7 @@ export default function NewsAbout() {
                   mb={4}
                   color={titleColor}
                   lineHeight="1.3"
-                  letterGap="tight"
+                  letterSpacing="tight"
                 >
                   {news.title}
                 </Heading>
@@ -351,16 +315,17 @@ export default function NewsAbout() {
                       size="md"
                       variant="outline"
                       colorScheme="green"
-                      rightIcon={<FiArrowRight />}
                       _hover={{
                         bg: "green.50",
                         transform: "translateX(4px)",
                         transition: "all 0.2s ease",
                       }}
-                      transition="all 0.2s ease"
                       aria-label={`Read full article about ${news.title}`}
+                      display="inline-flex"
+                      alignItems="center"
+                      gap={2}
                     >
-                      Read Full Article
+                      Read Full Article <FiArrowRight />
                     </Button>
                   </Link>
 
@@ -368,7 +333,6 @@ export default function NewsAbout() {
                     size="md"
                     variant="ghost"
                     colorScheme="gray"
-                    leftIcon={<FiBookmark />}
                     onClick={() => toggleBookmark(news.title)}
                     aria-label={
                       bookmarked[news.title]
@@ -376,14 +340,18 @@ export default function NewsAbout() {
                         : "Bookmark article"
                     }
                     _hover={{ bg: "gray.100" }}
+                    display="inline-flex"
+                    alignItems="center"
+                    gap={2} // spacing between icon & text
                   >
+                    <FiBookmark />
                     {bookmarked[news.title] ? "Saved" : "Save"}
                   </Button>
                 </Flex>
               </Box>
             </MotionFlex>
           ))}
-        </Flex>
+        </MotionFlex>
 
         {/* Enhanced CTA Section with better accessibility */}
         <Box
@@ -411,279 +379,10 @@ export default function NewsAbout() {
             maxW="500px"
             mx="auto"
           >
-            {/* <Button
-              bg="white"
-              color="green.700"
-              size="lg"
-              px={8}
-              _hover={{
-                bg: "gray.100",
-                transform: "scale(1.02)",
-              }}
-              _active={{ transform: "scale(0.98)" }}
-              transition="all 0.2s ease"
-              aria-label="Subscribe to newsletter"
-            >
-              Subscribe Now
-            </Button>
-            <Button
-              variant="outline"
-              borderColor="white"
-              color="white"
-              size="lg"
-              _hover={{
-                bg: "whiteAlpha.200",
-                transform: "scale(1.02)",
-              }}
-              aria-label="View all news"
-            >
-              View All News
-            </Button> */}
+            {/* You can add subscription form fields here */}
           </Flex>
         </Box>
       </Container>
     </Box>
   );
 }
-
-// "use client";
-
-// import {
-//   Box,
-//   Text,
-//   Image,
-//   Button,
-//   Flex,
-//   Container,
-//   Badge,
-//   Heading,
-//   AspectRatio,
-//   Skeleton,
-//   Icon,
-// } from "@chakra-ui/react";
-// import { useColorModeValue } from "@chakra-ui/system";
-// import Link from "next/link";
-// import { motion } from "framer-motion";
-// import {
-//   FiArrowRight,
-//   FiCalendar,
-//   FiBookOpen,
-//   FiBookmark,
-// } from "react-icons/fi";
-// import { useState, useEffect } from "react";
-// import NextImage from "next/image";
-// import { supabaseStorageClient } from "@/src/supabase";
-// // import { supabase } from "@/src/supabase";
-
-// const MotionFlex = motion(Flex);
-
-// export default function NewsAbout() {
-//   const [newsData, setNewsData] = useState<any[]>([]);
-//   const [loading, setLoading] = useState(true);
-//   const [bookmarked, setBookmarked] = useState<Record<string, boolean>>({});
-
-//   const bgColor = useColorModeValue("white", "gray.800");
-//   const textColor = useColorModeValue("gray.600", "gray.300");
-//   const titleColor = useColorModeValue("gray.800", "white");
-//   const cardShadow = useColorModeValue("lg", "dark-lg");
-
-//   const toggleBookmark = (title: string) => {
-//     setBookmarked((prev) => ({ ...prev, [title]: !prev[title] }));
-//   };
-
-//   // Fetch news from Supabase
-//   useEffect(() => {
-//     async function fetchNews() {
-//       setLoading(true);
-
-//       const { data, error } = await supabaseStorageClient
-//         .from("NewsDetail")
-//         .select("*")
-//         .order("id", { ascending: true });
-
-//       if (error) {
-//         console.error("Error fetching news:", error);
-//       } else if (data) {
-//         const formattedData = data.map((item) => ({
-//           title: item.title,
-//           image: item.image,
-//           description: item.description,
-//           link: item.link,
-//           date: item.date,
-//           category: item.category,
-//           featured: item.featured,
-//         }));
-//         setNewsData(formattedData);
-//       }
-//       setLoading(false);
-//     }
-
-//     fetchNews();
-//   }, []);
-
-//   if (loading) {
-//     return (
-//       <Box py={20} textAlign="center" color={textColor}>
-//         Loading news...
-//       </Box>
-//     );
-//   }
-
-//   return (
-//     <Box py={{ base: 12, md: 20 }} px={{ base: 4, md: 6 }} bg={bgColor}>
-//       <Container maxW="1200px">
-//         <Box textAlign="center" mb={16}>
-//           <Badge
-//             colorScheme="green"
-//             fontSize="sm"
-//             px={4}
-//             py={2}
-//             borderRadius="full"
-//             mb={4}
-//           >
-//             Latest Updates
-//           </Badge>
-//           <Heading
-//             as="h1"
-//             fontSize={{ base: "3xl", md: "4xl" }}
-//             fontWeight="bold"
-//             mb={4}
-//             bgGradient="linear(to-r, green.600, blue.600)"
-//             bgClip="text"
-//           >
-//             News & Announcements
-//           </Heading>
-//           <Text
-//             fontSize="lg"
-//             color={textColor}
-//             maxW="600px"
-//             mx="auto"
-//             lineHeight="tall"
-//           >
-//             Stay updated with our latest news, events, and company milestones
-//           </Text>
-//         </Box>
-
-//         <Flex direction="column" gap={16}>
-//           {newsData.map((news) => (
-//             <MotionFlex
-//               key={news.title}
-//               direction={{
-//                 base: "column",
-//                 lg: news.featured ? "row" : "row-reverse",
-//               }}
-//               gap={12}
-//               align="center"
-//             >
-//               {/* IMAGE */}
-//               <Box
-//                 flex="1"
-//                 position="relative"
-//                 borderRadius="2xl"
-//                 boxShadow={cardShadow}
-//                 overflow="hidden"
-//               >
-//                 <AspectRatio ratio={16 / 9}>
-//                   <NextImage
-//                     src={news.image}
-//                     alt={news.title}
-//                     fill
-//                     style={{ objectFit: "cover" }}
-//                   />
-//                 </AspectRatio>
-//                 <Badge
-//                   position="absolute"
-//                   top={4}
-//                   left={4}
-//                   colorScheme="green"
-//                   fontSize="xs"
-//                   px={3}
-//                   py={1}
-//                   borderRadius="full"
-//                 >
-//                   {news.category}
-//                 </Badge>
-//                 {news.featured && (
-//                   <Badge
-//                     position="absolute"
-//                     top={4}
-//                     right={4}
-//                     colorScheme="orange"
-//                     fontSize="xs"
-//                     px={3}
-//                     py={1}
-//                     borderRadius="full"
-//                   >
-//                     Featured
-//                   </Badge>
-//                 )}
-//               </Box>
-
-//               {/* CONTENT */}
-//               <Box flex="1">
-//                 <Flex
-//                   align="center"
-//                   gap={4}
-//                   mb={3}
-//                   color="gray.500"
-//                   fontSize="sm"
-//                 >
-//                   <Flex align="center" gap={1}>
-//                     <Icon as={FiCalendar} boxSize={4} />
-//                     <Text as="time" dateTime={news.date}>
-//                       {news.date}
-//                     </Text>
-//                   </Flex>
-//                 </Flex>
-
-//                 <Heading
-//                   as="h2"
-//                   fontSize={{ base: "xl", md: "2xl" }}
-//                   fontWeight="bold"
-//                   mb={4}
-//                   color={titleColor}
-//                 >
-//                   {news.title}
-//                 </Heading>
-
-//                 <Text fontSize="md" mb={6} color={textColor} lineHeight="1.6">
-//                   {news.description}
-//                 </Text>
-
-//                 <Flex gap={3} align="center">
-//                   <Link href={news.link} passHref legacyBehavior>
-//                     <Button
-//                       as="a"
-//                       size="md"
-//                       variant="outline"
-//                       colorScheme="green"
-//                       rightIcon={<FiArrowRight />}
-//                       aria-label={`Read full article about ${news.title}`}
-//                     >
-//                       Read Article →
-//                     </Button>
-//                   </Link>
-
-//                   <Button
-//                     size="md"
-//                     variant="ghost"
-//                     colorScheme="gray"
-//                     leftIcon={<FiBookmark />}
-//                     onClick={() => toggleBookmark(news.title)}
-//                     aria-label={
-//                       bookmarked[news.title]
-//                         ? "Remove bookmark"
-//                         : "Bookmark article"
-//                     }
-//                   >
-//                     {bookmarked[news.title] ? "Saved" : "Save"}
-//                   </Button>
-//                 </Flex>
-//               </Box>
-//             </MotionFlex>
-//           ))}
-//         </Flex>
-//       </Container>
-//     </Box>
-//   );
-// }

@@ -2,7 +2,9 @@
 
 import {
   Box,
+  Button,
   BoxProps,
+  ButtonProps,
   Heading,
   Text,
   Grid,
@@ -10,20 +12,18 @@ import {
   Stack,
   Input,
   Textarea,
-  Button,
-  ButtonProps,
   Link as ChakraLink,
 } from "@chakra-ui/react";
 import { motion, HTMLMotionProps } from "framer-motion";
 import { useState } from "react";
 
-const MotionButton = motion<
-  Omit<ButtonProps, "transition"> & HTMLMotionProps<"button">
->(Button);
-const MotionBox = motion<Omit<BoxProps, "transition"> & HTMLMotionProps<"div">>(
-  Box,
-);
+type MotionBoxProps = Omit<BoxProps, "transition"> & HTMLMotionProps<"div">;
 
+type MotionButtonProps = Omit<ButtonProps, "transition"> &
+  HTMLMotionProps<"button">;
+
+const MotionBox = motion(Box) as React.FC<MotionBoxProps>;
+const MotionButton = motion(Button) as React.FC<MotionButtonProps>;
 const darkGreen = "#15350f";
 
 export default function ReemConsultancyContact() {

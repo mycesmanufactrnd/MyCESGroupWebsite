@@ -67,7 +67,7 @@ export default function EnergyAuditHero() {
           lineHeight="1.3"
           textShadow="0 6px 24px rgba(0,0,0,0.45)" // professional readability
         >
-          Welcome to MyCES Energy Audit Service
+          Welcome to MyCES Engineering
         </Heading>
       </MotionBox>
     </Box>

@@ -60,15 +60,21 @@ export default function Reemimportance() {
           fontWeight="bold"
           color={darkGreen}
         >
-          Why REEM Consultancy is Essential
+          Why REM Consultancy is Essential
         </Heading>
         <Text mt={10} fontSize={{ base: "md", md: "lg" }} color="gray.600">
-          Bridging the gap between regulatory compliance and sustainable energy savings
+          Bridging the gap between regulatory compliance and sustainable energy
+          savings
         </Text>
       </Box>
 
       {/* Flip Cards Grid */}
-      <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={8} maxW="1200px" mx="auto">
+      <Grid
+        templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }}
+        gap={8}
+        maxW="1200px"
+        mx="auto"
+      >
         {reemCards.map((card, index) => {
           const isFlipped = activeIndex === index;
 
@@ -86,8 +92,14 @@ export default function Reemimportance() {
                 h="100%"
                 transition="transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)"
                 transformStyle="preserve-3d"
-                transform={isFlipped ? "rotateY(180deg) rotateX(2deg)" : "rotateY(0deg)"}
-                _hover={{ transform: isFlipped ? "rotateY(180deg) rotateX(2deg)" : "rotateY(0deg) rotateX(2deg)" }}
+                transform={
+                  isFlipped ? "rotateY(180deg) rotateX(2deg)" : "rotateY(0deg)"
+                }
+                _hover={{
+                  transform: isFlipped
+                    ? "rotateY(180deg) rotateX(2deg)"
+                    : "rotateY(0deg) rotateX(2deg)",
+                }}
               >
                 {/* Front */}
                 <Box

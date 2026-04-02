@@ -7,6 +7,10 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 
 const MotionBox = motion(Box);
 
+type SafeIconButtonProps = React.ComponentProps<typeof IconButton> & {
+  icon: React.ReactElement;
+};
+
 const features = [
   {
     title: "Baseline Energy Measurement",
@@ -43,15 +47,32 @@ export default function MeasurementCarousel() {
   const next = () => setCenterIndex((centerIndex + 1) % total);
 
   const getProps = (index: number) => {
-    const diff = ((index - centerIndex + total) % total);
+    const diff = (index - centerIndex + total) % total;
     if (diff === 0) return { scale: 1.2, x: 0, opacity: 1, zIndex: 3 };
-    if (diff === 1 || diff === total - 1) return { scale: 1, x: diff === 1 ? 260 : -260, opacity: 0.85, zIndex: 2 };
-    if (diff === 2 || diff === total - 2) return { scale: 0.85, x: diff === 2 ? 480 : -480, opacity: 0.6, zIndex: 1 };
-    return { scale: 0.7, x: diff > total / 2 ? -600 : 600, opacity: 0, zIndex: 0 };
+    if (diff === 1 || diff === total - 1)
+      return { scale: 1, x: diff === 1 ? 260 : -260, opacity: 0.85, zIndex: 2 };
+    if (diff === 2 || diff === total - 2)
+      return {
+        scale: 0.85,
+        x: diff === 2 ? 480 : -480,
+        opacity: 0.6,
+        zIndex: 1,
+      };
+    return {
+      scale: 0.7,
+      x: diff > total / 2 ? -600 : 600,
+      opacity: 0,
+      zIndex: 0,
+    };
   };
 
   return (
-    <Box w="full" py={{ base: 16, md: 24 }} px={{ base: 6, md: 20 }} bg="#dde0dcb3">
+    <Box
+      w="full"
+      py={{ base: 16, md: 24 }}
+      px={{ base: 6, md: 20 }}
+      bg="#dde0dcb3"
+    >
       <Heading
         fontSize={{ base: "xl", md: "2xl" }}
         fontWeight="bold"
@@ -63,7 +84,12 @@ export default function MeasurementCarousel() {
       </Heading>
 
       <Box position="relative" w="full" overflow="hidden">
-        <Flex justify="center" align="center" position="relative" h={{ base: "300px", md: "360px" }}>
+        <Flex
+          justify="center"
+          align="center"
+          position="relative"
+          h={{ base: "300px", md: "360px" }}
+        >
           {features.map((feature, index) => {
             const { scale, x, opacity, zIndex } = getProps(index);
 
@@ -85,9 +111,18 @@ export default function MeasurementCarousel() {
                 p={4}
                 style={{ zIndex }}
                 initial={{ opacity: 0, y: 80 }} // start further below for smoother scroll effect
-                whileInView={{ transform: `translateX(${x}px) scale(${scale})`, opacity, y: 0 }}
+                whileInView={{
+                  transform: `translateX(${x}px) scale(${scale})`,
+                  opacity,
+                  y: 0,
+                }}
                 viewport={{ once: true, amount: 0.3 }}
-                transition={{ type: "spring", stiffness: 150, damping: 28, delay: index * 0.12 }} // smoother entrance
+                transition={{
+                  type: "spring",
+                  stiffness: 150,
+                  damping: 28,
+                  delay: index * 0.12,
+                }} // smoother entrance
                 whileHover={{
                   scale: scale + 0.08,
                   y: -10,
@@ -95,8 +130,12 @@ export default function MeasurementCarousel() {
                   transition: { type: "spring", stiffness: 300, damping: 20 },
                 }}
               >
-                <Heading fontSize="lg" mb={2} color="#0F2A1D">{feature.title}</Heading>
-                <Text fontSize="sm" color="gray.700">{feature.description}</Text>
+                <Heading fontSize="lg" mb={2} color="#0F2A1D">
+                  {feature.title}
+                </Heading>
+                <Text fontSize="sm" color="gray.700">
+                  {feature.description}
+                </Text>
               </MotionBox>
             );
           })}
@@ -104,8 +143,10 @@ export default function MeasurementCarousel() {
 
         {/* Navigation */}
         <IconButton
+          {...({
+            icon: <ChevronLeftIcon boxSize={6} />,
+          } as SafeIconButtonProps)}
           aria-label="Previous"
-          icon={<ChevronLeftIcon boxSize={6} />}
           position="absolute"
           top="50%"
           left={1}
@@ -117,8 +158,10 @@ export default function MeasurementCarousel() {
           boxShadow="md"
         />
         <IconButton
+          {...({
+            icon: <ChevronRightIcon boxSize={6} />,
+          } as SafeIconButtonProps)}
           aria-label="Next"
-          icon={<ChevronRightIcon boxSize={6} />}
           position="absolute"
           top="50%"
           right={1}

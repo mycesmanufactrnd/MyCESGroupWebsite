@@ -74,7 +74,7 @@ export default function OurCoreValues() {
       {/* Flip Cards */}
       <Grid
         templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
-        spacing={10}
+        gap={10}
         maxW="1300px"
         mx="auto"
       >

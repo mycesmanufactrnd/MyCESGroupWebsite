@@ -10,7 +10,7 @@ import {
   Input,
   Textarea,
   Button,
-  Link,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -106,21 +106,21 @@ export default function EMSContact() {
             <Box>
               <Text fontWeight="bold">Email:</Text>
               <Text>
-                <Link href="mailto:admin@mycesgroup.com">
+                <ChakraLink href="mailto:admin@mycesgroup.com">
                   admin@mycesgroup.com
-                </Link>{" "}
+                </ChakraLink>{" "}
               </Text>
             </Box>
 
             <Box>
               <Text fontWeight="bold">Website:</Text>
-              <Link
+              <ChakraLink
                 href="https://www.mycesgroup.com"
-                color={darkGreen}
-                isExternal
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 www.mycesgroup.com
-              </Link>
+              </ChakraLink>
             </Box>
           </Stack>
         </MotionBox>
@@ -223,9 +223,6 @@ export default function EMSContact() {
                 color="white"
                 size="lg"
                 borderRadius="md"
-                as={motion.button}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
                 _hover={{ bg: "#8FAF9B" }}
               >
                 Submit

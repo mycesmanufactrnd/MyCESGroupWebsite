@@ -4,6 +4,7 @@ import { Box, Grid, Image, Text, Heading, IconButton } from "@chakra-ui/react";
 import { motion, Variants } from "framer-motion";
 import { useState } from "react";
 import { CloseIcon } from "@chakra-ui/icons";
+import { Icon } from "lucide-react";
 
 const MotionBox = motion(Box);
 
@@ -49,41 +50,41 @@ const awards = [
     year: "2023",
     img: "/certificates/1.KKM- SIJIL AKUAN PENDAFTARAN.png",
   },
-  {
-    title: "Perakuan Kekompetenan Penjaga Jantera",
-    year: "2026",
-    img: "/certificates/2. ADC1.png",
-  },
-  {
-    title: "Certified Facility Management Professional",
-    year: "2022",
-    img: "/certificates/2. ADC2.png",
-  },
-  {
-    title: "Kompetensi Kemahiran Pembinaan",
-    year: "2023",
-    img: "/certificates/2. ADC3.png",
-  },
-  {
-    title: "Certified Energy Manager",
-    year: "",
-    img: "/certificates/3. CEM.png",
-  },
-  {
-    title: "Perakuan Pendaftaran Sebagai Pengurus Tenaga Berdaftar Jenis Kedua",
-    year: "2025",
-    img: "/certificates/3. COR.png",
-  },
-  {
-    title: "Perakuan Amalan Pengurus Tenaga Berdaftar Jenis Kedua",
-    year: "2026",
-    img: "/certificates/3. PC2.png",
-  },
-  {
-    title: "Perakuan Pendaftaran Sebagai Pengurus Tenaga Elektrik",
-    year: "2012",
-    img: "/certificates/4. PC.png",
-  },
+  // {
+  //   title: "Perakuan Kekompetenan Penjaga Jantera",
+  //   year: "2026",
+  //   img: "/certificates/2. ADC1.png",
+  // },
+  // {
+  //   title: "Certified Facility Management Professional",
+  //   year: "2022",
+  //   img: "/certificates/2. ADC2.png",
+  // },
+  // {
+  //   title: "Kompetensi Kemahiran Pembinaan",
+  //   year: "2023",
+  //   img: "/certificates/2. ADC3.png",
+  // },
+  // {
+  //   title: "Certified Energy Manager",
+  //   year: "",
+  //   img: "/certificates/3. CEM.png",
+  // },
+  // {
+  //   title: "Perakuan Pendaftaran Sebagai Pengurus Tenaga Berdaftar Jenis Kedua",
+  //   year: "2025",
+  //   img: "/certificates/3. COR.png",
+  // },
+  // {
+  //   title: "Perakuan Amalan Pengurus Tenaga Berdaftar Jenis Kedua",
+  //   year: "2026",
+  //   img: "/certificates/3. PC2.png",
+  // },
+  // {
+  //   title: "Perakuan Pendaftaran Sebagai Pengurus Tenaga Elektrik",
+  //   year: "2012",
+  //   img: "/certificates/4. PC.png",
+  // },
   // {
   //   title: "Perakuan Kekompetenan Sebagai Penjaga Jantera",
   //   year: "2019",
@@ -167,7 +168,7 @@ export default function AwardsList() {
         <Grid
           templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
           justifyItems="center"
-          spacing={{ base: 3, md: 2 }}
+          gap={{ base: 3, md: 2 }}
         >
           {awards.map((award, index) => {
             const row = Math.floor(index / 3);
@@ -264,7 +265,6 @@ export default function AwardsList() {
             onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
           >
             <IconButton
-              icon={<CloseIcon />}
               position="absolute"
               top={2}
               right={2}
@@ -273,7 +273,10 @@ export default function AwardsList() {
               size="sm"
               bg="transparent"
               _hover={{ bg: "gray.200" }}
-            />
+            >
+              <CloseIcon />
+            </IconButton>
+
             <Text mb={4} fontWeight="bold" textAlign="center">
               {selectedAward.title} ({selectedAward.year})
             </Text>

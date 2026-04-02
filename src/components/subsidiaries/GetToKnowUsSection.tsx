@@ -17,7 +17,7 @@ const subsidiaries = [
       "Energy Audit",
       "Equipment Rental",
       "M&V",
-      "Reem Consultancy",
+      "REM Consultancy",
       "Energy Management System Certification",
     ],
   },
@@ -128,7 +128,8 @@ export default function GetToKnowUsSection() {
                 <Box order={{ base: 1, md: isEven ? 2 : 1 }}>
                   <Link
                     href={item.url}
-                    isExternal
+                    target="_blank"
+                    rel="noopener noreferrer"
                     _hover={{ textDecoration: "none" }}
                   >
                     <Heading

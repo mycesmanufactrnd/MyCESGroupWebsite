@@ -12,7 +12,7 @@ export default function OfficesContactDetails() {
     <Box bg="white" px={{ base: 6, md: 20 }} py={20}>
       <Grid
         templateColumns={{ base: "1fr", md: "1fr 1fr" }}
-        spacing={{ base: 12, md: 20 }}
+        gap={{ base: 12, md: 20 }}
         alignItems="start"
       >
         {/* ================= LEFT COLUMN ================= */}
@@ -38,7 +38,7 @@ export default function OfficesContactDetails() {
           />
 
           {/* Header */}
-          <Flex align="center" spacing={3} mb={6}>
+          <Flex align="center" gap={3} mb={6}>
             <Box p={3} bg="gray.100" borderRadius="md" color="#0F2A1D">
               <FaMapMarkerAlt />
             </Box>
@@ -84,7 +84,7 @@ export default function OfficesContactDetails() {
           />
 
           {/* Header */}
-          <Flex align="center" spacing={3} mb={6}>
+          <Flex align="center" gap={3} mb={6}>
             <Box p={3} bg="gray.100" borderRadius="md" color="#0F2A1D">
               <FaPhoneAlt />
             </Box>

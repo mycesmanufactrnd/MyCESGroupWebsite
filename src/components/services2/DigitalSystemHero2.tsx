@@ -67,7 +67,7 @@ export default function DigitalSystemHero2() {
           lineHeight="1.3"
           textShadow="0 6px 24px rgba(0,0,0,0.45)" // professional readability
         >
-          Welcome to MyCES Digital System Service
+          Welcome to MyCES Manufacturing
         </Heading>
       </MotionBox>
     </Box>
