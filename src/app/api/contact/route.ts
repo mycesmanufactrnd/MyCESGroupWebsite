@@ -58,36 +58,44 @@ export async function POST(req: NextRequest) {
        3. SEND EMAIL TO ADMIN
     ========================== */
     console.log("📧 Sending admin email...");
-    await transporter.sendMail({
-      from: `"MYCES Website" <${process.env.EMAIL_USER}>`,
-      to: process.env.HR_EMAIL || process.env.EMAIL_USER,
-      subject: "📩 New Contact Form Submission",
-      html: `
-        <h2>New Contact Message</h2>
-        <p><b>Name:</b> ${firstName} ${lastName}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Phone:</b> ${phone || 'Not provided'}</p>
-        <p><b>Message:</b></p>
-        <p>${message}</p>
-      `,
-    });
+    try {
+      await transporter.sendMail({
+        from: `"MYCES Website" <${process.env.EMAIL_USER}>`,
+        to: process.env.HR_EMAIL || process.env.EMAIL_USER,
+        subject: "📩 New Contact Form Submission",
+        html: `
+          <h2>New Contact Message</h2>
+          <p><b>Name:</b> ${firstName} ${lastName}</p>
+          <p><b>Email:</b> ${email}</p>
+          <p><b>Phone:</b> ${phone || 'Not provided'}</p>
+          <p><b>Message:</b></p>
+          <p>${message}</p>
+        `,
+      });
+    } catch (error) {
+      console.error("EMAIL FAILED:", error);
+    }
 
     /* =========================
        4. AUTO-REPLY TO USER
     ========================== */
     console.log("📧 Sending auto-reply...");
-    await transporter.sendMail({
-      from: `"MYCES Team" <${process.env.EMAIL_USER}>`,
-      to: email,
-      subject: "Thank you for contacting MYCES",
-      html: `
-        <p>Dear ${firstName},</p>
-        <p>Thank you for reaching out to MYCES. We have received your message and will respond shortly.</p>
-        <p><b>Your Message:</b></p>
-        <blockquote>${message}</blockquote>
-        <p>Regards,<br/>MYCES Team</p>
-      `,
-    });
+    try {
+      await transporter.sendMail({
+        from: `"MYCES Team" <${process.env.EMAIL_USER}>`,
+        to: email,
+        subject: "Thank you for contacting MYCES",
+        html: `
+          <p>Dear ${firstName},</p>
+          <p>Thank you for reaching out to MYCES. We have received your message and will respond shortly.</p>
+          <p><b>Your Message:</b></p>
+          <blockquote>${message}</blockquote>
+          <p>Regards,<br/>MYCES Team</p>
+        `,
+      });
+    } catch (error) {
+      console.error("EMAIL FAILED:", error);
+    }
 
     return NextResponse.json({
       success: true,

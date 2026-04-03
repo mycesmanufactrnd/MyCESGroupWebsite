@@ -91,22 +91,26 @@ export async function POST(req: NextRequest) {
     /* =========================
        5. SEND EMAIL
     ========================== */
-    await transporter.sendMail({
-      from: `"MyCES Careers" <${process.env.EMAIL_USER}>`,
-      to: process.env.HR_EMAIL,
-      subject: `New CV Submission – ${body.vacancy}`,
-      html: `
-        <h2>New Job Application</h2>
-        <p><b>Vacancy:</b> ${body.vacancy}</p>
-        <p><b>Name:</b> ${body.name}</p>
-        <p><b>Email:</b> ${body.email}</p>
-        <p><b>Phone:</b> ${body.phone}</p>
-        <p><b>About:</b><br/>${body.description || "-"}</p>
-        <hr/>
-        <p>Files are attached to this email.</p>
-      `,
-      attachments,
-    });
+    try {
+      await transporter.sendMail({
+        from: `"MyCES Careers" <${process.env.EMAIL_USER}>`,
+        to: process.env.HR_EMAIL,
+        subject: `New CV Submission – ${body.vacancy}`,
+        html: `
+          <h2>New Job Application</h2>
+          <p><b>Vacancy:</b> ${body.vacancy}</p>
+          <p><b>Name:</b> ${body.name}</p>
+          <p><b>Email:</b> ${body.email}</p>
+          <p><b>Phone:</b> ${body.phone}</p>
+          <p><b>About:</b><br/>${body.description || "-"}</p>
+          <hr/>
+          <p>Files are attached to this email.</p>
+        `,
+        attachments,
+      });
+    } catch (error) {
+      console.error("EMAIL FAILED:", error);
+    }
 
     return NextResponse.json({ success: true, record });
   } catch (error: unknown) {
