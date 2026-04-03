@@ -21,16 +21,20 @@ export async function POST(req: NextRequest) {
        1. SAVE TO DATABASE
     ========================== */
     console.log("📝 Saving to database...");
-    const record = await prisma.contact.create({
-      data: {
-        firstName,
-        lastName,
-        email,
-        phone: phone || "",
-        message,
-      },
-    });
-    console.log("✅ Saved with ID:", record.id);
+    try {
+      const record = await prisma.contact.create({
+        data: {
+          firstName,
+          lastName,
+          email,
+          phone: phone || "",
+          message,
+        },
+      });
+      console.log("✅ Saved with ID:", record.id);
+    } catch (error) {
+      console.error("DATABASE ERROR:", error);
+    }
 
     /* =========================
        2. EMAIL SETUP
