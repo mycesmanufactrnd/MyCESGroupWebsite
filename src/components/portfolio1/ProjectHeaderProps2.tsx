@@ -3,7 +3,7 @@
 import { Box, Flex, Text, Link as ChakraLink } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import NextLink from "next/link";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 
@@ -14,7 +14,7 @@ interface ProjectHeaderProps2 {
   category: string;
 }
 
-export default function ProjectHeaderProps2({
+function ProjectHeaderProps2Inner({
   title,
   category,
 }: ProjectHeaderProps2) {
@@ -118,5 +118,13 @@ export default function ProjectHeaderProps2({
         </Flex>
       </Box>
     </Box>
+  );
+}
+
+export default function ProjectHeaderProps2({ title, category }: ProjectHeaderProps2) {
+  return (
+    <Suspense fallback={null}>
+      <ProjectHeaderProps2Inner title={title} category={category} />
+    </Suspense>
   );
 }

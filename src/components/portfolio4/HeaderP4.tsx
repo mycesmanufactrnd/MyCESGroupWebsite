@@ -3,7 +3,7 @@
 import { Box, Flex, Text, Link as ChakraLink } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import NextLink from "next/link";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 
@@ -14,7 +14,7 @@ interface ProjectHeaderProps2 {
   category: string;
 }
 
-export default function HeaderP2({ title, category }: ProjectHeaderProps2) {
+function HeaderP2Inner({ title, category }: ProjectHeaderProps2) {
   const [isSticky, setIsSticky] = useState(false);
   const searchParams = useSearchParams();
   const service = searchParams.get("service") || "DEFAULT";
@@ -107,5 +107,13 @@ export default function HeaderP2({ title, category }: ProjectHeaderProps2) {
         </Flex>
       </Box>
     </Box>
+  );
+}
+
+export default function HeaderP2({ title, category }: ProjectHeaderProps2) {
+  return (
+    <Suspense fallback={null}>
+      <HeaderP2Inner title={title} category={category} />
+    </Suspense>
   );
 }
