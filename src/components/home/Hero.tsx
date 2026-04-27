@@ -78,10 +78,10 @@ const bgVariants: VariantProps[] = [
   },
 ];
 
-const MotionBox = motion(Box);
-const MotionFlex = motion(Flex);
-const MotionHeading = motion(Heading);
-const MotionText = motion(Text);
+const MotionBox = motion.create(Box);
+const MotionFlex = motion.create(Flex);
+const MotionHeading = motion.create(Heading);
+const MotionText = motion.create(Text);
 
 /* ================= HERO COMPONENT ================= */
 export default function Hero() {
@@ -218,7 +218,7 @@ export default function Hero() {
       <MotionFlex
         position="absolute"
         bottom={{ base: 4, md: 10 }}
-        left={{ base: 0, md: "30%" }}
+        left={{ base: 0, md: "45%" }}
         transform={{ base: "none", md: "translateX(-50%)" }} // ← remove translate on mobile
         w={{ base: "100%", md: "820px" }} // ← full width on mobile
         px={{ base: 4, md: 10 }}

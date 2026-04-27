@@ -14,7 +14,7 @@ import {
 import { motion } from "framer-motion";
 import { useState, ChangeEvent } from "react";
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 export default function SendCVSection() {
   const toaster = createToaster({
@@ -258,7 +258,6 @@ export default function SendCVSection() {
             Upload CV (max 10MB)
           </Text>
           <Input
-            key={cvFile ? cvFile.name : "empty"}
             type="file"
             accept=".pdf,.doc,.docx"
             p={1}

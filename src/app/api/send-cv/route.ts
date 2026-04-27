@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
     const phone = formData.get("phone") as string | null;
     const vacancy = formData.get("vacancy") as string | null;
 
-    if (!name || !email || !phone) {
+    if (!name || !email || !phone || !vacancy) {
       return NextResponse.json(
         { success: false, error: "Missing required fields: name, email, phone" },
         { status: 400 }
