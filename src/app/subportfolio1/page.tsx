@@ -1,5 +1,3 @@
-"use client";
-
 import { Box } from "@chakra-ui/react";
 import ProjectHeaderProps2 from "../../components/portfolio1/ProjectHeaderProps2";
 import DescriptionSubPortfolio from "../../components/portfolio1/DescriptionSubPortfolio";
