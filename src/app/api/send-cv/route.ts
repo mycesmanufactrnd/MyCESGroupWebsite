@@ -9,10 +9,17 @@ export async function POST(req: NextRequest) {
     // ✅ SAME STYLE AS INTERNSHIP (FormData)
     const formData = await req.formData();
 
-    const name = formData.get("name") as string;
-    const email = formData.get("email") as string;
-    const phone = formData.get("phone") as string;
-    const vacancy = formData.get("vacancy") as string;
+    const name = formData.get("name") as string | null;
+    const email = formData.get("email") as string | null;
+    const phone = formData.get("phone") as string | null;
+    const vacancy = formData.get("vacancy") as string | null;
+
+    if (!name || !email || !phone) {
+      return NextResponse.json(
+        { success: false, error: "Missing required fields: name, email, phone" },
+        { status: 400 }
+      );
+    }
 
     const file = formData.get("cvFile") as File | null;
 
