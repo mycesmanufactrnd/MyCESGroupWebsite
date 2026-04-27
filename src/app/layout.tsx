@@ -1,15 +1,30 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Providers } from "./providers";
-import { Inter, Montserrat } from 'next/font/google';
+import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-jakarta",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-inter",
+});
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${jakarta.variable} ${inter.variable}`}
+      suppressHydrationWarning
+    >
       <body>
         <Providers>
           <Header />
@@ -20,13 +35,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-sans',
-});
-
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  variable: '--font-heading',
-});

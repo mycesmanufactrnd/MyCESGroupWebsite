@@ -5,115 +5,119 @@ import { useEffect, useState } from "react";
 
 const sections = [
   { id: "hero", label: "Hero" },
-  { id: "social-proof", label: "Social Proof" },
   { id: "about-us", label: "About Us" },
   { id: "services", label: "Services" },
-  { id: "specialties", label: "Specialties" },
-  { id: "totalservice", label: "Total Service" },
+  { id: "social-proof", label: "Social Proof" },
   { id: "backtop", label: "Back" },
 ];
 
 export default function ScrollBullets() {
   const [activeSection, setActiveSection] = useState("");
-  const [showBullets, setShowBullets] = useState(false);
   const [hovered, setHovered] = useState<string | null>(null);
 
   const handleScroll = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    document.getElementById(id)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   };
 
   useEffect(() => {
-    // Observer for hero section to hide bullets while at top
-    const hero = document.getElementById("hero");
-    const heroObserver = new IntersectionObserver(
-      ([entry]) => setShowBullets(!entry.isIntersecting), // hide bullets if hero is visible
-      { threshold: 0.1 },
-    );
-    if (hero) heroObserver.observe(hero);
-
-    // Observer for all sections to track which bullet is active
-    const sectionObserver = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       (entries) => {
+        let bestMatch = { id: "", ratio: 0 };
+
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
+          if (entry.intersectionRatio > bestMatch.ratio) {
+            bestMatch = {
+              id: entry.target.id,
+              ratio: entry.intersectionRatio,
+            };
           }
         });
+
+        if (bestMatch.id) {
+          setActiveSection(bestMatch.id);
+        }
       },
-      { rootMargin: "0px", threshold: 0.25 }, // trigger when 25% of section visible
+      {
+        threshold: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6],
+        rootMargin: "-20% 0px -40% 0px",
+      },
     );
 
     sections.forEach((sec) => {
       const el = document.getElementById(sec.id);
-      if (el) sectionObserver.observe(el);
+      if (el) observer.observe(el);
     });
 
-    return () => {
-      heroObserver.disconnect();
-      sectionObserver.disconnect();
-    };
+    return () => observer.disconnect();
   }, []);
-
-  if (!showBullets) return null; // hide bullets while hero visible
 
   return (
     <VStack
       position="fixed"
       top="50%"
-      right="2rem"
+      right="1.5rem"
       transform="translateY(-50%)"
       gap={4}
-      zIndex={100}
+      zIndex={9999}
     >
-      {sections.map((sec) => (
-        <Box
-          key={sec.id}
-          position="relative"
-          onMouseEnter={() => setHovered(sec.id)}
-          onMouseLeave={() => setHovered(null)}
-          cursor="pointer"
-          onClick={() => handleScroll(sec.id)}
-        >
-          {/* Bullet */}
-          <Box
-            w="12px"
-            h="12px"
-            borderRadius="full"
-            bg={activeSection === sec.id ? "green.800" : "gray.400"} // active guidance color
-            transition="all 0.3s ease"
-          />
+      {sections.map((sec) => {
+        const isActive = activeSection === sec.id;
 
-          {/* Tooltip */}
-          {hovered === sec.id && (
+        return (
+          <Box
+            key={sec.id}
+            position="relative"
+            cursor="pointer"
+            onMouseEnter={() => setHovered(sec.id)}
+            onMouseLeave={() => setHovered(null)}
+            onClick={() => handleScroll(sec.id)}
+          >
+            {/* BULLET (MATCH ScrollBullets2 THEME) */}
             <Box
-              position="absolute"
-              right="140%"
-              top="50%"
-              transform="translateY(-50%)"
-              bg="black"
-              color="white"
-              px={3}
-              py={1}
-              fontSize="xs"
-              whiteSpace="nowrap"
-              borderRadius="md"
-              zIndex={10}
-            >
-              {sec.label}
+              w={isActive ? "12px" : "9px"}
+              h={isActive ? "12px" : "9px"}
+              borderRadius="full"
+              bg={isActive ? "#1B4D2E" : "gray.400"}
+              transform={isActive ? "scale(1.25)" : "scale(1)"}
+              transition="all 0.25s ease"
+              boxShadow={isActive ? "0 0 10px rgba(27, 77, 46, 0.6)" : "none"}
+            />
+
+            {/* TOOLTIP */}
+            {hovered === sec.id && (
               <Box
                 position="absolute"
-                right="-5px"
+                right="140%"
                 top="50%"
-                transform="translateY(-50%) rotate(45deg)"
-                w="6px"
-                h="6px"
+                transform="translateY(-50%)"
                 bg="black"
-              />
-            </Box>
-          )}
-        </Box>
-      ))}
+                color="white"
+                px={3}
+                py={1}
+                fontSize="xs"
+                borderRadius="md"
+                whiteSpace="nowrap"
+                boxShadow="md"
+              >
+                {sec.label}
+
+                <Box
+                  position="absolute"
+                  right="-4px"
+                  top="50%"
+                  transform="translateY(-50%) rotate(45deg)"
+                  w="6px"
+                  h="6px"
+                  bg="black"
+                />
+              </Box>
+            )}
+          </Box>
+        );
+      })}
     </VStack>
   );
 }

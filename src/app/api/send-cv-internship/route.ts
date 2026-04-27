@@ -6,93 +6,95 @@ import nodemailer from "nodemailer";
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
+    // ✅ 1. Get FormData (NOT JSON)
+    const formData = await req.formData();
 
-    // ===== 1. EMAIL SETUP =====
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const phone = formData.get("phone") as string;
+    const internshipType = formData.get("internshipType") as string;
+
+    const file = formData.get("cvFile") as File | null;
+
+    // ===== 2. EMAIL SETUP =====
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
+      host: "mail.mycesgroup.com",
       port: 465,
       secure: true,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
-      tls: { rejectUnauthorized: false },
+      logger: true,
+      debug: true,
     });
 
-    // ===== 2. FILE HANDLING =====
-    const attachments: Array<{ filename: string; content: Buffer }> = [];
+    let cvUrl = "";
+ interface Attachment {
+  filename: string;
+  content: Buffer;
+}
 
-    const uploadFile = async (file: { name: string; base64?: string }) => {
-      if (!file || !file.base64) return "";
+const attachments: Attachment[] = [];
 
-      const buffer = Buffer.from(file.base64, "base64");
-
-      attachments.push({ filename: file.name, content: buffer });
-
+    // ===== 3. FILE UPLOAD =====
+    if (file) {
       const uniqueName = `${uuidv4()}_${file.name}`;
+
       const { error } = await supabase.storage
         .from("internship-applications")
-        .upload(`files/${uniqueName}`, buffer, { upsert: true });
+        .upload(`files/${uniqueName}`, file, {
+          contentType: file.type, 
+        });
 
       if (error) throw error;
-
-      const { data } = supabase.storage
+      const { data: signedUrlData } = await supabase.storage
         .from("internship-applications")
-        .getPublicUrl(`files/${uniqueName}`);
+        .createSignedUrl(`files/${uniqueName}`, 60 * 60); 
 
-      return data.publicUrl;
-    };
+      cvUrl = signedUrlData?.signedUrl || "";
 
-    const cvUrl = body.cvFile ? await uploadFile(body.cvFile) : "";
-    const transcriptUrl = body.transcriptFile ? await uploadFile(body.transcriptFile) : "";
-    const otherDocsUrl = body.otherFile ? await uploadFile(body.otherFile) : "";
+      // attach file to email
+      const buffer = Buffer.from(await file.arrayBuffer());
+      attachments.push({
+        filename: file.name,
+        content: buffer,
+      });
+    }
 
-    // ===== 3. SAVE TO DATABASE =====
+    // ===== 4. SAVE TO DATABASE =====
     const record = await prisma.internshipApplication.create({
       data: {
-        name: body.name,
-        email: body.email,
-        phone: body.phone,
-        university: body.university,
-        course: body.course,
-        duration: body.duration,
-        internshipType: body.internshipType || "Not specified", // include type
-        description: body.description,
+        name,
+        email,
+        phone,
+        internshipType: internshipType || "Not specified",
         cvUrl,
-        transcriptUrl,
-        otherDocsUrl,
       },
     });
 
-    // ===== 4. SEND EMAIL =====
+    // ===== 5. SEND EMAIL =====
     await transporter.sendMail({
       from: `"MyCES Internship" <${process.env.EMAIL_USER}>`,
       to: process.env.HR_EMAIL,
-      subject: `New Internship CV – ${body.name}`,
+      subject: `New Internship Application – ${name}`,
       html: `
         <h2>New Internship Application</h2>
-        <p><b>Name:</b> ${body.name}</p>
-        <p><b>Email:</b> ${body.email}</p>
-        <p><b>Phone:</b> ${body.phone}</p>
-        <p><b>University:</b> ${body.university}</p>
-        <p><b>Course:</b> ${body.course}</p>
-        <p><b>Internship Type:</b> ${body.internshipType || "Not specified"}</p>
-        <p><b>Duration:</b> ${body.duration}</p>
-        <p><b>About:</b><br/>${body.description || "-"}</p>
-        <hr/>
-        <p>All files are attached to this email.</p>
+        <p><b>Name:</b> ${name}</p>
+        <p><b>Email:</b> ${email}</p>
+        <p><b>Phone:</b> ${phone}</p>
+        <p><b>Internship Type:</b> ${internshipType}</p>
       `,
       attachments,
     });
 
     return NextResponse.json({ success: true, record });
+
   } catch (error: unknown) {
-    console.error(error);
-    const errorMessage = error instanceof Error ? error.message : "Failed to save.";
-    return NextResponse.json(
-      { success: false, error: errorMessage },
-      { status: 500 }
-    );
-  }
+  console.error("ERROR:", error);
+  return NextResponse.json(
+    { success: false, error: error as string  },
+    { status: 500 }
+  );
+}
 }

@@ -69,9 +69,9 @@ const subsidiaries = [
     ],
   },
   {
-    title: "MYCES AIRCOND & ELECTRICAL SERVICES SDN BHD",
+    title: "MYCES POWER SOLUTION SDN BHD",
     description:
-      "MyCES Aircond & Electrical Services Sdn Bhd is a Malaysian contractor delivering safe, efficient, and smart electrical and building automation solutions.",
+      "MyCES Power Solution Sdn Bhd is a Malaysian contractor delivering safe, efficient, and smart electrical and building automation solutions.",
     image: "/subsidiaries/13.jpg",
     url: "",
     details: [

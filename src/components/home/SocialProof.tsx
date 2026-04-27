@@ -86,24 +86,19 @@ export default function SocialProof() {
   };
 
   return (
-    <Box
-      bg="#CCD5C5"
-      color="#1A1A1A"
-      py={10}
-      overflow="hidden"
-      position="relative"
-    >
+    <Box bg="#ccd5c5be" py={10} overflow="hidden" position="relative">
       {/* HEADER */}
       <Flex align="center" mb={6} px={{ base: 4, md: 16 }} gap={4}>
         <Box flex="1" h="1px" bg="gray.400" />
 
         <Text
-          fontWeight="bold"
-          fontSize={{ base: "sm", md: "md" }}
+          fontFamily="heading"
+          fontWeight="semibold"
+          fontSize="14px"
           whiteSpace="nowrap"
           textAlign="center"
         >
-          Trusted by World Class Brands and Organization
+          Trusted by Industry Leaders
         </Text>
 
         <Box flex="1" h="1px" bg="gray.400" />
@@ -121,7 +116,12 @@ export default function SocialProof() {
         <Flex
           ref={containerRef}
           transform={`translateX(-${current * LOGO_WIDTH}px)`}
-          transition={isTransitioning ? "transform 0.55s ease-in-out" : "none"}
+          transition={
+            isTransitioning
+              ? "transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)"
+              : "none"
+          }
+          style={{ willChange: "transform" }}
         >
           {loopedLogos.map((logo, index) => (
             <Flex
@@ -182,7 +182,7 @@ export default function SocialProof() {
       </Box>
 
       {/* BULLETS */}
-      <Flex justify="center" mt={4} gap={2}>
+      {/* <Flex justify="center" mt={4} gap={2}>
         {logos.map((_, index) => (
           <Box
             key={index}
@@ -196,7 +196,7 @@ export default function SocialProof() {
             onClick={() => setCurrent(index)}
           />
         ))}
-      </Flex>
+      </Flex> */}
     </Box>
   );
 }

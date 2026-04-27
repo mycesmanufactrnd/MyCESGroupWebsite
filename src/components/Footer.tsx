@@ -15,7 +15,7 @@ import {
   Icon,
   HStack,
 } from "@chakra-ui/react";
-import { FaLinkedin, FaFacebook } from "react-icons/fa";
+import { FaLinkedin, FaFacebook, FaInstagram } from "react-icons/fa";
 import NextLink from "next/link";
 
 export default function Footer() {
@@ -23,335 +23,245 @@ export default function Footer() {
   const [loading, setLoading] = useState(false);
 
   const handleNotifyMe = async () => {
-    if (!email) {
-      alert("Please enter your email.");
-      return;
-    }
+    if (!email) return alert("Please enter your email.");
 
     setLoading(true);
-
     try {
-      const response = await fetch("/api/newsletter", {
+      const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        alert(data.message);
-        return;
-      }
+      const data = await res.json();
+      if (!res.ok) return alert(data.message);
 
       alert(data.message);
       setEmail("");
-    } catch (error) {
-      console.error("Newsletter error:", error);
-      alert("Failed to subscribe. Please try again later.");
+    } catch (err) {
+      alert("Failed. Try again.");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleClick = async () => {
-    setLoading(true);
-
-    try {
-      // Perform some action here, such as sending an email to the newsletter
-      setLoading(false);
-    } catch (error) {
-      console.error("Error submitting newsletter:", error);
-      alert("Something went wrong. Please try again later.");
-    }
-  };
-
   return (
-    <Box bg="#CCD5C5" color="#1A1A1A">
-      {/* ===== FOOTER GRID ===== */}
-      <Box maxW="7xl" mx="auto" px={6} py={16}>
-        <Grid templateColumns={{ base: "1fr", md: "repeat(5, 1fr)" }} gap={12}>
-          {/* Column 1: About Us */}
-          <GridItem>
-            <Heading size="md" mb={4}>
-              WHAT WE DO
-            </Heading>
-            <Stack gap={2} fontSize="sm">
-              <Link
-                as={NextLink}
-                href="/about"
-                _hover={{ textDecoration: "underline", color: "green.800" }}
+    <Box
+      bg="#CCD5C5"
+      color="#1A1A1A"
+      fontFamily="var(--font-jakarta), sans-serif"
+    >
+      {/* ===== GRID ===== */}
+      <Box maxW="5xl" mx="auto" px={6} py={14}>
+        <Grid
+          templateColumns={{ base: "1fr", md: "repeat(5, 1fr)" }}
+          gap={{ base: 8, md: 10 }}
+        >
+          {/* Column */}
+          {[
+            {
+              title: "WHAT WE DO",
+              links: [
+                { label: "Who We Are", href: "/about" },
+                {
+                  label: "Board & Leadership",
+                  href: "/our-company/team-member",
+                },
+                { label: "Certification", href: "/award" },
+                { label: "Portfolio", href: "/portfolio" },
+              ],
+            },
+            {
+              title: "OUR BUSINESS",
+              links: [
+                {
+                  label: "Biomedical Engineering",
+                  href: "/services8/biomedical",
+                },
+                {
+                  label: "Manufacturing",
+                  href: "/services/energy-audit/digitalsystem",
+                },
+                { label: "Academy", href: "/services9/robotic" },
+                { label: "Power Solution", href: "/services11/building" },
+                { label: "Engineering", href: "/services/energy-audit" },
+              ],
+            },
+            {
+              title: "SERVICES",
+              links: [
+                { label: "Energy Audit", href: "/services/energy-audit" },
+                { label: "Biomedical", href: "/services8/biomedical" },
+                {
+                  label: "Equipment Rental",
+                  href: "/services2/equipmentrental",
+                },
+                {
+                  label: "Digital System",
+                  href: "/services/energy-audit/digitalsystem",
+                },
+                {
+                  label: "Measurement & Verification",
+                  href: "/services3/measurement",
+                },
+                { label: "Robotic Class", href: "/services9/robotic" },
+                {
+                  label: "REM Consultancy",
+                  href: "/services5/reemconsultancy",
+                },
+              ],
+            },
+            {
+              title: "SERVICES",
+              links: [
+                {
+                  label: "EMS Certification",
+                  href: "/services7/emscertification",
+                },
+                {
+                  label: "Building Automation System",
+                  href: "/services11/building",
+                },
+                {
+                  label: "Supply & Installation",
+                  href: "/services11/building",
+                },
+                {
+                  label: "Testing & Maintenance",
+                  href: "/services11/building",
+                },
+                {
+                  label: "Smart Building Solutions",
+                  href: "/services11/building",
+                },
+              ],
+            },
+          ].map((col, i) => (
+            <GridItem key={i}>
+              <Heading
+                size="xs"
+                mb={3}
+                letterSpacing="wide"
+                fontWeight="semibold"
               >
-                Who We Are
-              </Link>
-              <Link
-                as={NextLink}
-                href="/our-company/team-member"
-                _hover={{ textDecoration: "underline", color: "green.800" }}
-              >
-                Board & Leadership
-              </Link>
-              <Link
-                as={NextLink}
-                href="/award"
-                _hover={{ textDecoration: "underline", color: "green.800" }}
-              >
-                Certification
-              </Link>
-              <Link
-                as={NextLink}
-                href="/portfolio"
-                _hover={{ textDecoration: "underline", color: "green.800" }}
-              >
-                Portfolio
-              </Link>
-            </Stack>
-          </GridItem>
+                {col.title}
+              </Heading>
 
-          {/* Column 2: Our Business */}
-          <GridItem>
-            <Heading size="md" mb={4}>
-              OUR BUSINESS
-            </Heading>
-            <Stack gap={2} fontSize="sm">
-              <Link
-                as={NextLink}
-                href="/services8/biomedical"
-                _hover={{ textDecoration: "underline", color: "green.800" }}
-              >
-                Biomedical Engineering
-              </Link>
-              <Link
-                as={NextLink}
-                href="/services/energy-audit/digitalsystem"
-                _hover={{ textDecoration: "underline", color: "green.800" }}
-              >
-                Manufacturing
-              </Link>
-              <Link
-                as={NextLink}
-                href="/services9/robotic"
-                _hover={{ textDecoration: "underline", color: "green.800" }}
-              >
-                Academy
-              </Link>
-              <Link
-                as={NextLink}
-                href="/services11/building"
-                _hover={{ textDecoration: "underline", color: "green.800" }}
-              >
-                Aircond & Electrical
-              </Link>
-              <Link
-                as={NextLink}
-                href="/services/energy-audit"
-                _hover={{ textDecoration: "underline", color: "green.800" }}
-              >
-                Engineering
-              </Link>
-            </Stack>
-          </GridItem>
+              <Stack gap={2} fontSize="xs">
+                {col.links.map((link, idx) => (
+                  <Link
+                    key={idx}
+                    as={NextLink}
+                    href={link.href}
+                    _hover={{ color: "green.800" }}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </Stack>
+            </GridItem>
+          ))}
 
-          {/* Column 3: Services 1 */}
+          {/* CONTACT */}
           <GridItem>
-            <Heading size="md" mb={4}>
-              Services
+            <Heading size="xs" mb={3} letterSpacing="wide">
+              CONTACT
             </Heading>
-            <Stack gap={2} fontSize="sm">
-              <Link
-                as={NextLink}
-                href="/services/energy-audit"
-                _hover={{ textDecoration: "underline", color: "green.800" }}
-              >
-                Energy Audit
-              </Link>
-              <Link
-                as={NextLink}
-                href="/services8/biomedical"
-                _hover={{ textDecoration: "underline", color: "green.800" }}
-              >
-                Biomedical
-              </Link>
-              <Link
-                as={NextLink}
-                href="/services2/equipmentrental"
-                _hover={{ textDecoration: "underline", color: "green.800" }}
-              >
-                Equipment Rental
-              </Link>
-              <Link
-                as={NextLink}
-                href="/services/energy-audit/digitalsystem"
-                _hover={{ textDecoration: "underline", color: "green.800" }}
-              >
-                Digital System
-              </Link>
-              <Link
-                as={NextLink}
-                href="/services3/measurement"
-                _hover={{ textDecoration: "underline", color: "green.800" }}
-              >
-                Measurement & Verification
-              </Link>
-              <Link
-                as={NextLink}
-                href="/services9/robotic"
-                _hover={{ textDecoration: "underline", color: "green.800" }}
-              >
-                Robotic Class
-              </Link>
-              <Link
-                as={NextLink}
-                href="/services5/reemconsultancy"
-                _hover={{ textDecoration: "underline", color: "green.800" }}
-              >
-                REM Consultancy
-              </Link>
-            </Stack>
-          </GridItem>
 
-          {/* Column 4: Services 2 */}
-          <GridItem>
-            <Heading size="md" mb={4}>
-              Services
-            </Heading>
-            <Stack gap={2} fontSize="sm">
-              <Link
-                as={NextLink}
-                href="/services7/emscertification"
-                _hover={{ textDecoration: "underline", color: "green.800" }}
-              >
-                EMS Certification
-              </Link>
-              <Link
-                as={NextLink}
-                href="/services11/building"
-                _hover={{ textDecoration: "underline", color: "green.800" }}
-              >
-                Building Automation System
-              </Link>
-              <Link
-                as={NextLink}
-                href="/services11/building"
-                _hover={{ textDecoration: "underline", color: "green.800" }}
-              >
-                Supply And Installation
-              </Link>
-              <Link
-                as={NextLink}
-                href="/services11/building"
-                _hover={{ textDecoration: "underline", color: "green.800" }}
-              >
-                Testing Commissioning And Maintanance
-              </Link>
-              <Link
-                as={NextLink}
-                href="/services11/building"
-                _hover={{ textDecoration: "underline", color: "green.800" }}
-              >
-                Energy Efficiency and Smart Buiding Solutions (EMS)
-              </Link>
-            </Stack>
-          </GridItem>
-
-          {/* Column 5: Contact Us */}
-          <GridItem>
-            <Heading size="md" mb={4}>
-              Contact Us
-            </Heading>
-            <Stack gap={2} fontSize="sm">
-              <Text fontWeight="semibold">Office (HQ)</Text>
-              <Text>
-                No. 20, Jalan Damai Mewah 1, <br />
-                Taman Damai Mewah, 43000 Kajang, Selangor
-                <br />
+            <Stack fontSize="xs">
+              <Text fontWeight="medium">
+                <strong>Office (HQ)</strong>
               </Text>
-              <Text>Phone: (+60) 3-8725 5811</Text>
+
+              <Text lineHeight="1.5">
+                20-1, Jalan Damai Mewah 1, <br />
+                Taman Damai Mewah, 43000 Kajang, Selangor
+              </Text>
+
               <Text>
-                Email:{" "}
+                <strong>Phone:</strong>(+60) 3-8725 5811
+              </Text>
+
+              <Text>
+                <strong>Email:</strong>
                 <Link
-                  href="mailto:admin@mycesgroup.com"
+                  href="mailto:hello@mycesgroup.com"
                   textDecoration="underline"
                 >
-                  admin@mycesgroup.com
+                  hello@mycesgroup.com
                 </Link>
               </Text>
+
               <HStack gap={3} mt={2}>
-                <Link
-                  href="https://www.linkedin.com/company/myces-energy-consultant/posts/?feedView=all"
-                  as="a"
-                  target="_blank" // specify that the link should open in a new tab
-                  rel="noopener noreferrer" // specify that the link is external
-                  aria-label="LinkedIn"
-                >
-                  <Icon as={FaLinkedin} w={5} h={5} />
-                </Link>
-                <Link
-                  href="https://www.facebook.com/mycesgroup#"
-                  as="a"
-                  target="_blank" // specify that the link should open in a new tab
-                  rel="noopener noreferrer" // specify that the link is external
-                  aria-label="Facebook"
-                >
-                  <Icon as={FaFacebook} w={5} h={5} />
-                </Link>
+                {[FaLinkedin, FaFacebook, FaInstagram].map((IconItem, i) => (
+                  <Icon
+                    key={i}
+                    as={IconItem}
+                    w={4}
+                    h={4}
+                    opacity={0.7}
+                    cursor="pointer"
+                    _hover={{ opacity: 1 }}
+                  />
+                ))}
               </HStack>
             </Stack>
           </GridItem>
         </Grid>
       </Box>
 
-      {/* ===== NEWSLETTER BAR ===== */}
-      <Box h="1px" bg="gray.600" opacity={0.6} />
+      {/* ===== DIVIDER ===== */}
+      <Box h="1px" bg="blackAlpha.300" />
 
-      <Box maxW="7xl" mx="auto" px={6} py={10}>
+      {/* ===== NEWSLETTER ===== */}
+      {/* <Box maxW="7xl" mx="auto" px={6} py={8}>
         <Flex
           direction={{ base: "column", md: "row" }}
           align="center"
           justify="space-between"
-          gap={6}
+          gap={5}
         >
-          <Box>
-            <Heading size="sm" mb={1}>
-              Stay Updated with Our Company
+          <Box textAlign={{ base: "center", md: "left" }}>
+            <Heading fontSize="12px" mb={0}>
+              Stay Updated
             </Heading>
-            <Text fontSize="sm">
-              The latest news, articles, and resources, sent to your inbox
-              weekly.
+            <Text fontSize="xs" opacity={0.8}>
+              Get updates and insights weekly.
             </Text>
           </Box>
 
-          <Flex gap={3} w={{ base: "100%", md: "auto" }}>
+          <Flex gap={2} align="center">
             <Input
-              placeholder="Enter your email"
+              placeholder="Email"
+              fontSize="12px"
               bg="white"
-              borderRadius="md"
-              maxW="280px"
-              type="email"
+              borderRadius="full"
+              px={3}
+              maxW="220px"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <Button
               bg="#1B4D2E"
+              fontSize="12px"
               color="white"
+              borderRadius="full"
               px={6}
               _hover={{ bg: "#163F26" }}
-              onClick={handleClick}
+              onClick={handleNotifyMe}
               loading={loading}
             >
               Submit
             </Button>
           </Flex>
         </Flex>
-      </Box>
+      </Box> */}
 
-      {/* ===== COPYRIGHT STRIP ===== */}
-      <Box bg="#BFC8B5" py={4}>
-        <Box maxW="7xl" mx="auto" px={6}>
-          <Text fontSize="sm">
-            © {new Date().getFullYear()} MyCES–Group.com – All Rights Reserved
-          </Text>
-        </Box>
+      {/* ===== COPYRIGHT ===== */}
+      <Box bg="#CCD5C5" py={3}>
+        <Text fontSize="12px" opacity={0.7} textAlign="center">
+          © {new Date().getFullYear()} MyCES Group Sdn Bhd. All Rights Reserved.
+        </Text>
       </Box>
     </Box>
   );

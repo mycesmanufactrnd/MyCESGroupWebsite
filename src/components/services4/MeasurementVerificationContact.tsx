@@ -99,8 +99,8 @@ export default function MeasurementVerificationContact() {
 
             <Box>
               <Text fontWeight="bold">Email:</Text>
-              <ChakraLink href="mailto:admin@mycesgroup.com" color={darkGreen}>
-                admin@mycesgroup.com
+              <ChakraLink href="mailto:hello@mycesgroup.com" color={darkGreen}>
+                hello@mycesgroup.com
               </ChakraLink>
             </Box>
 

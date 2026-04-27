@@ -1,7 +1,16 @@
 "use client";
 
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, HStack, Button } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+import {
+  FiTool,
+  FiCpu,
+  FiSettings,
+  FiActivity,
+  FiRepeat,
+  FiCheckCircle,
+} from "react-icons/fi";
+import Link from "next/link";
 
 const MotionBox = motion(Box);
 
@@ -10,72 +19,64 @@ const darkGreen = "#0B5D3B";
 const services = [
   {
     title: "Service Maintenance (BEMS)",
+    icon: FiTool,
     description:
       "Comprehensive planned maintenance programs designed to ensure medical equipment remains reliable, safe, and operational.",
   },
   {
     title: "Medical Equipment Supply",
+    icon: FiCpu,
     description:
-      "The procurement and delivery of high-quality medical devices and healthcare-related supplies to medical facilities.",
+      "Procurement and delivery of high-quality medical devices and healthcare-related supplies.",
   },
   {
     title: "Spare Parts Provision",
+    icon: FiSettings,
     description:
-      "Supplying genuine and compatible replacement parts to minimize downtime for critical medical machinery and equipment.",
+      "Supplying genuine replacement parts to minimize downtime for critical medical machinery.",
   },
   {
     title: "Repair and Troubleshooting",
+    icon: FiActivity,
     description:
-      "Expert technical diagnosis and repair services to restore malfunctioning medical equipment to full clinical functionality.",
+      "Expert diagnosis and repair services to restore equipment to full functionality.",
   },
   {
     title: "Equipment Rental Services",
+    icon: FiRepeat,
     description:
-      "Flexible rental options for organizations requiring medical testing tools or healthcare equipment on a temporary basis.",
+      "Flexible rental options for organizations requiring equipment on a temporary basis.",
   },
   {
     title: "Testing and Commissioning",
+    icon: FiCheckCircle,
     description:
-      "The formal process of verifying that new medical equipment meets all safety standards and manufacturer specifications before use.",
+      "Verification that new equipment meets safety and manufacturer standards before use.",
   },
 ];
 
 export default function BiomedicalServicesSection() {
   return (
     <Box
-      position="relative"
       py={{ base: 20, md: 28 }}
       px={{ base: 6, md: 20 }}
-      bgImage="url('/bioservice/2.jpg')"
-      bgSize="cover"
-      bgPos="center"
-      bgRepeat="no-repeat"
+      bg="linear-gradient(180deg, #f8faf9 0%, #eef2ef 100%)"
     >
-      {/* ===== OVERLAY ===== */}
-      <Box
-        position="absolute"
-        inset={0}
-        bg="rgba(255, 255, 255, 0.33)" // soft white overlay
-        zIndex={0}
-      />
-
-      {/* ===== CONTENT ===== */}
       <Flex
-        position="relative"
-        zIndex={1}
         maxW="1300px"
         mx="auto"
-        gap={{ base: 12, md: 20 }}
+        gap={{ base: 14, md: 20 }}
         direction={{ base: "column", md: "row" }}
         align="flex-start"
       >
-        {/* LEFT STICKY COLUMN */}
+        {/* LEFT COLUMN */}
         <Box
           flex="1"
           position={{ base: "relative", md: "sticky" }}
-          top={{ md: "100px" }}
-          alignSelf="flex-start"
+          top={{ md: "120px" }}
         >
+          <Box w="70px" h="4px" bg={darkGreen} mb={6} borderRadius="full" />
+
           <Heading
             fontSize={{ base: "2xl", md: "3xl" }}
             fontWeight="bold"
@@ -86,51 +87,111 @@ export default function BiomedicalServicesSection() {
           </Heading>
 
           <Text
-            fontSize="2xl"
-            color="gray.700"
-            lineHeight="1.8"
-            maxW="620px"
+            fontSize={{ base: "md", md: "lg" }}
+            color="gray.600"
+            lineHeight="1.9"
+            maxW="500px"
           >
-            MyCES Biomedical provides a full suite of technical and maintenance
-            services for healthcare facilities.
+            Delivering end-to-end biomedical engineering solutions with
+            precision, reliability, and innovation for modern healthcare
+            environments.
           </Text>
         </Box>
 
-        {/* RIGHT SCROLLING COLUMN */}
-        <Box flex="1.2">
-          {services.map((service) => (
-            <MotionBox
-              key={service.title}
-              mb={10}
-              bg="white"
-              border="1px solid"
-              borderColor="gray.200"
-              p={8}
-              borderRadius="md"
-              whileHover={{
-                boxShadow: "0 14px 30px rgba(0,0,0,0.12)",
-                borderColor: darkGreen,
-              }}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-            >
-              <Heading
-                fontSize="lg"
-                fontWeight="semibold"
-                color={darkGreen}
-                mb={3}
-              >
-                {service.title}
-              </Heading>
+        {/* RIGHT COLUMN */}
+        <Box flex="1.3">
+          {services.map((service, index) => {
+            const Icon = service.icon;
 
-              <Text fontSize="md" color="gray.600" lineHeight="1.8">
-                {service.description}
-              </Text>
-            </MotionBox>
-          ))}
+            return (
+              <MotionBox
+                key={service.title}
+                mb={8}
+                p={8}
+                borderRadius="2xl"
+                backdropFilter="blur(10px)"
+                bg="rgba(255,255,255,0.7)"
+                border="1px solid rgba(255,255,255,0.4)"
+                boxShadow="0 10px 30px rgba(0,0,0,0.05)"
+                whileHover={{
+                  y: -8,
+                  scale: 1.02,
+                  boxShadow: "0 25px 50px rgba(0,0,0,0.1)",
+                }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{
+                  duration: 0.5,
+                  delay: index * 0.08,
+                }}
+              >
+                {/* TOP ROW */}
+                <HStack mb={4} justify="space-between">
+                  {/* ICON + TITLE */}
+                  <HStack gap={4}>
+                    <Box
+                      w="48px"
+                      h="48px"
+                      borderRadius="xl"
+                      bg="rgba(11,93,59,0.1)"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                    >
+                      <Icon size={22} color={darkGreen} />
+                    </Box>
+
+                    <Heading
+                      fontSize="lg"
+                      fontWeight="semibold"
+                      color={darkGreen}
+                    >
+                      {service.title}
+                    </Heading>
+                  </HStack>
+
+                  {/* NUMBER */}
+                  <Text fontSize="2xl" fontWeight="bold" color="gray.300">
+                    {String(index + 1).padStart(2, "0")}
+                  </Text>
+                </HStack>
+
+                {/* DESCRIPTION */}
+                <Text fontSize="sm" color="gray.600" lineHeight="1.8">
+                  {service.description}
+                </Text>
+              </MotionBox>
+            );
+          })}
         </Box>
+      </Flex>
+      {/* import Link from "next/link"; */}
+      {/* const companyGreen = "#0B5D3B"; */}
+      <Flex justify="flex-end" mt={10} mr="5%">
+        <Link href="/services8/biomedical" passHref>
+          <Button
+            bg="white"
+            color={darkGreen}
+            border="1px solid"
+            borderColor={darkGreen}
+            px={6}
+            py={5}
+            fontSize="sm"
+            fontWeight="medium"
+            borderRadius="md"
+            _hover={{
+              bg: darkGreen,
+              color: "white",
+            }}
+            _active={{
+              transform: "scale(0.98)",
+            }}
+            transition="all 0.2s ease"
+          >
+            Learn More →
+          </Button>
+        </Link>
       </Flex>
     </Box>
   );

@@ -4,6 +4,7 @@ import { Box } from "@chakra-ui/react";
 import AcademyHero from "../../../components/services11/AcademyHero";
 import MycesAcademyService from "../../../components/services11/MycesAcademyService";
 import MycesAcademyFocus from "../../../components/services11/MycesAcademyFocus";
+import MycesAcademyValues from "../../../components/services11/AcademyValues";
 import BackToTop from "../../../components/services11/BackToTop";
 import ScrollBullets15 from "../../../components/services11/ScrollBullets15";
 
@@ -18,15 +19,19 @@ export default function AcademyPage() {
         <MycesAcademyService />
       </Box>
 
+      <Box id="academy-value">
+        <MycesAcademyValues />
+      </Box>
+      {/* 
       <Box id="academy-focus">
         <MycesAcademyFocus />
-      </Box>
+      </Box> */}
 
       <Box id="backtop">
         <BackToTop />
       </Box>
 
-      <ScrollBullets15 />
+      {/* <ScrollBullets15 /> */}
     </>
   );
 }

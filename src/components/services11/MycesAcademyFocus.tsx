@@ -1,8 +1,9 @@
 "use client";
 
-import { Box, Grid, Heading, Text } from "@chakra-ui/react";
+import { Box, Grid, Heading, Text, Button, Flex } from "@chakra-ui/react";
 import { useState } from "react";
-
+import Link from "next/link";
+const companyGreen = "#0B5D3B";
 const pillars = [
   {
     id: 1,
@@ -18,7 +19,7 @@ const pillars = [
   {
     id: 2,
     title: "Coding Class & Technical Training",
-    frontImage: "/academyservice/3.jpg",
+    frontImage: "/academyservice/14.png",
     details: [
       "STEM-based courses in coding, robotics, and technical skills.",
       "Hands-on learning using Arduino, Raspberry Pi, and Micro:bit.",
@@ -29,7 +30,7 @@ const pillars = [
   {
     id: 3,
     title: "Training Provider for Diverse Industries",
-    frontImage: "/academyservice/4.jpg",
+    frontImage: "/academyservice/aca1.png",
     details: [
       "HRD Corp-registered training provider offering structured and accredited programs.",
       "Training across biomedical, manufacturing, engineering, and air-conditioning & electrical sectors.",
@@ -46,11 +47,17 @@ export default function MycesAcademyFocus() {
     <Box bg="gray.50" py={{ base: 16, md: 28 }} px={{ base: 6, md: 20 }}>
       {/* SECTION HEADER */}
       <Box textAlign="center" mb={{ base: 12, md: 16 }}>
-        <Heading fontSize={{ base: "1xl", md: "2xl" }} fontWeight="bold" mb={4} color="#1e4b16">
+        <Heading
+          fontSize={{ base: "1xl", md: "2xl" }}
+          fontWeight="bold"
+          mb={4}
+          color="#1e4b16"
+        >
           Our Main Focus Areas
         </Heading>
         <Text fontSize={{ base: "md", md: "lg" }} color="gray.600">
-          Empowering individuals and industries with practical skills and innovative solutions
+          Empowering individuals and industries with practical skills and
+          innovative solutions
         </Text>
       </Box>
 
@@ -71,9 +78,7 @@ export default function MycesAcademyFocus() {
               perspective="1200px"
               onMouseEnter={() => setActiveIndex(index)}
               onMouseLeave={() => setActiveIndex(null)}
-              onClick={() =>
-                setActiveIndex(isFlipped ? null : index)
-              } // mobile tap
+              onClick={() => setActiveIndex(isFlipped ? null : index)} // mobile tap
             >
               <Box
                 position="relative"
@@ -129,14 +134,6 @@ export default function MycesAcademyFocus() {
                   flexDirection="column"
                   justifyContent="center"
                 >
-                  <Heading
-                    fontSize="lg"
-                    mb={4}
-                    color="green.800"
-                    textAlign="center"
-                  >
-                    {pillar.title}
-                  </Heading>
                   <Box as="ul" pl={4}>
                     {pillar.details.map((item, idx) => (
                       <Box
@@ -158,6 +155,33 @@ export default function MycesAcademyFocus() {
           );
         })}
       </Grid>
+      {/* import Link from "next/link"; */}
+      {/* const companyGreen = "#0B5D3B"; */}
+      <Flex justify="flex-end" mt={10} mr="5%">
+        <Link href="/services9/robotic" passHref>
+          <Button
+            bg="white"
+            color={companyGreen}
+            border="1px solid"
+            borderColor={companyGreen}
+            px={6}
+            py={5}
+            fontSize="sm"
+            fontWeight="medium"
+            borderRadius="md"
+            _hover={{
+              bg: companyGreen,
+              color: "white",
+            }}
+            _active={{
+              transform: "scale(0.98)",
+            }}
+            transition="all 0.2s ease"
+          >
+            Learn More →
+          </Button>
+        </Link>
+      </Flex>
     </Box>
   );
 }

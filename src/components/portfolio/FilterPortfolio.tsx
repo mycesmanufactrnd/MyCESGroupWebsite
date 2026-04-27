@@ -8,120 +8,95 @@ const MotionBox = motion(Box);
 
 const servicesPortfolio = [
   {
-    service: "Energy Audit",
+    service: "ENERGY AUDIT",
     portfolios: [
       {
-        title: "Energy Audit – Industrial Plant",
-        image: "/portfolio/p3.jpg",
-        href: "/subportfolio1",
-      },
-      {
-        title: "Energy Audit – Commercial Building",
-        image: "/portfolio/p4.jpg",
-        href: "/portfolio/energy-audit-commercial",
+        title: "ENERGY AUDIT ",
+        image: "/portfolio/9.jpg",
+        href: "/subportfolio1?service=ENERGY%20AUDIT",
       },
     ],
   },
   {
-    service: "Equipment Rental",
+    service: "ENERGY MONITORING SYSTEM (EMARS) ",
     portfolios: [
       {
-        title: "Industrial Equipment Rental",
+        title: "ENERGY MONITORING SYSTEM (EMARS) ",
         image: "/portfolio/p8.jpg",
-        href: "/portfolio/equipment-rental",
+        href: "/subportfolio2?service=ENERGY MONITORING SYSTEM%20(EMARS)",
       },
     ],
   },
   {
-    service: "Measurement & Verification",
+    service: "COMPUTERIZED MAINTENANCE MANAGEMENT SYSTEM (CMMS)",
     portfolios: [
       {
-        title: "Building Energy M&V Project",
-        image: "/portfolio/p9.jpg",
-        href: "/portfolio/measurement-verification",
+        title: "COMPUTERIZED MAINTENANCE MANAGEMENT SYSTEM (CMMS)",
+        image: "/portfolio/p11.jpg",
+        href: "/subportfolio3?service=COMPUTERIZED%20MAINTENANCE%20MANAGEMENT%20SYSTEM%20(CMMS)",
       },
     ],
   },
   {
-    service: "Biomedical",
+    service: "SUSTAINABLE ENERGY MANAGEMENT SYSTEM (SEMS)",
     portfolios: [
       {
-        title: "Biomedical Lab Setup",
-        image: "/portfolio/p2.jpg",
-        href: "/portfolio/biomedical-lab",
+        title: "SUSTAINABLE ENERGY MANAGEMENT SYSTEM (SEMS)",
+        image: "/portfolio/p12.jpg",
+        href: "/subportfolio4?service=SUSTAINABLE%20ENERGY%20MANAGEMENT%20SYSTEM%20(SEMS)",
       },
     ],
   },
   {
-    service: "Digital System",
+    service: "MEASUREMENT AND VERIFICATION (M&V)",
     portfolios: [
       {
-        title: "Digital Control System",
-        image: "/portfolio/p5.jpg",
-        href: "/portfolio/digital-system",
+        title: "MEASUREMENT AND VERIFICATION (M&V)",
+        image: "/portfolio/17.jpg",
+        href: "/subportfolio5?service=MEASUREMENT%20AND%20VERIFICATION%20(M%26V)",
       },
     ],
   },
   {
-    service: "Robotic Class",
+    service: "ENERGY TRAINING",
     portfolios: [
       {
-        title: "Robotics Training Program",
-        image: "/portfolio/p6.jpg",
-        href: "/portfolio/robotic-class",
+        title: "ENERGY TRAINING",
+        image: "/portfolio/18.png",
+        href: "/subportfolio6?service=ENERGY%20TRAINING",
       },
     ],
   },
   {
-    service: "Indoor Air Quality (IAQ)",
+    service: "ELECTRICAL WORKS",
     portfolios: [
       {
-        title: "IAQ Monitoring Project",
-        image: "/portfolio/p7.jpeg",
-        href: "/portfolio/iaq-project",
+        title: "ELECTRICAL WORKS",
+        image: "/portfolio/p15.jpg",
+        href: "/subportfolio7?service=ELECTRICAL%20WORKS",
       },
     ],
   },
-  {
-    service: "Building Automation System (BAS)",
-    portfolios: [
-      {
-        title: "Smart BAS Installation",
-        image: "/portfolio/p10.png",
-        href: "/portfolio/bas-project",
-      },
-    ],
-  },
-  {
-    service: "Building Automation System (BAS)",
-    portfolios: [
-      {
-        title: "Smart BAS Installation",
-        image: "/portfolio/p10.png",
-        href: "/portfolio/bas-project",
-      },
-    ],
-  },
-  {
-    service: "Building Automation System (BAS)",
-    portfolios: [
-      {
-        title: "Smart BAS Installation",
-        image: "/portfolio/p10.png",
-        href: "/portfolio/bas-project",
-      },
-    ],
-  },
-  {
-    service: "Building Automation System (BAS)",
-    portfolios: [
-      {
-        title: "Smart BAS Installation",
-        image: "/portfolio/p10.png",
-        href: "/portfolio/bas-project",
-      },
-    ],
-  },
+  // {
+  //   service: "GENERAL WORKS",
+  //   portfolios: [
+  //     {
+  //       title: "GENERAL WORKS",
+  //       image: "/portfolio/p14.jpg",
+  //       href: "/subportfolio8?service=GENERAL%20WORKS",
+  //     },
+  //   ],
+  // },
+  // {
+  //   service: "SMART CONTROL BUILDING AND HOUSE",
+  //   portfolios: [
+  //     {
+  //       title: "SMART CONTROL BUILDING AND HOUSE",
+  //       image: "/portfolio/p15.jpg",
+  //       href: "/subportfolio9?service=SMART%20CONTROL%20BUILDING%20AND%20HOUSE",
+  //     },
+  //   ],
+  // },
 ];
 
 export default function Portfolio() {
@@ -134,7 +109,7 @@ export default function Portfolio() {
       {/* ================= PORTFOLIO GRID ================= */}
       <Box px={{ base: 4, md: 10 }} py={12}>
         <AnimatePresence mode="popLayout">
-          <SimpleGrid columns={{ base: 1, sm: 2, md: 3, xl: 6 }} gap={8}>
+          <SimpleGrid columns={{ base: 1, sm: 2, md: 3, xl: 5 }} gap={8}>
             {allProjects.map((project) => (
               <Box key={project.title} bg="white" p="6px">
                 <Link href={project.href}>
@@ -154,7 +129,7 @@ export default function Portfolio() {
                       bgSize="cover"
                       bgPos="center"
                     />
-                    <Box position="absolute" inset={0} bg="rgba(0,0,0,0.35)" />
+                    <Box position="absolute" inset={0} bg="rgba(0,0,0,0.55)" />
                     <Flex
                       position="absolute"
                       inset={0}
@@ -166,6 +141,7 @@ export default function Portfolio() {
                       <Text
                         color="white"
                         fontWeight="bold"
+                        textShadow="2px 2px 6px rgba(0,0,0,0.7)"
                         fontSize="lg"
                         letterSpacing="0.05em"
                         textTransform="uppercase"

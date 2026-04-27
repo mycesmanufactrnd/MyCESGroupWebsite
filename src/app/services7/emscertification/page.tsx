@@ -41,7 +41,7 @@ export default function EmsCertificationPage() {
         <BackToTop />
       </Box>
 
-      <ScrollBullets13 />
+      {/* <ScrollBullets13 /> */}
     </>
   );
 }

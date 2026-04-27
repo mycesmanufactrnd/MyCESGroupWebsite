@@ -4,9 +4,10 @@ import { Box } from "@chakra-ui/react";
 import BASHero from "../../../components/services10/BASHero";
 import ElectricalServices from "../../../components/services10/ElectricalServices";
 import USP from "../../../components/services10/USP";
+import PowerFeature from "../../../components/services10/PowerFeature";
+import PowerValues from "../../../components/services10/PowerValues";
 import BackToTop from "../../../components/services10/BackToTop";
 import ScrollBullets14 from "../../../components/services10/ScrollBullets14";
-
 
 export default function BASPage() {
   return (
@@ -15,19 +16,27 @@ export default function BASPage() {
         <BASHero />
       </Box>
 
+      <Box id="power-feature">
+        <PowerFeature />
+      </Box>
+
+      <Box id="power-values">
+        <PowerValues />
+      </Box>
+      {/* 
       <Box id="bas-service">
         <ElectricalServices />
       </Box>
 
       <Box id="USP">
         <USP />
-      </Box>
+      </Box> */}
 
       <Box id="backtop">
         <BackToTop />
       </Box>
 
-      <ScrollBullets14 />
+      {/* <ScrollBullets14 /> */}
     </>
   );
 }

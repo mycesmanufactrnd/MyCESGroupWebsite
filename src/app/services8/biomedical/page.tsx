@@ -6,7 +6,7 @@ import BiomedicalFeature from "../../../components/services9/BiomedicalFeature";
 import TechnicalServicesBreakdownBiomed from "../../../components/services9/TechnicalServicesBreakdownBiomed";
 import BiomedProductSection from "../../../components/services9/BiomedProductSection";
 import BiomedicalServicesSection from "../../../components/services9/BiomedicalServicesSection";
-import AdvancedTesterSection from "../../../components/services9/AdvancedTesterSection";
+import BiomedValues from "../../../components/services9/BiomedValues";
 import BackToTop from "../../../components/services9/BackToTop";
 import ScrollBullets14 from "../../../components/services9/ScrollBullets14";
 
@@ -21,7 +21,11 @@ export default function BiomedicalPage() {
         <BiomedicalFeature />
       </Box>
 
-      <Box id="biomedical-serviceclassification">
+      <Box id="biomedical-value">
+        <BiomedValues />
+      </Box>
+
+      {/* <Box id="biomedical-serviceclassification">
         <TechnicalServicesBreakdownBiomed />
       </Box>
 
@@ -31,17 +35,13 @@ export default function BiomedicalPage() {
 
       <Box id="biomedical-service">
         <BiomedicalServicesSection />
-      </Box>
-
-      <Box id="biomedical-tester">
-        <AdvancedTesterSection />
-      </Box>
+      </Box> */}
 
       <Box id="backtop">
         <BackToTop />
       </Box>
-
-      <ScrollBullets14 />
+      {/* 
+      <ScrollBullets14 /> */}
     </>
   );
 }

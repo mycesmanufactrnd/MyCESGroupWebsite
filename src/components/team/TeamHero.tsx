@@ -10,7 +10,7 @@ export default function TeamHero() {
     <MotionBox
       position="relative"
       w="full"
-      minH={{ base: "620px", md: "750px" }}
+      minH={{ base: "70vh", md: "90vh" }}
       overflow="hidden"
       display="flex"
       alignItems="center"
@@ -56,27 +56,6 @@ export default function TeamHero() {
           >
             Board & Leadership
           </Heading>
-        </MotionBox>
-
-        {/* Description */}
-        <MotionBox
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
-          viewport={{ once: true }}
-        >
-          <Text
-            fontSize={{ base: "md", md: "lg" }}
-            fontWeight="semibold"
-            color="white"
-            lineHeight="1.9"
-            textShadow="1px 1px 4px rgba(0,0,0,0.5)"
-          >
-            At MyCES Group, our team management philosophy emphasizes strong
-            communication, seamless collaboration, and visionary leadership. We
-            believe that empowered teams drive innovation, operational
-            excellence, and long-term sustainable growth.
-          </Text>
         </MotionBox>
       </Box>
     </MotionBox>

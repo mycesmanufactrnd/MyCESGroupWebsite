@@ -12,32 +12,31 @@ import ScrollBullets from "../components/home/ScrollBullets";
 export default function Home() {
   return (
     <>
-      <ScrollBullets />
-
       <Box id="hero">
         <Hero />
-      </Box>
-
-      <Box id="social-proof">
-        <SocialProof />
       </Box>
 
       <Box id="about-us">
         <AboutUs />
       </Box>
 
-      <Box id="total-service">
+      {/* <Box id="total-service">
         <TotalService />
-      </Box>
+      </Box> */}
 
       <Box id="services">
         <OurServices />
+      </Box>
+
+      <Box id="social-proof">
+        <SocialProof />
       </Box>
 
       <Box id="backtop">
         <BackToTop />
       </Box>
 
+      {/* <ScrollBullets /> */}
     </>
   );
 }

@@ -3,6 +3,7 @@
 import { Box } from "@chakra-ui/react";
 import DigitalSystemHero2 from "../../../../components/services2/DigitalSystemHero2";
 import DigitalSystemFeature from "../../../../components/services2/DigitalSystemFeature";
+import DigitalValues from "../../../../components/services2/ManuValues";
 import TechnicalServicesBreakdownds from "../../../../components/services2/TechnicalServicesBreakdownds";
 import EmarsSection from "../../../../components/services2/EmarsSection";
 import FmsSection from "../../../../components/services2/FmsSection";
@@ -20,7 +21,11 @@ export default function DigitalSystemPage() {
         <DigitalSystemFeature />
       </Box>
 
-      <Box id="technicalds">
+      <Box id="digital-values">
+        <DigitalValues />
+      </Box>
+
+      {/* <Box id="technicalds">
         <TechnicalServicesBreakdownds />
       </Box>
 
@@ -30,13 +35,13 @@ export default function DigitalSystemPage() {
 
       <Box id="fms">
         <FmsSection />
-      </Box>
+      </Box> */}
 
       <Box id="backtop">
         <BackToTop />
       </Box>
-
-      <ScrollBullets7 />
+      {/* 
+      <ScrollBullets7 /> */}
     </>
   );
 }

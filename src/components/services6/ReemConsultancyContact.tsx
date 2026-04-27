@@ -80,15 +80,8 @@ export default function ReemConsultancyContact() {
             color={darkGreen}
             mb={6}
           >
-            Registered Electrical Energy Manager (REEM) Contact
+            Contact Us
           </Heading>
-
-          <Text fontSize="md" color="gray.700" mb={4}>
-            For inquiries related to Registered Electrical Energy Manager (REEM)
-            consultancy, regulatory compliance under EMEER 2008, or energy
-            management strategy implementation, please contact MyCES using the
-            details below.
-          </Text>
 
           <Text fontSize="md" color="gray.700" mb={6}>
             Our certified REEM professionals support facilities in meeting
@@ -113,22 +106,10 @@ export default function ReemConsultancyContact() {
             <Box>
               <Text fontWeight="bold">Email:</Text>
               <Text>
-                <ChakraLink href="mailto:admin@mycesgroup.com">
-                  admin@mycesgroup.com
+                <ChakraLink href="mailto:hello@mycesgroup.com">
+                  hello@mycesgroup.com
                 </ChakraLink>{" "}
               </Text>
-            </Box>
-
-            <Box>
-              <Text fontWeight="bold">Website:</Text>
-              <ChakraLink
-                href="https://www.mycesgroup.com"
-                color="green.600" // or your darkGreen variable
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                www.mycesgroup.com
-              </ChakraLink>
             </Box>
           </Stack>
         </MotionBox>
@@ -210,7 +191,7 @@ export default function ReemConsultancyContact() {
 
               {/* MESSAGE */}
               <Textarea
-                placeholder="Describe your REEM consultancy requirements, compliance needs, or energy management concerns"
+                placeholder="Describe your requirements..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 bg="gray.100"

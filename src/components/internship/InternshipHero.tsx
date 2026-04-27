@@ -12,8 +12,8 @@ export default function InternshipHero() {
     <Box
       w="full"
       position="relative"
-      minH={{ base: "420px", md: "520px" }}
-      bgImage="url('/internship/1.jpg')"
+      minH={{ base: "70vh", md: "90vh" }}
+      bgImage="url('/internship/11.png')"
       bgSize="cover"
       bgPos="center"
       bgRepeat="no-repeat"
@@ -48,7 +48,7 @@ export default function InternshipHero() {
         {/* Heading */}
         <MotionHeading
           fontSize={{ base: "2xl", md: "3xl" }}
-          fontWeight="bold"       // ✅ bolder heading
+          fontWeight="bold" // ✅ bolder heading
           color="white"
           mb={6}
           textShadow="2px 2px 6px rgba(66, 66, 66, 0.7)" // subtle shadow
@@ -63,24 +63,6 @@ export default function InternshipHero() {
         >
           Internship
         </MotionHeading>
-
-        {/* Description */}
-        <MotionText
-          fontSize={{ base: "md", md: "lg" }}
-          fontWeight="semibold"          // ✅ slightly bolder
-          color="white"
-          lineHeight="1.8"
-          textShadow="1px 1px 4px rgba(70, 70, 70, 0.5)" // subtle shadow
-          variants={{
-            hidden: { opacity: 0, y: 20 },
-            visible: {
-              opacity: 1,
-              y: 0,
-              transition: { duration: 0.9, ease: "easeOut" },
-            },
-          }}
-        >
-          MYCES Group offers internship programs that give students and graduates hands-on experience in engineering, energy, digital solutions, and facility management. Interns work on real projects, gaining practical skills and industry knowledge in a professional environment.        </MotionText>
       </MotionBox>
     </Box>
   );

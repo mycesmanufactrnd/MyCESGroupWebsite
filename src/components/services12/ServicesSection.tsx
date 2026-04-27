@@ -37,7 +37,7 @@ export default function ServicesSection() {
     {
       title: "Training Providers",
       description:
-        "Beyond academy services, we serve as a comprehensive training provider across the MyCES Group subsidiaries[cite: 1123, 1131]. We deliver specialized technical modules and vocational training encompassing Biomedical Engineering, Manufacturing, Venture development, and Aircond & Electrical Engineering.",
+        "Beyond academy services, we serve as a comprehensive training provider across the MyCES Group subsidiaries[cite: 1123, 1131]. We deliver specialized technical modules and vocational training encompassing Biomedical Engineering, Manufacturing, Venture development, and Power Solution.",
       image: "/services/group_training.jpg",
       cta: "View More",
       link: "/training-providers",

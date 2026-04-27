@@ -6,9 +6,7 @@ import ScrollBullets2 from "../../components/about/ScrollBullets2";
 import SubsidiariesSection from "../../components/about/SubsidiariesSection";
 import OurCoreValues from "../../components/about/OurCoreValues";
 import OurSpecialties from "../../components/about/OurSpecialties";
-import BackToTop from "../../components/subportfolio/BackToTop";
-
-
+import BackToTop from "../../components/portfolio1/BackToTop";
 
 export default function AboutPage() {
   return (
@@ -29,15 +27,15 @@ export default function AboutPage() {
         <OurCoreValues />
       </div>
 
-      <div id="about-specialties">
+      {/* <div id="about-specialties">
         <OurSpecialties />
-      </div>
+      </div> */}
 
       <div id="backtop">
         <BackToTop />
       </div>
 
-      <ScrollBullets2 />
+      {/* <ScrollBullets2 /> */}
     </>
   );
 }

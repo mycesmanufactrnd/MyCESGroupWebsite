@@ -49,7 +49,7 @@ export default function OfficesContactDetails() {
 
           {/* Address Content */}
           <Text fontSize="md" color="gray.700" lineHeight="1.9" mb={6}>
-            <strong>MyCES Sdn Bhd Location:</strong>
+            <strong>Headquarters:</strong>
             <br />
             20-1, Jalan Damai Mewah 1,
             <br />
@@ -97,11 +97,11 @@ export default function OfficesContactDetails() {
           <Text fontSize="md" color="gray.700" lineHeight="1.9" mb={4}>
             <strong>Email:</strong>{" "}
             <Link
-              href="mailto:admin@mycesgroup.com"
+              href="mailto:hello@mycesgroup.com"
               color="#0F2A1D"
               fontWeight="medium"
             >
-              admin@mycesgroup.com
+              hello@mycesgroup.com
             </Link>
           </Text>
 

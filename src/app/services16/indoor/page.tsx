@@ -21,7 +21,7 @@ export default function BiomedicalPage() {
         <BackToTop />
       </Box>
 
-      <ScrollBullets14 />
+      {/* <ScrollBullets14 /> */}
     </>
   );
 }

@@ -1,123 +1,131 @@
 import { prisma } from "@/lib/prisma";
-import { supabase } from "@/lib/supabaseClient";
 import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 import nodemailer from "nodemailer";
+import { supabaseServer } from "@/lib/supabaseServer";
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
+    // ✅ SAME STYLE AS INTERNSHIP (FormData)
+    const formData = await req.formData();
+
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const phone = formData.get("phone") as string;
+    const vacancy = formData.get("vacancy") as string;
+
+    const file = formData.get("cvFile") as File | null;
 
     /* =========================
-       1. EMAIL SETUP
+       EMAIL SETUP
     ========================== */
-    const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 465,
-      secure: true, // true for 465
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-      tls: {
-        rejectUnauthorized: false,
-      },
-    });
+const transporter = nodemailer.createTransport({
+  host: "mail.mycesgroup.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+  logger: true,
+  debug: true,
+});
 
+    let cvUrl = "";
+
+    interface Attachment {
+      filename: string;
+      content: Buffer;
+    }
+
+    const attachments: Attachment[] = [];
 
     /* =========================
-       2. FILE HANDLING
+       FILE UPLOAD (SUPABASE)
     ========================== */
-    const attachments: { filename: string; content: Buffer }[] = [];
-
-    const uploadFile = async (file: {
-      name: string;
-      base64?: string;
-    }) => {
-      if (!file || !file.base64) return "";
-
-      const buffer = Buffer.from(file.base64, "base64");
-
-      // Add attachment for email
-      attachments.push({
-        filename: file.name,
-        content: buffer,
-      });
+    if (file) {
+      const fileName = `${uuidv4()}_${file.name}`;
+      const buffer = Buffer.from(await file.arrayBuffer());
 
       // Upload to Supabase
-      const uniqueName = `${uuidv4()}_${file.name}`;
-      const { error } = await supabase.storage
+      const { error } = await supabaseServer.storage
         .from("job-applications")
-        .upload(`files/${uniqueName}`, buffer, {
+        .upload(`files/${fileName}`, buffer, {
+          contentType: file.type,
           upsert: true,
         });
 
       if (error) throw error;
 
-      const { data } = supabase.storage
+      // Get public URL
+      const { data } = supabaseServer.storage
         .from("job-applications")
-        .getPublicUrl(`files/${uniqueName}`);
+        .getPublicUrl(`files/${fileName}`);
 
-      return data.publicUrl;
-    };
+      cvUrl = data.publicUrl;
 
-    /* =========================
-       3. PROCESS FILES
-    ========================== */
-    const cvUrl = body.cvFile ? await uploadFile(body.cvFile) : "";
-    const transcriptUrl = body.transcriptFile
-      ? await uploadFile(body.transcriptFile)
-      : "";
-    const otherDocsUrl = body.otherFile
-      ? await uploadFile(body.otherFile)
-      : "";
+      // Attach file to email
+      attachments.push({
+        filename: file.name,
+        content: buffer,
+      });
+    }
 
     /* =========================
-       4. SAVE TO DATABASE
+       SAVE TO DATABASE
     ========================== */
     const record = await prisma.jobApplication.create({
       data: {
-        vacancy: body.vacancy,
-        name: body.name,
-        email: body.email,
-        phone: body.phone,
-        description: body.description,
+        name,
+        email,
+        phone,
+        vacancy: vacancy || "Not specified",
         cvUrl,
-        transcriptUrl,
-        otherDocsUrl,
       },
     });
 
     /* =========================
-       5. SEND EMAIL
+       SEND EMAIL
     ========================== */
+    await transporter.verify();
+console.log("SMTP CONNECTION OK");
+    console.log("EMAIL USER:", process.env.EMAIL_USER);
+console.log("EMAIL PASS EXISTS:", !!process.env.EMAIL_PASS);
     try {
       await transporter.sendMail({
         from: `"MyCES Careers" <${process.env.EMAIL_USER}>`,
         to: process.env.HR_EMAIL,
-        subject: `New CV Submission – ${body.vacancy}`,
+        subject: `New Job Application – ${name}`,
         html: `
           <h2>New Job Application</h2>
-          <p><b>Vacancy:</b> ${body.vacancy}</p>
-          <p><b>Name:</b> ${body.name}</p>
-          <p><b>Email:</b> ${body.email}</p>
-          <p><b>Phone:</b> ${body.phone}</p>
-          <p><b>About:</b><br/>${body.description || "-"}</p>
-          <hr/>
-          <p>Files are attached to this email.</p>
+          <p><b>Name:</b> ${name}</p>
+          <p><b>Email:</b> ${email}</p>
+          <p><b>Phone:</b> ${phone}</p>
+          <p><b>Vacancy:</b> ${vacancy}</p>
+
         `,
         attachments,
       });
-    } catch (error) {
-      console.error("EMAIL FAILED:", error);
+    } catch (emailError) {
+      console.error("Email sending failed:", emailError);
     }
 
-    return NextResponse.json({ success: true, record });
+    /* =========================
+       RESPONSE
+    ========================== */
+    return NextResponse.json({
+      success: true,
+      record,
+    });
+
   } catch (error: unknown) {
-    console.error(error);
-    const errorMessage = error instanceof Error ? error.message : "Failed to save.";
+    console.error("ERROR:", error);
+
     return NextResponse.json(
-      { success: false, error: errorMessage },
+      {
+        success: false,
+        error: error instanceof Error ? error.message : "Failed to process request",
+      },
       { status: 500 }
     );
   }

@@ -19,7 +19,7 @@ export default function ContactMap() {
       {/* Heading */}
       <MotionHeading
         mb={8}
-        fontSize={{ base: "2xl", md: "3xl" }}
+        fontSize={{ base: "xl", md: "3xl" }}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -27,7 +27,7 @@ export default function ContactMap() {
         transition={{ duration: 0.6, delay: 0.2 }}
         color="#163F2D"
       >
-        Headquarters
+        Office (HQ)
       </MotionHeading>
 
       {/* Map Card */}

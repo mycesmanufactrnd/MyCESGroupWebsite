@@ -36,7 +36,7 @@ export default function ReemConsultancyPage() {
         <BackToTop />
       </Box>
 
-      <ScrollBullets11 />
+      {/* <ScrollBullets11 /> */}
     </>
   );
 }

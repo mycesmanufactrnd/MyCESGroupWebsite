@@ -10,31 +10,31 @@ const darkGreen = "#0B5D3B";
 
 const services = [
   {
-    title: "Chiller Efficiency",
-    icon: FiDroplet,
-    items: [
-      "Assessment of chiller systems to evaluate energy use, cooling performance, and operational efficiency. Recommendations are provided to optimize performance, reduce energy consumption, and lower operating costs.",
-    ],
-  },
-  {
-    title: "Boiler Efficiency",
-    icon: FiCpu,
-    items: [
-      "Evaluation of boiler systems to measure fuel use, heat transfer, and overall performance. The audit identifies energy losses and provides solutions to improve efficiency, safety, and fuel savings.",
-    ],
-  },
-  {
-    title: "Air Compressor Efficiency",
+    title: "Air Disinfection",
     icon: FiWind,
     items: [
-      "Analysis of compressed air systems to check energy use, leaks, pressure, and load patterns. Recommendations help optimize performance, minimize energy waste, and improve system efficiency.",
+      "Helps reduce airborne microbes that may cause illnesses, improving indoor air quality.",
     ],
   },
   {
-    title: "Electrical System Analysis",
-    icon: FiZap,
+    title: "Odor Elimination",
+    icon: FiDroplet,
     items: [
-      "Comprehensive review of electrical systems, including power quality, load balance, and energy consumption. The analysis identifies inefficiencies and provides solutions to enhance reliability, efficiency, and cost-effectiveness.",
+      "Effectively removes bad smells from smoke, food, pets, and chemicals.",
+    ],
+  },
+  {
+    title: "Long-Lasting Protection",
+    icon: FiCpu,
+    items: [
+      "Each unit can last for weeks, depending on room size and conditions.",
+    ],
+  },
+  {
+    title: "Safe & Easy to Use",
+    icon: FiCpu,
+    items: [
+      "Non-toxic formulation (if applicable — confirm with supplier), suitable for daily environments.",
     ],
   },
 ];
@@ -61,11 +61,11 @@ export default function TechnicalServicesBreakdowneu() {
       >
         <Heading
           as="h2"
-          fontSize={{ base: "xl", md: "3xl" }}
+          fontSize={{ base: "2xl", md: "3xl" }}
           fontWeight="bold"
           color={darkGreen}
         >
-          Energy Audit Service Classification
+          Our Benefits
         </Heading>
       </MotionBox>
 
@@ -97,7 +97,7 @@ export default function TechnicalServicesBreakdowneu() {
               <Flex mb={5}>
                 <Box
                   as={Icon}
-                  fontSize="36px"
+                  fontSize="24px"
                   color={darkGreen}
                   transition="all 0.3s ease"
                   _groupHover={{
@@ -110,7 +110,7 @@ export default function TechnicalServicesBreakdowneu() {
               {/* HEADING */}
               <Heading
                 as="h3"
-                fontSize={{ base: "xl", md: "1.5xl" }}
+                fontSize={{ base: "large", md: "1.5xl" }}
                 fontWeight="bold"
                 color={darkGreen}
                 position="relative"
@@ -138,7 +138,7 @@ export default function TechnicalServicesBreakdowneu() {
                 {service.items.map((item) => (
                   <Text
                     key={item}
-                    fontSize={{ base: "md", md: "md" }}
+                    fontSize={{ base: "sm", md: "md" }}
                     color="gray.700"
                     mb={2}
                     textAlign="justify"

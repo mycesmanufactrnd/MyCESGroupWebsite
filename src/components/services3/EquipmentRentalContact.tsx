@@ -102,8 +102,8 @@ export default function EquipmentRentalContact() {
             <Box>
               <Text fontWeight="bold">Email:</Text>
               <Text>
-                <Link href="mailto:admin@mycesgroup.com">
-                  admin@mycesgroup.com
+                <Link href="mailto:hello@mycesgroup.com">
+                  hello@mycesgroup.com
                 </Link>
               </Text>
             </Box>

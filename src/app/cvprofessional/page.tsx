@@ -6,7 +6,6 @@ import SendCVSection from "../../components/cvprofessional/SendCVSection";
 import BackToTop from "../../components/cvprofessional/BackToTop";
 import ScrollBullets18 from "../../components/cvprofessional/ScrollBullets18";
 
-
 export default function SubPortfolioPage() {
   return (
     <>
@@ -22,7 +21,7 @@ export default function SubPortfolioPage() {
         <BackToTop />
       </Box>
 
-      <ScrollBullets18 />
+      {/* <ScrollBullets18 /> */}
     </>
   );
 }

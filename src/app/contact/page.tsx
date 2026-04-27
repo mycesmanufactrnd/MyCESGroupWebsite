@@ -12,30 +12,28 @@ export default function ContactPage() {
   return (
     <>
       {/* Scroll bullets */}
-      <ScrollBullets3 />
+      {/* <ScrollBullets3 /> */}
 
       {/* Sections with IDs for bullets */}
       <Box id="contact-hero">
         <ContactHero />
       </Box>
-
+      {/* 
       <Box id="contact-info">
         <ContactSection />
-      </Box>
+      </Box> */}
 
       <Box id="get-in-touch">
         <GetInTouchSection />
       </Box>
 
-      <Box id="offices">
+      {/* <Box id="offices">
         <OfficesContactDetails />
-      </Box>
+      </Box> */}
 
       <Box id="backtop">
         <BackToTop />
       </Box>
-
-      <Box id="extra" h="100px" /> {/* Optional extra section if needed */}
     </>
   );
 }

@@ -48,7 +48,7 @@ export default function CVInternshipHero() {
         {/* Heading */}
         <MotionHeading
           fontSize={{ base: "2xl", md: "3xl" }}
-          fontWeight="bold"       // ✅ bolder heading
+          fontWeight="bold" // ✅ bolder heading
           color="white"
           mb={6}
           textShadow="2px 2px 6px rgba(66, 66, 66, 0.7)" // subtle shadow
@@ -62,28 +62,8 @@ export default function CVInternshipHero() {
           }}
         >
           Internship Application
-
         </MotionHeading>
-
-        {/* Description */}
-        <MotionText
-          fontSize={{ base: "md", md: "lg" }}
-          fontWeight="semibold"          // ✅ slightly bolder
-          color="white"
-          lineHeight="1.8"
-          textShadow="1px 1px 4px rgba(70, 70, 70, 0.5)" // subtle shadow
-          variants={{
-            hidden: { opacity: 0, y: 20 },
-            visible: {
-              opacity: 1,
-              y: 0,
-              transition: { duration: 0.9, ease: "easeOut" },
-            },
-          }}
-        >
-          Start your career journey with MyCES Group</MotionText>
       </MotionBox>
     </Box>
   );
 }
-

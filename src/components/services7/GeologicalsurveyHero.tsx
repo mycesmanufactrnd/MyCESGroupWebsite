@@ -1,40 +1,49 @@
 "use client";
 
 import { Box, Heading } from "@chakra-ui/react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 const MotionBox = motion(Box);
 
-export default function GeologicalsurveyHero() {
-  return (
-    <Box w="full" position="relative" h={{ base: "550px", md: "650px" }}>
-      {/* BACKGROUND VIDEO */}
-      <video
-        src="/backgrounds/vs1.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          position: "absolute",
-          top: 0,
-          left: 0,
-          zIndex: 0,
-        }}
-      />
+export default function MeasurementHero() {
+  const ref = useRef(null);
 
-      {/* Light Overlay */}
+  // Track scroll progress relative to hero section
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+
+  // Animate content on scroll
+  const y = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const opacity = useTransform(scrollYProgress, [0, 0.6, 1], [1, 0.6, 0]);
+
+  return (
+    <Box
+      ref={ref}
+      w="full"
+      position="relative"
+      h={{ base: "550px", md: "650px" }}
+      bgImage="url('/portfolio/p16.jpg')"
+      bgSize="cover"
+      bgPos="center"
+      bgRepeat="no-repeat"
+      bgAttachment="fixed"
+    >
+      {/* Dark Gradient Overlay for Contrast */}
       <Box
         position="absolute"
         inset={0}
-        bg="rgba(221, 221, 221, 0.37)"
+        bg="linear-gradient(
+          to bottom,
+          rgba(0,0,0,0.45),
+          rgba(0,0,0,0.65)
+        )"
         zIndex={1}
       />
 
-      {/* CENTERED CONTENT */}
+      {/* CONTENT */}
       <MotionBox
         position="relative"
         zIndex={2}
@@ -45,19 +54,20 @@ export default function GeologicalsurveyHero() {
         display="flex"
         alignItems="center"
         justifyContent="center"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        style={{ y, opacity }}
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut" }}
-        viewport={{ once: true }}
       >
         <Heading
           textAlign="center"
           fontSize={{ base: "2xl", md: "4xl" }}
           fontWeight="bold"
-          color="black"
+          color="white" // 🔥 strong contrast
           lineHeight="1.3"
+          textShadow="0 6px 24px rgba(0,0,0,0.45)" // professional readability
         >
-          Welcome to MyCES REM Consultancy Service
+          Welcome to Geological Survey
         </Heading>
       </MotionBox>
     </Box>

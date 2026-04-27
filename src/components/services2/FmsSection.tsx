@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Grid, Heading, Text, Flex } from "@chakra-ui/react";
+import { Box, Grid, Heading, Text, Flex, Button } from "@chakra-ui/react";
 import { useState } from "react";
 import {
   FiLayers,
@@ -10,9 +10,11 @@ import {
   FiClock,
   FiDollarSign,
 } from "react-icons/fi";
+import Link from "next/link";
 
 const darkGreen = "#15350f";
 const sageGreen = "#94ac8cb3";
+const companyGreen = "#0B5D3B";
 const cardHeight = "320px";
 
 const features = [
@@ -64,15 +66,21 @@ export default function FmsSection() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
+    // <Box
+    // py={{ base: 16, md: 24 }}
+    // px={{ base: 6, md: 20 }}
+    // position="relative"
+    // overflow="hidden"
+    // bgImage="url('/dsservice/4.jpg')"
+    // bgSize="cover"
+    // bgPos="center"
+    // bgAttachment="fixed"
     <Box
       py={{ base: 16, md: 24 }}
       px={{ base: 6, md: 20 }}
       position="relative"
       overflow="hidden"
-      bgImage="url('/dsservice/3.jpg')" // your background image path
-      bgSize="cover"
-      bgPos="center"
-      bgAttachment="fixed" // static background
+      bg="rgb(232, 233, 230)"
     >
       {/* Optional overlay to improve text contrast */}
       <Box
@@ -92,7 +100,7 @@ export default function FmsSection() {
             fontWeight="bold"
             mb={8}
           >
-            What is FMS?
+            What is CMMS?
           </Heading>
           <Text
             fontSize={{ base: "md", md: "lg" }}
@@ -100,17 +108,22 @@ export default function FmsSection() {
             maxW="800px"
             mx="auto"
           >
-            The MYCES Facility Management System (FMS) is a comprehensive digital
-            solution created to streamline and modernize the management of physical
-            assets. It digitalizes traditional maintenance workflows, allowing
-            businesses to optimize their maintenance processes, enhance asset
-            visibility, and improve overall operational productivity.
+            The MYCES Computerised Maintenance Management System (CMMS) is a
+            comprehensive digital solution created to streamline and modernize
+            the management of physical assets. It digitalizes traditional
+            maintenance workflows, allowing businesses to optimize their
+            maintenance processes, enhance asset visibility, and improve overall
+            operational productivity.
           </Text>
         </Box>
 
         {/* FLIP CARDS GRID */}
         <Grid
-          templateColumns={{ base: "1fr", md: "repeat(3, 1fr)", lg: "repeat(3, 1fr)" }}
+          templateColumns={{
+            base: "1fr",
+            md: "repeat(3, 1fr)",
+            lg: "repeat(3, 1fr)",
+          }}
           gap={10}
           maxW="1300px"
           mx="auto"
@@ -153,7 +166,12 @@ export default function FmsSection() {
                     boxShadow="md"
                   >
                     <Flex as={Icon} fontSize="36px" color={darkGreen} mb={4} />
-                    <Heading as="h3" fontSize="lg" textAlign="center" color={darkGreen}>
+                    <Heading
+                      as="h3"
+                      fontSize="lg"
+                      textAlign="center"
+                      color={darkGreen}
+                    >
                       {item.title}
                     </Heading>
                   </Box>
@@ -175,12 +193,28 @@ export default function FmsSection() {
                     boxShadow="lg"
                   >
                     <Flex align="flex-start" mb={3}>
-                      <Flex as={Icon} fontSize="28px" color={darkGreen} mr={3} mt={1} />
-                      <Heading as="h4" fontSize="md" color={darkGreen} textAlign="left">
+                      <Flex
+                        as={Icon}
+                        fontSize="28px"
+                        color={darkGreen}
+                        mr={3}
+                        mt={1}
+                      />
+                      <Heading
+                        as="h4"
+                        fontSize="md"
+                        color={darkGreen}
+                        textAlign="left"
+                      >
                         {item.title}
                       </Heading>
                     </Flex>
-                    <Text fontSize="sm" color="#1A1A1A" lineHeight="1.6" textAlign="left">
+                    <Text
+                      fontSize="sm"
+                      color="#1A1A1A"
+                      lineHeight="1.6"
+                      textAlign="left"
+                    >
                       {item.description}
                     </Text>
                   </Box>
@@ -190,6 +224,32 @@ export default function FmsSection() {
           })}
         </Grid>
       </Box>
+      {/* import Link from "next/link"; */}
+      <Flex justify="flex-end" mt={10} mr="5%">
+        <Link href="/services/energy-audit/digitalsystem" passHref>
+          <Button
+            bg="white"
+            color={companyGreen}
+            border="1px solid"
+            borderColor={companyGreen}
+            px={6}
+            py={5}
+            fontSize="sm"
+            fontWeight="medium"
+            borderRadius="md"
+            _hover={{
+              bg: companyGreen,
+              color: "white",
+            }}
+            _active={{
+              transform: "scale(0.98)",
+            }}
+            transition="all 0.2s ease"
+          >
+            Learn More →
+          </Button>
+        </Link>
+      </Flex>
     </Box>
   );
 }

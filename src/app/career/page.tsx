@@ -31,7 +31,7 @@ export default function SubPortfolioPage() {
         <BackToTop />
       </Box>
 
-      <ScrollBullets17 />
+      {/* <ScrollBullets17 /> */}
     </>
   );
 }

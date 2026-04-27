@@ -3,9 +3,10 @@
 import { Box } from "@chakra-ui/react";
 import EnergyAuditHero from "../../../components/services/EnergyAuditHero";
 import EnergyAuditFeature from "../../../components/services/EnergyAuditFeature";
-import TechnicalServicesBreakdowneu from "../../../components/services/TechnicalServicesBreakdowneu";
+import EngFeature from "../../../components/services/EngFeature";
+import EngValues from "../../../components/services/EngValues";
+import TechnicalServicesBreakdown from "../../../components/services/TechnicalServicesBreakdowneu";
 import DifferentiatorsSection from "../../../components/services/DifferentiatorsSection";
-import EnergyAuditProcess from "../../../components/services/EnergyAuditProcess";
 import BackToTop from "../../../components/services/BackToTop";
 import ScrollBullets6 from "../../../components/services/ScrollBullets6";
 
@@ -16,26 +17,31 @@ export default function EnergyAuditPage() {
         <EnergyAuditHero />
       </Box>
 
-      <Box id="energy-feature">
+      <Box id="eng-feature">
+        <EngFeature />
+      </Box>
+
+      <Box id="eng-values">
+        <EngValues />
+      </Box>
+
+      {/* <Box id="energy-feature">
         <EnergyAuditFeature />
       </Box>
+
       <Box id="technicalbreakdown">
-        <TechnicalServicesBreakdowneu />
+        <TechnicalServicesBreakdown />
       </Box>
 
       <Box id="differentiators">
         <DifferentiatorsSection />
-      </Box>
-
-      <Box id="energy-process">
-        <EnergyAuditProcess />
-      </Box>
+      </Box> */}
 
       <Box id="backtop">
         <BackToTop />
       </Box>
 
-      <ScrollBullets6 />
+      {/* <ScrollBullets6 /> */}
     </>
   );
 }

@@ -9,7 +9,7 @@ export default function BiomedicalFeature() {
   return (
     <Box
       w="full"
-      bg="#CED5CC" // pale sage green
+      bg="#CED5CC"
       py={{ base: 20, md: 28 }}
       px={{ base: 6, md: 20 }}
     >
@@ -55,7 +55,7 @@ export default function BiomedicalFeature() {
           {/* RIGHT — Image */}
           <Box>
             <Image
-              src="/bioservice/1.jpg"
+              src="/bioservice/8.png"
               alt="Team reviewing energy audit charts"
               borderRadius="2xl"
               w="full"

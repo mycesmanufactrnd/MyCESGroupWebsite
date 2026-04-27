@@ -29,7 +29,7 @@ export default function MeasurementHero() {
       bgSize="cover"
       bgPos="center"
       bgRepeat="no-repeat"
-      bgAttachment="fixed" // 🔥 background stays static
+      bgAttachment="fixed"
     >
       {/* Dark Gradient Overlay for Contrast */}
       <Box

@@ -9,83 +9,80 @@ import {
   Stack,
   LinkBox,
   LinkOverlay,
-  useBreakpointValue,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const MotionBox = motion(Box);
 
 const subsidiaries = [
   {
-    name: "MYCES Sdn Bhd",
-    image: "/subsidiaries/1.jpg",
+    name: "MyCES Biomedical Engineering",
+    image: "/bioservice/1.png",
+    href: "/services8/biomedical",
   },
   {
-    name: "MYCES Biomedical Engineering Sdn Bhd",
-    image: "/subsidiaries/2.jpg",
-  },
-  {
-    name: "MYCES Ventures Sdn Bhd",
-    image: "/subsidiaries/3.jpg",
-  },
-  {
-    name: "MYCES Manufacturing Sdn Bhd",
+    name: "MyCES Manufacturing",
     image: "/subsidiaries/4.jpg",
+    href: "/services/energy-audit/digitalsystem",
   },
   {
-    name: "MYCES Academy Sdn Bhd",
-    image: "/subsidiaries/5.jpg",
+    name: "MyCES Academy",
+    image: "/academyservice/aca1.png",
+    href: "/services9/robotic",
   },
   {
-    name: "MYCES Aircond & Electrical Services Sdn Bhd",
-    image: "/subsidiaries/6.jpg",
+    name: "MyCES Power Solution",
+    image: "/portfolio/p15.jpg",
+    href: "/services11/building",
   },
   {
-    name: "MYCES Engineering Sdn Bhd",
-    image: "/subsidiaries/7.jpg",
+    name: "MyCES Engineering",
+    image: "/home/eng1.png",
+    href: "/services/energy-audit",
   },
 ];
 
 export default function SubsidiariesSection() {
-  const isMobile = useBreakpointValue({ base: true, md: false });
-
   return (
-    <Box bg="#dde0dcb3" py={{ base: 16, md: 24 }}>
+    <Box bg="#f5f7f4" py={{ base: 16, md: 24 }}>
       <Flex
-        maxW="1200px"
+        maxW="1100px"
         mx="auto"
         px={{ base: 6, md: 8 }}
-        gap={{ base: 10, md: 16 }}
-        direction={{ base: "column", md: "row" }}
+        gap={{ base: 8, md: 20 }} // ✅ better spacing
+        direction={{ base: "column", md: "row" }} // ✅ correct order
+        align="flex-start"
       >
-        {/* LEFT STICKY HEADER */}
+        {/* LEFT (TEXT) */}
         <Box
           flex="0 0 35%"
-          position={isMobile ? "relative" : "sticky"}
-          top={isMobile ? "auto" : "120px"}
-          alignSelf="flex-start"
-          transform={{ base: "none", md: "translateX(-40px)" }}
+          position={{ base: "static", md: "sticky" }} // ✅ fix overlap issue
+          top="120px"
+          mb={{ base: 6, md: 0 }} // ✅ spacing below text
+          w="100%"
         >
-          <Stack gap={5}>
-            <Heading size="2xl" color="#223c26" fontWeight="bold">
+          <Stack gap={6} textAlign={{ base: "center", md: "left" }}>
+            <Heading size="2xl" color="#1B4D2E" fontWeight="bold">
               Our Subsidiaries
             </Heading>
-            <Text color="gray.600" fontSize="md">
-              Discover the specialized companies under the MYCES Group, each
-              delivering focused expertise across engineering, biomedical,
-              manufacturing, education, and technical services.
+
+            <Text color="gray.600" fontSize="md" lineHeight="1.8">
+              Discover MyCES companies driving innovation across engineering,
+              biomedical, manufacturing, and technical services.
             </Text>
           </Stack>
         </Box>
 
-        {/* RIGHT COLUMN — ONE COLUMN ONLY */}
-        <Grid flex="1" templateColumns="1fr" gap={6}>
+        {/* RIGHT (CARDS) */}
+        <Grid flex="1" templateColumns="1fr" gap={8} w="100%">
           {subsidiaries.map((item, index) => (
             <SubsidiaryCard
               key={item.name}
               title={item.name}
               image={item.image}
-              delay={index * 0.1}
+              href={item.href}
+              delay={index * 0.12}
             />
           ))}
         </Grid>
@@ -95,61 +92,93 @@ export default function SubsidiariesSection() {
 }
 
 /* =======================
-   SUBSIDIARY CARD
+   CARD
 ======================= */
 function SubsidiaryCard({
   title,
   image,
+  href,
   delay,
 }: {
   title: string;
   image: string;
+  href: string;
   delay: number;
 }) {
   return (
     <LinkBox>
       <MotionBox
-        initial={{ opacity: 0, y: 24 }}
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, delay, ease: "easeOut" }}
-        whileHover={{
-          scale: 1.04,
-          boxShadow: "0 16px 36px rgba(0,0,0,0.18)",
-        }}
-        h="140px"
-        borderRadius="md"
+        transition={{ duration: 0.6, delay }}
+        whileHover="hover"
+        borderRadius="2xl"
         overflow="hidden"
-        border="1px solid"
-        borderColor="gray.200"
         cursor="pointer"
+        position="relative"
+        role="group"
       >
-        {/* BACKGROUND IMAGE FROM /public */}
+        {/* IMAGE */}
         <Box
-          h="100%"
+          h={{ base: "160px", md: "180px" }}
           bgImage={`url(${image})`}
           bgSize="cover"
           bgPos="center"
-          position="relative"
-        >
-          {/* DARK OVERLAY FOR READABILITY */}
-          <Box position="absolute" inset={0} bg="rgba(0,0,0,0.55)" />
+          transition="all 0.5s ease"
+          _groupHover={{
+            transform: "scale(1.08)",
+          }}
+        />
 
-          {/* TEXT CONTENT */}
-          <Stack
-            position="relative"
-            h="100%"
-            align="center"
-            justify="center"
-            textAlign="center"
-            px={6}
-            gap={2}
-          >
-            <Heading fontSize="md" color="white" fontWeight="semibold">
-              <LinkOverlay href="#">{title}</LinkOverlay>
+        {/* GRADIENT */}
+        <Box
+          position="absolute"
+          inset={0}
+          bg="linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0.2))"
+          transition="all 0.4s ease"
+          _groupHover={{
+            bg: "linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.1))",
+          }}
+        />
+
+        {/* CONTENT */}
+        <Flex position="absolute" inset={0} align="flex-end" p={6}>
+          <Stack gap={1}>
+            <Heading
+              fontSize={{ base: "md", md: "lg" }}
+              color="white"
+              fontWeight="semibold"
+            >
+              <LinkOverlay as={Link} href={href}>
+                {title}
+              </LinkOverlay>
             </Heading>
+
+            <Text
+              fontSize="sm"
+              color="whiteAlpha.800"
+              opacity={0}
+              transform="translateY(10px)"
+              transition="all 0.3s"
+              _groupHover={{
+                opacity: 1,
+                transform: "translateY(0)",
+              }}
+            >
+              View Services →
+            </Text>
           </Stack>
-        </Box>
+        </Flex>
+
+        {/* BORDER */}
+        <Box
+          position="absolute"
+          inset={0}
+          borderRadius="2xl"
+          border="1px solid rgba(255,255,255,0.1)"
+          pointerEvents="none"
+        />
       </MotionBox>
     </LinkBox>
   );

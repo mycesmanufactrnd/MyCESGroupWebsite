@@ -1,16 +1,16 @@
 "use client";
 
 import { Box } from "@chakra-ui/react";
-import ProjectHeaderProps2 from "../../components/subportfolio/ProjectHeaderProps2";
-import DescriptionSubPortfolio from "../../components/subportfolio/DescriptionSubPortfolio";
-import BackToTop from "../../components/subportfolio/BackToTop";
-import ScrollBullets16 from "../../components/subportfolio/ScrollBullets16";
+import ProjectHeaderProps2 from "../../components/portfolio1/ProjectHeaderProps2";
+import DescriptionSubPortfolio from "../../components/portfolio1/DescriptionSubPortfolio";
+import BackToTop from "../../components/portfolio1/BackToTop";
+import ScrollBullets16 from "../../components/portfolio1/ScrollBullets16";
 
 export default function SubPortfolioPage() {
   return (
     <>
       <Box id="subportfolio-hero">
-        <ProjectHeaderProps2 title="My Project" category="Web Development" />
+        <ProjectHeaderProps2 title="Energy Audit" category="Energy Audit" />
       </Box>
 
       <Box id="descriptionsubportfolio">
@@ -20,8 +20,8 @@ export default function SubPortfolioPage() {
       <Box id="backtop">
         <BackToTop />
       </Box>
-
-      <ScrollBullets16 />
+      {/* 
+      <ScrollBullets16 /> */}
     </>
   );
 }

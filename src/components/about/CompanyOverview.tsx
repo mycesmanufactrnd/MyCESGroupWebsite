@@ -1,19 +1,18 @@
 "use client";
 
-import { Box, Heading, Text, Stack, Grid } from "@chakra-ui/react";
+import { Box, Heading, Text, Stack, Grid, Container } from "@chakra-ui/react";
 import { motion, Variants } from "framer-motion";
 
-/* Motion wrappers */
 const MotionBox = motion(Box);
 const MotionStack = motion(Stack);
 
-/* Animation variants */
+/* ===== ANIMATION ===== */
 const containerVariant: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.18,
+      staggerChildren: 0.12,
       delayChildren: 0.1,
     },
   },
@@ -25,175 +24,132 @@ const itemVariant: Variants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.7,
-      ease: "easeInOut",
+      duration: 0.6,
+      ease: "easeOut",
     },
   },
 };
 
 export default function CompanyOverview() {
   return (
-    <Box bg="white" px={{ base: 6, md: 20 }} py={{ base: 16, md: 24 }}>
-      {/* ===== SECTION HEADER ===== */}
-      <MotionStack
-        gap={6}
-        maxW="4xl"
-        mb={16}
-        variants={containerVariant}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        <MotionBox variants={itemVariant}>
-          <Heading
-            fontSize={{ base: "2xl", md: "3xl" }}
-            fontWeight="bold"
-            color="#0F2A1D"
-          >
-            Company Overview
-          </Heading>
-        </MotionBox>
-      </MotionStack>
+    <Box bg="gray.50" py={{ base: 20, md: 28 }}>
+      <Container maxW="6xl">
+        {/* ===== HEADER ===== */}
+        <MotionStack
+          gap={5}
+          maxW="2xl"
+          mb={{ base: 14, md: 20 }}
+          variants={containerVariant}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {/* Accent line */}
+          <MotionBox
+            variants={itemVariant}
+            w="60px"
+            h="3px"
+            bg="#1B4D2E"
+            borderRadius="full"
+          />
 
-      {/* ===== WHO WE ARE ===== */}
-      <MotionBox
-        w="100%"
-        mb={20}
-        variants={containerVariant}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        <Stack gap={6}>
           <MotionBox variants={itemVariant}>
-            <Heading fontSize={{ base: "xl", md: "xl" }} color="#163F2D">
+            <Heading
+              fontSize={{ base: "2xl", md: "3xl" }}
+              fontWeight="extrabold"
+              color="#1B4D2E"
+              letterSpacing="-0.02em"
+            >
               Who We Are
             </Heading>
           </MotionBox>
 
           <MotionBox variants={itemVariant}>
             <Text
-              fontSize={{ base: "md", md: "md" }}
               color="gray.600"
-              lineHeight="2"
+              lineHeight="1.9"
+              fontSize={{ base: "sm", md: "md" }}
             >
-              MyCES Group is a multidisciplinary engineering and services group
-              committed to delivering innovative, reliable, and sustainable
-              solutions across various industries. Through our network of
-              specialized subsidiaries, we provide integrated services that
-              support infrastructure development, energy efficiency, engineering
-              excellence, and technology-driven growth. With a strong focus on
-              quality, safety, and efficiency, MyCES Group combines technical
-              expertise with practical experience to meet the evolving needs of
-              commercial, industrial, and institutional clients. Our services
-              range from engineering and construction support to facility
-              management, energy auditing, education technology, manufacturing,
-              and agro-based solutions.
+              MyCES Group delivers integrated engineering, energy,
+              manufacturing, and technology solutions through specialized
+              subsidiaries.
+              <br />
+              We drive performance, reduce costs, and support long-term
+              sustainability through practical expertise.
             </Text>
           </MotionBox>
+        </MotionStack>
 
-          <MotionBox variants={itemVariant}>
-            <Text
-              fontSize={{ base: "md", md: "md" }}
-              color="gray.600"
-              lineHeight="2"
-            >
-              Driven by professionalism and continuous improvement, MyCES Group
-              strives to be a trusted partner by delivering solutions that
-              enhance operational performance, reduce costs, and promote
-              long-term sustainability.
-            </Text>
+        {/* ===== VISION & MISSION ===== */}
+        <Grid
+          templateColumns={{ base: "1fr", md: "1fr 1fr" }}
+          gap={{ base: 8, md: 12 }}
+        >
+          {/* ===== VISION CARD ===== */}
+          <MotionBox
+            variants={itemVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            bg="white"
+            p={{ base: 6, md: 8 }}
+            borderRadius="2xl"
+            boxShadow="md"
+            _hover={{
+              transform: "translateY(-4px)",
+              boxShadow: "lg",
+            }}
+          >
+            <Stack gap={4}>
+              <Heading fontSize="lg" fontWeight="bold" color="#1B4D2E">
+                Our Vision
+              </Heading>
+
+              <Text color="gray.600" lineHeight="1.9">
+                To be a leading engineering and services group recognized for
+                innovation, sustainability, and excellence in delivering
+                impactful solutions that empower industries and communities.
+              </Text>
+            </Stack>
           </MotionBox>
-        </Stack>
-      </MotionBox>
 
-      {/* ===== DIVIDER ===== */}
-      <Box h="1px" bg="gray.200" my={16} />
+          {/* ===== MISSION CARD ===== */}
+          <MotionBox
+            variants={itemVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            bg="white"
+            p={{ base: 6, md: 8 }}
+            borderRadius="2xl"
+            boxShadow="md"
+            _hover={{
+              transform: "translateY(-4px)",
+              boxShadow: "lg",
+            }}
+          >
+            <Stack gap={4}>
+              <Heading fontSize="lg" fontWeight="bold" color="#1B4D2E">
+                Our Mission
+              </Heading>
 
-      {/* ===== MISSION & VISION ===== */}
-      <Grid templateColumns="1fr" gap={14}>
-        {/* VISION */}
-        <MotionBox
-          variants={itemVariant}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <Stack gap={4}>
-            <Heading fontSize={{ base: "lg", md: "lg" }} color="#163F2D">
-              Our Vision
-            </Heading>
-            <Text
-              fontSize={{ base: "md", md: "md" }}
-              color="gray.600"
-              lineHeight="2"
-            >
-              To be a leading multidisciplinary engineering and services group,
-              recognized for innovation, sustainability, and excellence in
-              delivering integrated solutions that empower industries and
-              communities.
-            </Text>
-          </Stack>
-        </MotionBox>
-
-        {/* ===== DIVIDER ===== */}
-        <Box h="1px" bg="gray.200" my={1} />
-
-        {/* MISSION */}
-        <MotionBox
-          variants={itemVariant}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <Stack gap={4}>
-            <Heading fontSize={{ base: "lg", md: "lg" }} color="#163F2D">
-              Our Mission
-            </Heading>
-            <Text
-              fontSize={{ base: "md", md: "md" }}
-              color="gray.600"
-              lineHeight="2"
-            >
-              1. Deliver innovative and reliable solutions across engineering,
-              energy, manufacturing, education technology, and agro-based
-              sectors.
-            </Text>
-            <Text
-              fontSize={{ base: "md", md: "md" }}
-              color="gray.600"
-              lineHeight="2"
-            >
-              2. Promote energy efficiency and sustainability in every project
-              we undertake.
-            </Text>
-            <Text
-              fontSize={{ base: "md", md: "md" }}
-              color="gray.600"
-              lineHeight="2"
-            >
-              3. Enhance client value and satisfaction through quality, safety,
-              and professional excellence.
-            </Text>
-            <Text
-              fontSize={{ base: "md", md: "md" }}
-              color="gray.600"
-              lineHeight="2"
-            >
-              4. Invest in technology, talent, and continuous improvement to
-              remain at the forefront of industry advancements.
-            </Text>
-            <Text
-              fontSize={{ base: "md", md: "md" }}
-              color="gray.600"
-              lineHeight="2"
-            >
-              5. Foster strong partnerships and community development,
-              contributing to long-term growth and positive impact.
-            </Text>
-          </Stack>
-        </MotionBox>
-      </Grid>
+              <Stack gap={2}>
+                {[
+                  "Deliver bold, reliable engineering solutions.",
+                  "Power sustainability and energy efficiency.",
+                  "Maximize value through excellence.",
+                  "Advance through technology and talent.",
+                  "Forge strong, lasting partnerships.",
+                ].map((item, idx) => (
+                  <Text key={idx} color="gray.600" lineHeight="1.8">
+                    • {item}
+                  </Text>
+                ))}
+              </Stack>
+            </Stack>
+          </MotionBox>
+        </Grid>
+      </Container>
     </Box>
   );
 }

@@ -9,7 +9,6 @@ import {
   Input,
   Textarea,
   Button,
-  Field,
   VStack,
   HStack,
   Icon,
@@ -36,7 +35,6 @@ export default function GetInTouchSection() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     setLoading(true);
 
     const formData = { firstName, lastName, email, phone, message };
@@ -66,14 +64,8 @@ export default function GetInTouchSection() {
   };
 
   return (
-    <Box
-      position="relative"
-      py={28}
-      px={{ base: 6, md: 20 }}
-      bg="white"
-      overflow="hidden"
-    >
-      {/* Animated Gradient Background */}
+    <Box position="relative" py={28} px={{ base: 6, md: 20 }} bg="white">
+      {/* Background Glow */}
       <FloatingGradient
         position="absolute"
         top="-120px"
@@ -83,16 +75,7 @@ export default function GetInTouchSection() {
         borderRadius="full"
         bgGradient="linear(to-r, green.200, teal.200)"
         filter="blur(120px)"
-        opacity={0.7}
-        animate={{
-          x: [0, 40, -20, 0],
-          y: [0, 30, -30, 0],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+        opacity={0.6}
       />
 
       <FloatingGradient
@@ -104,102 +87,120 @@ export default function GetInTouchSection() {
         borderRadius="full"
         bgGradient="linear(to-r, teal.200, green.200)"
         filter="blur(140px)"
-        opacity={0.7}
-        animate={{
-          x: [0, -40, 20, 0],
-          y: [0, -30, 30, 0],
-        }}
-        transition={{
-          duration: 14,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+        opacity={0.6}
       />
+
+      {/* SECTION TITLE */}
+      <Stack textAlign="center" mb={16}>
+        <Heading fontSize={{ base: "2xl", md: "4xl" }} fontWeight="bold">
+          Get In Touch
+        </Heading>
+        <Text color="gray.600" maxW="600px" mx="auto">
+          We love to hear from you. Reach out for inquiries, collaborations, or
+          support.
+        </Text>
+      </Stack>
 
       <form onSubmit={handleSubmit}>
         <Grid
-          templateColumns={{ base: "1fr", md: "45% 55%" }}
-          gap={20}
-          alignItems="center"
+          templateColumns={{ base: "1fr", md: "1fr 1fr" }}
+          gap={16}
+          alignItems="stretch"
         >
           {/* LEFT SIDE */}
           <MotionBox
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
           >
-            <Heading
-              fontSize={{ base: "3xl", md: "4xl" }}
-              fontWeight="bold"
-              mb={6}
+            {/* <Heading
+              fontSize={{ base: "xl", md: "3xl" }}
+              mb={4}
+              color={"#163F2D"}
             >
-              <Box as="span" color="black">
-                Lets Work Together
-              </Box>
+              Let’s Work Together
             </Heading>
 
-            <Text color="gray.600" lineHeight="1.8" mb={10}>
-              Have questions about our solutions or want to explore
-              collaboration opportunities? Send us a message and our team will
-              respond shortly.
-            </Text>
+            <Text color="gray.600" mb={10}>
+              Have questions or want to collaborate? Reach out to us anytime.
+            </Text> */}
 
-            {/* CONTACT INFO */}
-            <VStack align="start" gap={6}>
-              <HStack>
-                <Icon as={Mail} color="#163F2D" />
-                <Text fontSize="md" color="gray.700" lineHeight="1.9" mb={4}>
-                  <Link
-                    href="mailto:admin@mycesgroup.com"
-                    color="#0F2A1D"
-                    fontWeight="medium"
-                  >
-                    admin@mycesgroup.com
+            {/* Glass Card */}
+            <Box
+              bg="whiteAlpha.800"
+              backdropFilter="blur(16px)"
+              p={8}
+              borderRadius="2xl"
+              border="1px solid"
+              borderColor="gray.200"
+              shadow="lg"
+            >
+              <VStack align="start" gap={6}>
+                <HStack _hover={{ transform: "translateX(5px)" }}>
+                  <Icon as={MapPin} mt={1} color="#163F2D" />
+                  <Text color="gray.700">
+                    <strong>Office (HQ):</strong>
+                    <br />
+                    20-1, Jalan Damai Mewah 1,
+                    <br />
+                    Taman Damai Mewah,
+                    <br />
+                    43000 Kajang,
+                    <br />
+                    Selangor, Malaysia
+                  </Text>
+                </HStack>
+
+                <HStack _hover={{ transform: "translateX(5px)" }}>
+                  <Icon as={Mail} color="#163F2D" />
+                  <Link href="mailto:hello@mycesgroup.com">
+                    hello@mycesgroup.com
                   </Link>
-                </Text>
-              </HStack>
+                </HStack>
 
-              <HStack>
-                <Icon as={Phone} color="#163F2D" />
-                <Text fontSize="md" color="gray.700" lineHeight="1.9" mb={4}>
-                  <Link
-                    href="tel:+60387255811"
-                    color="#0F2A1D"
-                    fontWeight="medium"
-                  >
-                    (+60) 3-8725 5811
-                  </Link>
-                </Text>
-              </HStack>
+                <HStack _hover={{ transform: "translateX(5px)" }}>
+                  <Icon as={Phone} color="#163F2D" />
+                  <Link href="tel:+60387255811">(+60) 3-8725 5811</Link>
+                </HStack>
 
-              <HStack>
-                <Text fontSize="md" color="gray.700" lineHeight="1.9">
+                <Text color="gray.600">
                   <strong>Operating Hours:</strong>
                   <br />
                   Monday – Friday
                   <br />
                   8:30 AM – 5:30 PM
                 </Text>
-              </HStack>
-            </VStack>
+              </VStack>
+            </Box>
           </MotionBox>
 
-          {/* FORM CARD */}
+          {/* RIGHT SIDE MAP */}
           <MotionBox
-            bg="rgba(255,255,255,0.85)"
-            backdropFilter="blur(20px)"
+            borderRadius="2xl"
+            overflow="hidden"
+            shadow="2xl"
+            minH={{ base: "300px", md: "500px" }}
+            whileHover={{ scale: 1.02 }}
+          >
+            <iframe
+              src="https://www.google.com/maps?q=20-1%20Jalan%20Damai%20Mewah%201%20Kajang%20Selangor&output=embed"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              loading="lazy"
+            />
+          </MotionBox>
+        </Grid>
+
+        {/* FORM */}
+        <Box mt={24}>
+          <MotionBox
+            bg="white"
             border="1px solid"
             borderColor="gray.200"
             p={10}
             borderRadius="2xl"
             shadow="xl"
-            animate={{ y: [0, -8, 0] }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
           >
             <Stack gap={6}>
               {success && (
@@ -215,104 +216,73 @@ export default function GetInTouchSection() {
                   Message sent successfully 🚀
                 </Box>
               )}
-
+              <Box>
+                <Text fontSize="xl" fontWeight="bold" color="#163F2D" mb={1}>
+                  Leave your enquiries
+                </Text>
+                <Text fontSize="sm" color="gray.500">
+                  Fill in the form below and we’ll get back to you shortly.
+                </Text>
+              </Box>
               <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={4}>
-                <Field.Root>
-                  <Field.Label>First Name</Field.Label>
-                  <Input
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    bg="gray.50"
-                    border="1px solid"
-                    borderColor="gray.200"
-                    _focus={{
-                      borderColor: "#163F2D",
-                      boxShadow: "0 0 0 2px rgba(22,63,45,0.15)",
-                    }}
-                  />
-                </Field.Root>
-
-                <Field.Root>
-                  <Field.Label>Last Name</Field.Label>
-                  <Input
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    bg="gray.50"
-                    border="1px solid"
-                    borderColor="gray.200"
-                    _focus={{
-                      borderColor: "#163F2D",
-                      boxShadow: "0 0 0 2px rgba(22,63,45,0.15)",
-                    }}
-                  />
-                </Field.Root>
+                <Input
+                  placeholder="First Name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  _focus={{ borderColor: "green.500" }}
+                />
+                <Input
+                  placeholder="Last Name"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  _focus={{ borderColor: "green.500" }}
+                />
               </Grid>
 
-              <Field.Root>
-                <Field.Label>Email</Field.Label>
-                <Input
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  bg="gray.50"
-                  border="1px solid"
-                  borderColor="gray.200"
-                  _focus={{
-                    borderColor: "#163F2D",
-                    boxShadow: "0 0 0 2px rgba(22,63,45,0.15)",
-                  }}
-                />
-              </Field.Root>
+              <Input
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                _focus={{ borderColor: "green.500" }}
+              />
 
-              <Field.Root>
-                <Field.Label>Phone</Field.Label>
-                <Input
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  bg="gray.50"
-                  border="1px solid"
-                  borderColor="gray.200"
-                  _focus={{
-                    borderColor: "#163F2D",
-                    boxShadow: "0 0 0 2px rgba(22,63,45,0.15)",
-                  }}
-                />
-              </Field.Root>
+              <Input
+                placeholder="Phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                _focus={{ borderColor: "green.500" }}
+              />
 
-              <Field.Root>
-                <Field.Label>Message</Field.Label>
-                <Textarea
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  minH="150px"
-                  resize="none"
-                  bg="gray.50"
-                  border="1px solid"
-                  borderColor="gray.200"
-                  _focus={{
-                    borderColor: "#163F2D",
-                    boxShadow: "0 0 0 2px rgba(22,63,45,0.15)",
-                  }}
-                />
-              </Field.Root>
+              <Textarea
+                placeholder="Message"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                minH="150px"
+                _focus={{ borderColor: "green.500" }}
+              />
 
-              {/* Animated Gradient Button */}
+              {/* GREEN BUTTON */}
               <MotionButton
                 type="submit"
                 size="lg"
-                borderRadius="lg"
-                bgGradient="linear(to-r, #163F2D, green.400)"
-                backgroundSize="200% auto"
-                animation="gradientMove 5s linear infinite"
+                w="180px"
+                h="56px"
+                bg="#0B5D3B"
                 color="white"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.96 }}
+                fontWeight="semibold"
+                borderRadius="lg"
+                alignSelf="flex-end"
+                _hover={{ bg: "green.700" }}
+                _active={{ bg: "green.800" }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
                 disabled={loading}
               >
-                {loading ? <Spinner size="sm" /> : "Send Message"}
+                {loading ? <Spinner size="sm" /> : "Send"}
               </MotionButton>
             </Stack>
           </MotionBox>
-        </Grid>
+        </Box>
       </form>
     </Box>
   );

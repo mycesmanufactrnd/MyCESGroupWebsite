@@ -17,7 +17,7 @@ const services = [
     ],
   },
   {
-    title: "Facility Management System (FMS)",
+    title: "Computerised Maintenance Management System (CMMS)",
     icon: FiTool,
     items: [
       "A digital platform that streamlines asset management through automated maintenance scheduling and lifecycle tracking. It enhances operational efficiency by replacing manual paperwork with digital forms and data-driven analytics.",
@@ -43,6 +43,7 @@ export default function TechnicalServicesBreakdownds() {
       px={{ base: 6, md: 20 }}
       maxW="1400px"
       mx="auto"
+      bg="rgba(232, 233, 230, 0.5)"
     >
       {/* MAIN SECTION HEADER */}
       <MotionBox
@@ -90,7 +91,7 @@ export default function TechnicalServicesBreakdownds() {
               <Flex mb={5}>
                 <Box
                   as={Icon}
-                  fontSize="36px"
+                  fontSize="24px"
                   color={darkGreen}
                   transition="all 0.3s ease"
                   _groupHover={{
@@ -103,7 +104,7 @@ export default function TechnicalServicesBreakdownds() {
               {/* HEADING */}
               <Heading
                 as="h3"
-                fontSize={{ base: "xl", md: "1.5xl" }}
+                fontSize={{ base: "large", md: "1.5xl" }}
                 fontWeight="bold"
                 color={darkGreen}
                 position="relative"
@@ -131,7 +132,7 @@ export default function TechnicalServicesBreakdownds() {
                 {service.items.map((item) => (
                   <Text
                     key={item}
-                    fontSize={{ base: "md", md: "md" }}
+                    fontSize={{ base: "sm", md: "md" }}
                     color="gray.700"
                     mb={2}
                     textAlign="justify"

@@ -1,8 +1,9 @@
 "use client";
 
-import { Box, Grid, Heading, Text, Flex } from "@chakra-ui/react";
+import { Box, Grid, Heading, Text, Flex, Button } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { FiLayers, FiAward, FiCpu, FiShield, FiWind } from "react-icons/fi";
+import Link from "next/link";
 
 const MotionBox = motion(Box);
 
@@ -128,6 +129,33 @@ export default function USP() {
           );
         })}
       </Grid>
+      {/* import Link from "next/link"; */}
+      {/* const companyGreen = "#0B5D3B"; */}
+      <Flex justify="flex-end" mt={10} mr="5%">
+        <Link href="/services11/building" passHref>
+          <Button
+            bg="white"
+            color={darkGreen}
+            border="1px solid"
+            borderColor={darkGreen}
+            px={6}
+            py={5}
+            fontSize="sm"
+            fontWeight="medium"
+            borderRadius="md"
+            _hover={{
+              bg: darkGreen,
+              color: "white",
+            }}
+            _active={{
+              transform: "scale(0.98)",
+            }}
+            transition="all 0.2s ease"
+          >
+            Learn More →
+          </Button>
+        </Link>
+      </Flex>
     </Box>
   );
 }

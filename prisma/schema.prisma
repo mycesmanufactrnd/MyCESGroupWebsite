@@ -25,16 +25,13 @@ model Newsletter {
 }
 
 model JobApplication {
-  id            Int      @id @default(autoincrement())
-  vacancy       String
-  name          String
-  email         String
-  phone         String
-  description   String?
-  cvUrl         String?
-  transcriptUrl String?
-  otherDocsUrl  String?
-  createdAt     DateTime @default(now())
+  id             String   @id @default(uuid())
+  name           String
+  email          String
+  phone          String
+  vacancy String   @default("Not specified")
+  cvUrl          String?
+  createdAt      DateTime @default(now())
 }
 
 model InternshipApplication {
@@ -42,14 +39,8 @@ model InternshipApplication {
   name           String
   email          String
   phone          String
-  university     String
-  course         String
-  duration       String
   internshipType String   @default("Not specified")
-  description    String?
   cvUrl          String?
-  transcriptUrl  String?
-  otherDocsUrl   String?
   createdAt      DateTime @default(now())
 }
 

@@ -41,11 +41,15 @@ export default function DigitalSystemFeature() {
               color="#1F2A1D"
               lineHeight="1.9"
             >
-              MyCES Manufacturing Sdn Bhd offers an integrated digital solution combining E-MARS and FMS to optimize building performance.
-              Using IoT devices like the MyCES D-Logger, it monitors energy consumption, load profiles, and TNB tariffs in real time.
-              Maintenance is streamlined through automated Planned Preventive Maintenance (PPM) and asset tracking.
-              The system replaces manual processes with data-driven insights, enhancing efficiency and asset visibility.
-              Professional reporting templates are included, suitable for formal energy audits.
+              MyCES Manufacturing Sdn Bhd offers an integrated digital solution
+              combining E-MARS and CMMS to optimize building performance. Using
+              IoT devices like the MyCES D-Logger, it monitors energy
+              consumption, load profiles, and TNB tariffs in real time.
+              Maintenance is streamlined through automated Planned Preventive
+              Maintenance (PPM) and asset tracking. The system replaces manual
+              processes with data-driven insights, enhancing efficiency and
+              asset visibility. Professional reporting templates are included,
+              suitable for formal energy audits.
             </Text>
           </Box>
 

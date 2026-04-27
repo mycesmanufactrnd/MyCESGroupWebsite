@@ -106,8 +106,8 @@ export default function EMSContact() {
             <Box>
               <Text fontWeight="bold">Email:</Text>
               <Text>
-                <ChakraLink href="mailto:admin@mycesgroup.com">
-                  admin@mycesgroup.com
+                <ChakraLink href="mailto:hello@mycesgroup.com">
+                  hello@mycesgroup.com
                 </ChakraLink>{" "}
               </Text>
             </Box>

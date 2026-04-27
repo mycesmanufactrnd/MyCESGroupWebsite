@@ -24,68 +24,74 @@ interface TeamMember {
 
 const teamMembers: TeamMember[] = [
   {
-    name: "Mohd. Faiz Bin Hasan",
+    name: "Mohd Faiz B. Hassan",
     role: "Managing Director",
-    image: "/team/En_Faiz.png",
+    image: "/team/1.png",
     quote:
       "“Leading MYCES Group with integrity and strategic vision, ensuring sustainable growth, strong governance, and long-term value for our clients, partners, and communities.”",
   },
   {
-    name: "Muhammad Syamil Bin Reizon @ Ridzwan",
+    name: "Muhammad Syamil B. Reizon @ Ridzwan",
     role: "Associate Director",
-    image: "/team/En_Syamil.png",
+    image: "/team/7.png",
     quote:
       "“Driving operational excellence through collaboration, innovation, and disciplined execution to support MYCES Group’s strategic objectives.”",
   },
   {
-    name: "Nur Adibah bte Mohd Aslah",
+    name: "Nur Adibah Bt. Mohd Aslah",
     role: "General Manager",
-    image: "/team/Pn_Adibah.png",
-    quote: "“-”",
+    image: "/team/2.png",
+    quote:
+      "“Empowering teams and strengthening organizational performance through effective leadership, clear direction, and a commitment to continuous improvement.”",
   },
   {
-    name: "Muhammad Nur Iqbal Bin Razemi",
+    name: "Muhammad Nur Iqbal B. Razemi",
     role: "Chief of Operations",
-    image: "/team/En_Iqbal.png",
+    image: "/team/14.png",
     quote:
       "“Committed to optimizing energy performance through technical expertise, regulatory compliance, and sustainable engineering solutions that support MYCES Group’s mission.”",
   },
   {
-    name: "Hisham bin Ibrahim",
+    name: "Hishamudin B. Ibrahim",
     role: "Project Advisor",
-    image: "/team/En_Hisyam.png",
+    image: "/team/5.png",
     quote:
-      "“Delivering reliable and efficient energy management solutions in line with MYCES Group’s commitment to sustainability and excellence.”",
+      "“Providing strategic guidance and industry insight to ensure projects are delivered efficiently, sustainably, and in alignment with long-term business goals.”",
   },
   {
-    name: "Nur Anis Syazwanie binti Mohd Zaidi",
+    name: "Nur Anis Syazwanie Bt. Mohd Zaidi",
     role: "Chief Financial Officer",
-    image: "/team/Pn_Anis.png",
-    quote: "“-”",
+    image: "/team/4.jpeg",
+    quote:
+      "“Ensuring financial resilience and strategic resource management to support sustainable growth, transparency, and long-term organizational success.”",
   },
   {
-    name: "Hifzhan Ahmad bin Habibullah",
+    name: "Hifzhan Ahmad B. Habibullah",
     role: "Head of Project Engineering",
-    image: "/team/En_Hifzhan.png",
-    quote: "“-”",
+    image: "/team/12.png",
+    quote:
+      "“Leading engineering excellence through precision, innovation, and quality-driven project execution to meet the highest industry standards.”",
   },
   {
-    name: "Mohd Zahiruddin bin Mohd Jamal",
+    name: "Mohd Zahiruddin B. Mohd Jamal",
     role: "Head of Software Development",
-    image: "/team/En_Zahiruddin.png",
-    quote: "“-”",
+    image: "/team/3.png",
+    quote:
+      "“Driving digital innovation by delivering scalable, secure, and efficient software solutions that support the evolving needs of the business.”",
   },
   {
-    name: "Mohd Hanif bin Razali",
-    role: "Head of Business Development",
-    image: "/team/En_Hanif.png",
-    quote: "“-”",
-  },
-  {
-    name: "Muhammad Amirul Hycarl bin Abu Bakar",
+    name: "Muhammad Amirul Hycarl B. Abu Bakar",
     role: "Head of Electrical Project",
-    image: "/team/En_Amirul.png",
-    quote: "“-”",
+    image: "/team/8.png",
+    quote:
+      "“Delivering reliable and efficient electrical solutions through technical expertise, safety compliance, and a commitment to project excellence.”",
+  },
+  {
+    name: "Muhammad Zulfazeli B. Abu Bakar",
+    role: "Technical Sales & Training Specialist",
+    image: "/team/11.png",
+    quote:
+      "“Fostering strategic partnerships and identifying growth opportunities to expand MYCES Group’s market presence and long-term value.”",
   },
 ];
 
@@ -122,8 +128,12 @@ export default function MeetTheTeamSection() {
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           viewport={{ once: true }}
         >
-          <Heading fontSize={{ base: "2xl", md: "3xl" }} fontWeight="bold">
-            Meet the Team
+          <Heading
+            fontFamily="{heading}"
+            fontSize={{ base: "2xl", md: "3xl" }}
+            fontWeight="bold"
+          >
+            Executive Leadership
           </Heading>
         </MotionBox>
 
@@ -137,6 +147,7 @@ export default function MeetTheTeamSection() {
                 borderColor="gray.200"
                 borderRadius="xl"
                 p={6}
+                h="100%"
                 minH="440px"
                 display="flex"
                 flexDirection="column"
@@ -145,7 +156,7 @@ export default function MeetTheTeamSection() {
                 whileHover={{
                   y: -8,
                   boxShadow: "0px 25px 50px rgba(0,0,0,0.12)",
-                  borderColor: "#0F2A1D",
+                  borderColor: "#CCD5C5",
                 }}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -169,7 +180,7 @@ export default function MeetTheTeamSection() {
                     alt={member.name}
                     mx="auto"
                     w="100%"
-                    h="360px"
+                    h="280px"
                     objectFit="cover"
                     borderRadius="30px"
                     bg="teal.100"
@@ -178,10 +189,16 @@ export default function MeetTheTeamSection() {
 
                 {/* TEXT */}
                 <Box mt={2}>
-                  <Text fontWeight="bold" fontSize="md" color="gray.900" mb={1}>
+                  <Text
+                    fontFamily="{heading}"
+                    fontWeight="semibold"
+                    fontSize="md"
+                    color="gray.900"
+                    mb={1}
+                  >
                     {member.name}
                   </Text>
-                  <Text fontSize="sm" color="gray.600">
+                  <Text fontFamily="{body}" fontSize="sm" color="gray.600">
                     {member.role}
                   </Text>
                 </Box>
@@ -207,7 +224,6 @@ export default function MeetTheTeamSection() {
             zIndex={9999}
             onClick={() => setSelectedMember(null)}
           >
-            {/* Modal container - prevent click propagation */}
             <MotionBox
               bg="white"
               w={{ base: "90%", md: "70%", lg: "60%" }}
@@ -222,24 +238,41 @@ export default function MeetTheTeamSection() {
               position="relative"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Left Image */}
-              <Box w={{ base: "100%", md: "50%" }}>
+              {/* Left Image Container - with relative positioning for close button */}
+              <Box w={{ base: "100%", md: "50%" }} position="relative">
                 <Image
                   src={selectedMember.image}
                   alt={selectedMember.name}
-                  h="100%"
+                  h={{ base: "320px", md: "100%" }}
                   w="100%"
                   objectFit="cover"
                 />
+
+                {/* Close Button - Only visible on mobile */}
+                <IconButton
+                  aria-label="Close modal"
+                  position="absolute"
+                  top={4}
+                  right={4}
+                  borderRadius="full"
+                  onClick={() => setSelectedMember(null)}
+                  bg="blackAlpha.700"
+                  color="white"
+                  _hover={{ bg: "blackAlpha.900", transform: "scale(1.1)" }}
+                  size="sm"
+                  display={{ base: "flex", md: "none" }}
+                >
+                  <CloseIcon />
+                </IconButton>
               </Box>
 
-              {/* Right Text */}
+              {/* Right Text Container */}
               <Box
                 w={{ base: "100%", md: "50%" }}
                 p={{ base: 6, md: 10 }}
                 position="relative"
               >
-                {/* Close Button */}
+                {/* Close Button - Only visible on desktop */}
                 <IconButton
                   colorScheme="red"
                   aria-label="Close modal"
@@ -249,33 +282,49 @@ export default function MeetTheTeamSection() {
                   borderRadius="full"
                   onClick={() => setSelectedMember(null)}
                   _hover={{ transform: "scale(1.1)" }}
+                  display={{ base: "none", md: "flex" }}
                 >
                   <CloseIcon />
                 </IconButton>
 
                 {/* Quote */}
-                <Box textAlign="center" mt={6}>
-                  <Text fontSize="2xl" color="red.500" mb={2}>
+                <Box textAlign="center" mt={{ base: 0, md: 6 }}>
+                  <Text
+                    fontFamily="heading"
+                    fontSize="2xl"
+                    color="red.500"
+                    mb={0}
+                    lineHeight="0.8"
+                  >
                     &ldquo;
                   </Text>
                   <Text
+                    fontFamily="heading"
                     fontSize={{ base: "md", md: "lg" }}
                     color="gray.700"
-                    lineHeight="1.8"
+                    lineHeight="1.5"
+                    mt={1}
+                    mb={1}
                   >
                     {selectedMember.quote}
                   </Text>
-                  <Text fontSize="2xl" color="red.500" mt={2}>
+                  <Text
+                    fontFamily="heading"
+                    fontSize="2xl"
+                    color="red.500"
+                    mt={0}
+                    lineHeight="0.8"
+                  >
                     &rdquo;
                   </Text>
                 </Box>
 
                 {/* Signature */}
                 <Box textAlign="center" mt={6}>
-                  <Text fontFamily="serif" fontWeight="bold" fontSize="lg">
+                  <Text fontFamily="heading" fontWeight="bold" fontSize="lg">
                     {selectedMember.name}
                   </Text>
-                  <Text fontFamily="sans-serif" fontSize="sm" color="gray.500">
+                  <Text fontFamily="body" fontSize="sm" color="gray.500">
                     {selectedMember.role}
                   </Text>
                 </Box>

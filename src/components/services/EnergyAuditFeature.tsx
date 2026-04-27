@@ -34,26 +34,26 @@ export default function EnergyAuditFeature() {
               color="#0F2A1D" // deep forest green
               mb={4}
             >
-              Energy Audit
+              Air Purifying Gel (GermXit)
             </Heading>
             <Text
               fontSize={{ base: "md", md: "lg" }}
               color="#1F2A1D"
               lineHeight="1.9"
             >
-              An energy audit is a professional assessment of energy usage within 
-              a building or facility to identify inefficiencies and areas for improvement.
-              The process involves evaluating lighting, air conditioning, and 
-              electrical systems, analyzing energy performance data, and providing practical, 
-              cost-effective recommendations to reduce energy consumption, lower operational costs, 
-              and support long-term sustainability.
+              An advanced air hygiene solution designed to neutralize airborne
+              bacteria, viruses, and unpleasant odors in enclosed environments.
+              It works by slowly releasing active ingredients into the air,
+              creating a cleaner and healthier indoor atmosphere. Unlike sprays
+              or electrical purifiers, this gel operates passively, requiring no
+              power supply, making it ideal for continuous protection.
             </Text>
           </Box>
 
           {/* RIGHT — Image */}
           <Box>
             <Image
-              src="/euservice/eu3.jpg"
+              src="/euservice/3.png"
               alt="Team reviewing energy audit charts"
               borderRadius="2xl"
               w="full"

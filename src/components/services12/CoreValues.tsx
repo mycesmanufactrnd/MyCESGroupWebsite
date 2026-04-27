@@ -73,10 +73,10 @@ export default function CoreValues() {
         </Heading>
 
         <Text maxW="4xl" mx="auto" color="gray.600" fontSize="md">
-          At MyCES Aircond & Electrical Services Sdn. Bhd., our core values
-          guide how we work, make decisions, and deliver services. They reflect
-          our commitment to integrity, innovation, safety, sustainability,
-          excellence, and customer satisfaction.
+          At MyCES Power Solution Sdn. Bhd., our core values guide how we work,
+          make decisions, and deliver services. They reflect our commitment to
+          integrity, innovation, safety, sustainability, excellence, and
+          customer satisfaction.
         </Text>
       </Box>
 

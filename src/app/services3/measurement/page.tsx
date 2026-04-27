@@ -41,7 +41,7 @@ export default function MeasurementPage() {
         <BackToTop />
       </Box>
 
-      <ScrollBullets9 />
+      {/* <ScrollBullets9 /> */}
     </>
   );
 }

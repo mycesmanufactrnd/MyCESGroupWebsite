@@ -4,56 +4,126 @@ import {
   Box,
   Heading,
   Text,
-  Grid,
   Stack,
   Input,
-  Textarea,
   Button,
-  chakra, // Add chakra import
+  Select,
+  createToaster,
+  chakra,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { useState, ChangeEvent } from "react"; // Add ChangeEvent
+import { useState, ChangeEvent } from "react";
 
-// Motion wrapper
 const MotionBox = motion(Box);
 
 export default function SendCVSection() {
+  const toaster = createToaster({
+    placement: "top",
+  });
+
   const [loading, setLoading] = useState(false);
-  const [notification, setNotification] = useState<{
-    type: "success" | "error";
-    title: string;
-    description?: string;
-  } | null>(null);
 
   const [vacancy, setVacancy] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [description, setDescription] = useState("");
-
   const [cvFile, setCvFile] = useState<File | null>(null);
-  const [transcriptFile, setTranscriptFile] = useState<File | null>(null);
-  const [otherFile, setOtherFile] = useState<File | null>(null);
-
-  // helper function
-  const toBase64 = (file: File) =>
-    new Promise<string>((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        const result = reader.result as string;
-        const base64 = result.substring(result.indexOf(",") + 1);
-        resolve(base64);
-      };
-      reader.onerror = (error) => reject(error);
-    });
 
   const handleSubmit = async () => {
-    if (!vacancy || !name || !email || !phone) {
-      setNotification({
+    // Field-by-field validation (better UX)
+    if (!vacancy) {
+      toaster.create({
+        title: "Vacancy required",
+        description: "Please select a position.",
         type: "error",
-        title: "Missing required fields",
-        description: "Please fill in all mandatory fields.",
+        duration: 4000,
+        closable: true,
+      });
+      return;
+    }
+
+    if (!name) {
+      toaster.create({
+        title: "Name required",
+        description: "Please enter your full name.",
+        type: "error",
+        duration: 4000,
+        closable: true,
+      });
+      return;
+    }
+
+    if (!email) {
+      toaster.create({
+        title: "Email required",
+        description: "Please enter your email address.",
+        type: "error",
+        duration: 4000,
+        closable: true,
+      });
+      return;
+    }
+
+    if (!phone) {
+      toaster.create({
+        title: "Phone number required",
+        description: "Please enter your phone number.",
+        type: "error",
+        duration: 4000,
+        closable: true,
+      });
+      return;
+    }
+
+    if (!cvFile) {
+      toaster.create({
+        title: "CV required",
+        description: "Please upload your CV file.",
+        type: "error",
+        duration: 4000,
+        closable: true,
+      });
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toaster.create({
+        title: "Invalid email",
+        description: "Please enter a valid email address.",
+        type: "error",
+        duration: 4000,
+        closable: true,
+      });
+      return;
+    }
+
+    // File validation
+    const allowedTypes = [
+      "application/pdf",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    ];
+
+    if (!allowedTypes.includes(cvFile.type)) {
+      toaster.create({
+        title: "Invalid file type",
+        description: "Only PDF, DOC, or DOCX files are allowed.",
+        type: "error",
+        duration: 4000,
+        closable: true,
+      });
+      return;
+    }
+
+    if (cvFile.size > 10 * 1024 * 1024) {
+      toaster.create({
+        title: "File too large",
+        description: "File size must be less than 10MB.",
+        type: "error",
+        duration: 4000,
+        closable: true,
       });
       return;
     }
@@ -61,256 +131,156 @@ export default function SendCVSection() {
     try {
       setLoading(true);
 
-      const cvBase64 = cvFile ? await toBase64(cvFile) : undefined;
-      const transcriptBase64 = transcriptFile
-        ? await toBase64(transcriptFile)
-        : undefined;
-      const otherBase64 = otherFile ? await toBase64(otherFile) : undefined;
+      const formData = new FormData();
+      formData.append("vacancy", vacancy);
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("phone", phone);
+      formData.append("cvFile", cvFile); // now REQUIRED
 
       const res = await fetch("/api/send-cv", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          vacancy,
-          name,
-          email,
-          phone,
-          description,
-          cvFile: cvFile ? { name: cvFile.name, base64: cvBase64 } : null,
-          transcriptFile: transcriptFile
-            ? { name: transcriptFile.name, base64: transcriptBase64 }
-            : null,
-          otherFile: otherFile
-            ? { name: otherFile.name, base64: otherBase64 }
-            : null,
-        }),
+        body: formData,
       });
 
       const data = await res.json();
 
-      if (data.success) {
-        setNotification({
-          type: "success",
-          title: "CV submitted successfully!",
-          description: "Your application has been saved.",
-        });
+      if (!data.success) throw new Error(data.error);
 
-        setVacancy("");
-        setName("");
-        setEmail("");
-        setPhone("");
-        setDescription("");
-        setCvFile(null);
-        setTranscriptFile(null);
-        setOtherFile(null);
-      } else {
-        throw new Error(data.error || "Unknown error");
-      }
+      // ✅ SUCCESS MESSAGE
+      toaster.create({
+        title: "Application submitted",
+        description: "Your CV has been successfully sent.",
+        type: "success",
+        duration: 4000,
+        closable: true,
+      });
+
+      // Reset form
+      setVacancy("");
+      setName("");
+      setEmail("");
+      setPhone("");
+      setCvFile(null);
     } catch (error) {
-      console.error(error);
-      setNotification({
-        type: "error",
+      toaster.create({
         title: "Submission failed",
-        description: "There was an error saving your CV. Please try again.",
+        description: "Please try again later.",
+        type: "error",
+        duration: 4000,
+        closable: true,
       });
     } finally {
       setLoading(false);
     }
   };
-
   return (
     <MotionBox
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      viewport={{ once: true }}
-      maxW="1000px"
+      maxW="900px"
       mx="auto"
-      px={{ base: 4, md: 6 }}
+      px={{ base: 4, md: 8 }}
       py={20}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
     >
-      {/* Notification */}
-      {notification && (
-        <Box
-          mb={6}
-          p={4}
-          borderRadius="md"
-          bg={notification.type === "success" ? "green.100" : "red.100"}
-          border={`1px solid ${
-            notification.type === "success" ? "green.300" : "red.300"
-          }`}
-        >
-          <Text fontWeight="bold" mb={1}>
-            {notification.title}
+      <Stack gap={6}>
+        <Box textAlign="center">
+          <Heading size="lg">Send Your CV</Heading>
+          <Text color="gray.600" mt={2}>
+            Apply for available positions by submitting your details below.
           </Text>
-          {notification.description && <Text>{notification.description}</Text>}
         </Box>
-      )}
 
-      {/* Header */}
-      <Stack gap={3} mb={10}>
-        <Heading fontSize={{ base: "2xl", md: "3xl" }} fontWeight="bold">
-          SEND YOUR CV
-        </Heading>
-        <Text fontWeight="semibold" color="gray.600">
-          YES, WE ARE LOOKING FOR YOU!
-        </Text>
-        <Text color="gray.600" maxW="700px" lineHeight="1.8">
-          As MyCES Group continues to grow, we are constantly seeking talented,
-          motivated, and passionate individuals to be part of our professional
-          team. If you believe you have what it takes, we welcome your
-          application.
-        </Text>
-      </Stack>
-
-      {/* Form */}
-      <Stack gap={8}>
-        {/* Vacancy - Fixed select component */}
+        {/* Vacancy */}
         <Box>
-          <Text mb={2} fontWeight="medium">
-            Vacancy of Interest
-          </Text>
+          <Text mb={2}>Vacancy</Text>
           <chakra.select
-            bg="gray.100"
-            px={3}
-            py={2}
-            borderRadius="md"
-            border="1px solid"
-            borderColor="gray.200"
-            width="100%"
             value={vacancy}
             onChange={(e: ChangeEvent<HTMLSelectElement>) =>
               setVacancy(e.target.value)
             }
-            _focus={{
-              outline: "none",
-              borderColor: "blue.500",
-              boxShadow: "0 0 0 1px var(--chakra-colors-blue-500)",
+            style={{
+              width: "100%",
+              padding: "10px",
+              background: "#f5f5f5",
+              borderRadius: "6px",
+              boxSizing: "border-box",
             }}
           >
-            <option value="">Select a position</option>
+            <option value="">Select position</option>
             <option value="Energy Engineer">Energy Engineer</option>
             <option value="Business Developer">Business Developer</option>
+            <option value="Accountant">Accountant</option>
           </chakra.select>
         </Box>
 
         {/* Name */}
         <Box>
           <Text mb={2} fontWeight="medium">
-            Name
+            Full Name
           </Text>
           <Input
-            bg="gray.100"
-            placeholder="Your full name"
             value={name}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setName(e.target.value)
-            }
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Enter your full name"
           />
         </Box>
 
-        {/* Email & Phone */}
-        <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={6}>
-          <Box>
-            <Text mb={2} fontWeight="medium">
-              Email
-            </Text>
-            <Input
-              bg="gray.100"
-              placeholder="example@email.com"
-              value={email}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setEmail(e.target.value)
-              }
-            />
-          </Box>
+        {/* Email */}
+        <Box>
+          <Text mb={2} fontWeight="medium">
+            Email Address
+          </Text>
+          <Input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="example@email.com"
+          />
+        </Box>
 
-          <Box>
-            <Text mb={2} fontWeight="medium">
-              Contact Phone
-            </Text>
-            <Input
-              bg="gray.100"
-              placeholder="+60 XX-XXXXXXX"
-              value={phone}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setPhone(e.target.value)
-              }
-            />
-          </Box>
-        </Grid>
+        {/* Phone */}
+        <Box>
+          <Text mb={2} fontWeight="medium">
+            Phone Number
+          </Text>
+          <Input
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder="+60 12-345 6789"
+          />
+        </Box>
 
         {/* CV Upload */}
         <Box>
-          <Text fontWeight="medium" mb={2}>
-            CV / Resume (Max 20MB)
+          <Text mb={2} fontWeight="medium">
+            Upload CV (max 10MB)
           </Text>
           <Input
+            key={cvFile ? cvFile.name : "empty"}
             type="file"
-            bg="gray.100"
+            accept=".pdf,.doc,.docx"
+            p={1}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setCvFile(e.target.files?.[0] || null)
             }
           />
         </Box>
 
-        {/* Academic Transcript */}
-        <Box>
-          <Text fontWeight="medium" mb={2}>
-            Academic Transcript (Max 20MB)
-          </Text>
-          <Input
-            type="file"
-            bg="gray.100"
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setTranscriptFile(e.target.files?.[0] || null)
-            }
-          />
+        <Box display="flex" justifyContent="flex-end">
+          <Button
+            size="sm"
+            bg="green.800"
+            color="white"
+            _hover={{ bg: "green.900" }}
+            loading={loading}
+            loadingText="Submitting"
+            onClick={handleSubmit}
+          >
+            Submit
+          </Button>
         </Box>
-
-        {/* Other Docs */}
-        <Box>
-          <Text fontWeight="medium" mb={2}>
-            Other Relevant Documents (Max 20MB)
-          </Text>
-          <Input
-            type="file"
-            bg="gray.100"
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setOtherFile(e.target.files?.[0] || null)
-            }
-          />
-        </Box>
-
-        {/* About Yourself */}
-        <Box>
-          <Text mb={2} fontWeight="medium">
-            About Yourself
-          </Text>
-          <Textarea
-            bg="gray.100"
-            rows={5}
-            placeholder="Tell us about yourself..."
-            value={description}
-            onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
-              setDescription(e.target.value)
-            }
-          />
-        </Box>
-
-        {/* Submit */}
-        <Button
-          alignSelf="flex-start"
-          bg="gray.700"
-          color="white"
-          px={8}
-          _hover={{ bg: "gray.800" }}
-          transition="0.3s"
-          loading={loading}
-          onClick={handleSubmit}
-        >
-          SEND
-        </Button>
       </Stack>
     </MotionBox>
   );

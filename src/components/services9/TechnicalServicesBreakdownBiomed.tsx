@@ -3,11 +3,7 @@
 import { Box, Grid, Heading, Flex, Text } from "@chakra-ui/react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef } from "react";
-import {
-  FiTool,
-  FiActivity,
-  FiShield,
-} from "react-icons/fi";
+import { FiTool, FiActivity, FiShield } from "react-icons/fi";
 
 const MotionBox = motion(Box);
 const darkGreen = "#0B5D3B";
@@ -62,7 +58,7 @@ export default function TechnicalServicesBreakdownBiomed() {
           fontWeight="bold"
           color={darkGreen}
         >
-          Biomedical Engineering Service Classification
+          Service Classification
         </Heading>
       </MotionBox>
 
@@ -101,8 +97,7 @@ export default function TechnicalServicesBreakdownBiomed() {
                     transition="all 0.3s ease"
                     _groupHover={{
                       transform: "scale(1.12)",
-                      filter:
-                        "drop-shadow(0 0 6px rgba(11,93,59,0.4))",
+                      filter: "drop-shadow(0 0 6px rgba(11,93,59,0.4))",
                     }}
                   />
                 </Flex>

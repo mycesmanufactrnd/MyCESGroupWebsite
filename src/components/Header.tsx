@@ -5,70 +5,142 @@ import { Link as ChakraLink } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaSearch, FaGlobe } from "react-icons/fa";
-import { usePathname } from "next/navigation";
+import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 const MotionBox = motion(Box);
 
+type SubItem = {
+  label: string;
+  href?: string;
+  external?: boolean;
+  key?: string;
+  onClick?: () => void;
+};
+
+type NavItem = { label: string; key: string; items: SubItem[] };
+
 export default function Header() {
-  const pathname = usePathname();
-  const [servicesOpen, setServicesOpen] = useState(false);
-  const [companyOpen, setCompanyOpen] = useState(false);
-  const [actOpen, setActOpen] = useState(false);
-  const [newsOpen, setNewsOpen] = useState(false);
+  const router = useRouter();
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [careerOpen, setCareerOpen] = useState(false);
+  const [showPolicy, setShowPolicy] = useState(false);
 
   const searchRef = useRef<HTMLDivElement>(null);
-  const fontFamily = "'Inter', sans-serif"; // Corporate font
-  const primaryColor = "#1A1A1A"; // Dark text for corporate look
 
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSearchSubmit = (
+    e?:
+      | React.FormEvent<HTMLFormElement>
+      | React.KeyboardEvent<HTMLInputElement>,
+  ) => {
+    e?.preventDefault();
+
     const query = searchQuery.trim().toLowerCase();
     if (!query) return;
 
     const searchMap: { [key: string]: string } = {
       about: "/about",
-      "energy audit": "/services/energy-audit",
-      equipment: "/services2/equipmentrental",
-      rental: "/services2/equipmentrental",
-      digital: "/services/energy-audit/digitalsystem",
-      measurement: "/services3/measurement",
-      agriculture: "/services4/agriculture",
-      reem: "/services5/reemconsultancy",
-      geological: "/services6/geologicalsurvey",
-      ems: "/services7/emscertification",
-      biomedical: "/services8/biomedical",
       team: "/our-company/team-member",
-      subsidiaries: "/subsidiaries",
-      contact: "/contact",
-      career: "/career",
-      internship: "/internshipcareer",
       portfolio: "/portfolio",
-      award: "/award",
-      news: "/news",
-      ventures: "/services10/ventures",
-      manufacturing: "/services/energy-audit/digitalsystem",
-      academy: "/services9/robotic",
-      aircond: "/services11/building",
+      contact: "/contact",
+      biomedical: "/services8/biomedical",
       engineering: "/services/energy-audit",
+      academy: "/services9/robotic",
+      power: "/services11/building",
+      news: "/news",
+      career: "/career",
+      job: "/career",
+      internship: "/internshipcareer",
     };
 
-    let found = false;
-    for (const [key, value] of Object.entries(searchMap)) {
+    for (const key in searchMap) {
       if (query.includes(key)) {
-        window.location.href = value;
-        found = true;
-        break;
+        router.push(searchMap[key]);
+        setSearchOpen(false);
+        setSearchQuery("");
+        return;
       }
     }
 
-    if (!found) {
-      alert("⚠️ No matching data found.");
-    }
+    alert("⚠️ No matching result found.");
   };
+
+  const navItems: NavItem[] = [
+    {
+      label: "ABOUT US",
+      key: "company",
+      items: [
+        { label: "WHO WE ARE", href: "/about" },
+        { label: "BOARD & LEADERSHIP", href: "/our-company/team-member" },
+        { label: "CERTIFICATIONS", href: "/award" },
+        { label: "PORTFOLIO", href: "/portfolio" },
+      ],
+    },
+    {
+      label: "OUR BUSINESS",
+      key: "business",
+      items: [
+        { label: "MyCES GROUP", href: "/businessMyces/myces" },
+        { label: "BIOMEDICAL", href: "/businessBiomed/biomed" },
+        {
+          label: "MANUFACTURING",
+          href: "/businessManu/manu",
+        },
+        { label: "ACADEMY", href: "/businessAcademy/academy" },
+        { label: "POWER SOLUTION", href: "/businessPower/power" },
+        { label: "ENGINEERING", href: "/businessEng/eng" },
+      ],
+    },
+    // {
+    //   label: "OUR SUBSIDARIES",
+    //   key: "services",
+    //   items: [
+    //     // { label: "MyCES GROUP", href: "/services1/myces-group" },
+    //     { label: "BIOMEDICAL ENGINEERING", href: "/services8/biomedical" },
+    //     {
+    //       label: "MANUFACTURING",
+    //       href: "/services/energy-audit/digitalsystem",
+    //     },
+    //     { label: "ACADEMY", href: "/services9/robotic" },
+    //     { label: "POWER SOLUTION", href: "/services11/building" },
+    //     { label: "ENGINEERING", href: "/services/energy-audit" },
+    //   ],
+    // },
+    {
+      label: "ACT RESPONSIBLY",
+      key: "act",
+      items: [
+        {
+          label: "ANTI-BRIBERY AND CORRUPTION POLICY",
+          href: "/act1",
+        },
+        {
+          label: "ISO 9001 : 2015",
+          href: "/act2",
+        },
+        {
+          label: "ISO 41001 : 2018",
+          href: "/act3",
+        },
+      ],
+    },
+    {
+      label: "NEWS",
+      key: "news",
+      items: [{ label: "LATEST UPDATES", href: "/news" }],
+    },
+    {
+      label: "CAREER",
+      key: "career",
+      items: [
+        { label: "PROFESSIONAL", href: "/career" },
+        { label: "INTERNSHIP", href: "/internshipcareer" },
+      ],
+    },
+  ];
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -81,229 +153,250 @@ export default function Header() {
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [searchRef]);
-
-  const navItems = [
-    {
-      label: "ABOUT US",
-      key: "company",
-      open: companyOpen,
-      setOpen: setCompanyOpen,
-      items: [
-        { label: "WHO WE ARE", href: "/about" },
-        { label: "BOARD & LEADERSHIP", href: "/our-company/team-member" },
-        { label: "CERTIFICATIONS", href: "/award" },
-        { label: "PORTFOLIO", href: "/portfolio" },
-      ],
-    },
-    {
-      label: "OUR BUSINESS",
-      key: "services",
-      open: servicesOpen,
-      setOpen: setServicesOpen,
-      items: [
-        {
-          label: "MYCES BIOMEDICAL ENGINEERING",
-          href: "/services8/biomedical",
-        },
-        // { label: "VENTURES", href: "/services10/ventures" },
-        {
-          label: "MYCES MANUFACTURING",
-          href: "/services/energy-audit/digitalsystem",
-        },
-        { label: "MYCES ACADEMY", href: "/services9/robotic" },
-        { label: "MYCES AIRCOND & ELECTRICAL", href: "/services11/building" },
-        { label: "MYCES ENGINEERING", href: "/services/energy-audit" },
-      ],
-    },
-    {
-      label: "ACT RESPONSIBLY",
-      key: "act",
-      open: actOpen,
-      setOpen: setActOpen,
-      items: [
-        { label: "INTEGRITY v1", href: "/pdf/integrity1.pdf", external: true },
-        { label: "INTEGRITY v2", href: "/pdf/integrity2.pdf", external: true },
-      ],
-    },
-    {
-      label: "NEWS",
-      key: "news",
-      open: newsOpen,
-      setOpen: setNewsOpen,
-      items: [{ label: "LATEST UPDATES", href: "/news" }],
-    },
-    {
-      label: "CAREER",
-      key: "career",
-      open: careerOpen,
-      setOpen: setCareerOpen,
-      items: [
-        { label: "PROFESSIONAL", href: "/career", external: true },
-        { label: "INTERNSHIP", href: "/internshipcareer" },
-      ],
-    },
-  ];
+  }, []);
 
   return (
-    <Box position="relative" zIndex={50}>
-      {/* White header */}
-      <Box
-        px={{ base: 6, md: 14 }}
+    <Box
+      position="sticky"
+      top="0"
+      zIndex={100}
+      bg="white"
+      boxShadow="0 2px 10px rgba(0,0,0,0.05)"
+      fontFamily="heading"
+      fontWeight={"bold"}
+    >
+      {/* HEADER TOP */}
+      <Flex
+        px={{ base: 4, md: 10 }}
         py={4}
-        bg="white"
-        borderBottom={`1px solid #e2e2e2`}
-        boxShadow="0 1px 5px rgba(0,0,0,0.1)"
+        align="center"
+        justify="space-between"
+        position="relative"
       >
-        <Flex align="center" justify="space-between" wrap="wrap">
-          {/* Logo */}
-          <Flex align="center" gap={3} flex="1" minW="180px">
-            <ChakraLink as={NextLink} href="/">
-              <Image
-                src="/logo2.png"
-                alt="MyCES Logo"
-                h="60px"
-                objectFit="contain"
-              />
-            </ChakraLink>
-          </Flex>
+        {/* LOGO */}
+        <ChakraLink as={NextLink} href="/">
+          <Image src="/logo2.png" h="50px" />
+        </ChakraLink>
 
-          {/* Navigation */}
-          <Flex
-            flex="2"
-            justify="center"
-            align="center"
-            gap={{ base: 4, md: 8 }}
-            fontFamily={fontFamily}
-            wrap="wrap"
+        {/* DESKTOP NAV */}
+        <Flex display={{ base: "none", md: "flex" }} gap={6} align="center">
+          {navItems.map((item) => (
+            <Box
+              key={item.key}
+              position="relative"
+              onMouseEnter={() => setOpenDropdown(item.key)}
+              onMouseLeave={() => setOpenDropdown(null)}
+            >
+              <Text
+                fontSize="12px"
+                fontWeight="600"
+                cursor="pointer"
+                letterSpacing="0.05em"
+                textTransform="uppercase"
+                _hover={{ color: "green.600" }}
+              >
+                {item.label}
+              </Text>
+
+              <AnimatePresence>
+                {openDropdown === item.key && (
+                  <MotionBox
+                    position="absolute"
+                    top="120%"
+                    left="50%"
+                    transform="translateX(-50%)"
+                    bg="white"
+                    minW="220px"
+                    border="1px solid #eee"
+                    borderRadius="8px"
+                    boxShadow="0 10px 30px rgba(0,0,0,0.08)"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                  >
+                    {item.items.map((sub, i) => (
+                      <ChakraLink key={i} as={NextLink} href={sub.href ?? "#"}>
+                        <Text
+                          px={4}
+                          py={3}
+                          fontSize="12px"
+                          fontWeight="600"
+                          cursor="pointer"
+                          letterSpacing="0.05em"
+                          textTransform="uppercase"
+                          _hover={{ bg: "#f7f7f7" }}
+                        >
+                          {sub.label}
+                        </Text>
+                      </ChakraLink>
+                    ))}
+                  </MotionBox>
+                )}
+              </AnimatePresence>
+            </Box>
+          ))}
+
+          <ChakraLink as={NextLink} href="/contact">
+            <Text fontSize="12px" fontWeight="600" textTransform="uppercase">
+              CONTACT
+            </Text>
+          </ChakraLink>
+        </Flex>
+
+        {/* SEARCH ICON DESKTOP */}
+        <Flex display={{ base: "none", md: "flex" }} align="center">
+          <Icon
+            as={FaSearch}
+            cursor="pointer"
+            onClick={() => setSearchOpen(!searchOpen)}
+          />
+          <AnimatePresence>
+            {searchOpen && (
+              <MotionBox
+                ml={2}
+                initial={{ opacity: 0, width: 0 }}
+                animate={{ opacity: 1, width: "200px" }}
+                exit={{ opacity: 0, width: 0 }}
+                overflow="hidden"
+                transition={{ duration: 0.3 }}
+              >
+                <form onSubmit={handleSearchSubmit}>
+                  <Input
+                    size="sm"
+                    placeholder="Search..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                </form>
+              </MotionBox>
+            )}
+          </AnimatePresence>
+        </Flex>
+
+        {/* MOBILE ICONS + INLINE SEARCH */}
+        <Flex align="center" gap={2} display={{ base: "flex", md: "none" }}>
+          <AnimatePresence>
+            {searchOpen && (
+              <MotionBox
+                initial={{ width: 0, opacity: 0 }}
+                animate={{ width: "140px", opacity: 1 }}
+                exit={{ width: 0, opacity: 0 }}
+                overflow="hidden"
+                transition={{ duration: 0.25 }}
+              >
+                <form onSubmit={handleSearchSubmit}>
+                  <Input
+                    size="sm"
+                    placeholder="Search..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                      if (e.key === "Enter") handleSearchSubmit();
+                    }}
+                  />
+                </form>
+              </MotionBox>
+            )}
+          </AnimatePresence>
+
+          <Icon
+            as={FaSearch}
+            cursor="pointer"
+            boxSize={5}
+            onClick={() => setSearchOpen(!searchOpen)}
+          />
+          <Icon
+            as={menuOpen ? FaTimes : FaBars}
+            cursor="pointer"
+            boxSize={5}
+            onClick={() => setMenuOpen(!menuOpen)}
+          />
+        </Flex>
+      </Flex>
+
+      {/* MOBILE MENU */}
+      <AnimatePresence>
+        {menuOpen && (
+          <MotionBox
+            display={{ base: "block", md: "none" }}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            overflow="hidden"
+            px={4}
           >
             {navItems.map((item) => (
-              <Box
-                key={item.key}
-                position="relative"
-                onMouseEnter={() => item.setOpen(true)}
-                onMouseLeave={() => item.setOpen(false)}
-              >
-                <Text
-                  fontSize="12px"
-                  fontWeight="600"
+              <Box key={item.key} mb={3}>
+                <Flex
+                  justify="space-between"
                   cursor="pointer"
-                  color={primaryColor}
-                  textTransform="uppercase"
-                  letterSpacing="1px"
-                  _hover={{ color: "#199800" }}
+                  onClick={() =>
+                    setOpenDropdown(openDropdown === item.key ? null : item.key)
+                  }
                 >
-                  {item.label}
-                </Text>
+                  <Text fontSize="12px" fontWeight="600">
+                    {item.label}
+                  </Text>
+                </Flex>
 
                 <AnimatePresence>
-                  {item.open && (
+                  {openDropdown === item.key && (
                     <MotionBox
-                      position="absolute"
-                      top="120%"
-                      left="50%"
-                      transform="translateX(-50%)"
-                      bg="white"
-                      minW="200px"
-                      zIndex={30}
-                      borderRadius="6px"
-                      border="1px solid #e2e2e2"
-                      boxShadow="0 2px 8px rgba(0,0,0,0.1)"
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25 }}
                     >
-                      {item.items.map((subItem, idx) => (
-                        <ChakraLink
-                          key={idx}
-                          as={subItem.external ? "a" : NextLink}
-                          href={subItem.href}
-                          target={subItem.external ? "_blank" : undefined}
-                          rel={
-                            subItem.external ? "noopener noreferrer" : undefined
-                          }
-                          _hover={{ textDecoration: "none" }}
-                        >
-                          <Box
-                            px={4}
-                            py={2}
-                            fontSize="12px"
-                            fontWeight="500"
-                            color={primaryColor}
-                            _hover={{ bg: "#f5f5f5" }}
-                          >
-                            {subItem.label}
-                          </Box>
-                        </ChakraLink>
-                      ))}
+                      <Box pl={4} mt={2}>
+                        <Flex direction="column">
+                          {item.items.map((sub, i) => (
+                            <Box
+                              key={i}
+                              borderBottom="1px solid"
+                              borderColor="gray.200"
+                            >
+                              <ChakraLink
+                                as={sub.href ? NextLink : "a"}
+                                href={sub.href ?? "#"}
+                                onClick={() => {
+                                  setMenuOpen(false);
+                                  setOpenDropdown(null);
+                                  sub.onClick?.();
+                                }}
+                                _hover={{ textDecoration: "none" }}
+                              >
+                                <Box
+                                  py={2}
+                                  px={2}
+                                  borderRadius="md"
+                                  _hover={{ bg: "gray.100" }}
+                                  transition="0.2s"
+                                >
+                                  <Text fontSize="xs">{sub.label}</Text>
+                                </Box>
+                              </ChakraLink>
+                            </Box>
+                          ))}
+                        </Flex>
+                      </Box>
                     </MotionBox>
                   )}
                 </AnimatePresence>
               </Box>
             ))}
-
-            <ChakraLink as={NextLink} href="/contact">
-              <Text
-                fontSize="12px"
-                fontWeight="600"
-                cursor="pointer"
-                color={primaryColor}
-                textTransform="uppercase"
-                letterSpacing="1px"
-                _hover={{ color: "#199800" }}
-              >
-                Contact Us
+            <ChakraLink
+              as={NextLink}
+              href="/contact"
+              onClick={() => setMenuOpen(false)}
+            >
+              <Text fontSize="12px" fontWeight="600" mt={0} mb={3}>
+                CONTACT
               </Text>
             </ChakraLink>
-          </Flex>
-
-          {/* Search */}
-          <Flex
-            flex="1"
-            justify="flex-end"
-            align="center"
-            gap={4}
-            ref={searchRef}
-          >
-            <Icon
-              as={FaSearch}
-              boxSize={4}
-              cursor="pointer"
-              color={primaryColor}
-              onClick={() => setSearchOpen(!searchOpen)}
-            />
-
-            <AnimatePresence>
-              {searchOpen && (
-                <MotionBox
-                  initial={{ width: 0, opacity: 0 }}
-                  animate={{ width: 200, opacity: 1 }}
-                  exit={{ width: 0, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  overflow="hidden"
-                >
-                  <form onSubmit={handleSearchSubmit}>
-                    <Input
-                      placeholder="Search..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      size="sm"
-                      bg="white"
-                      border="1px solid #ccc"
-                      fontFamily={fontFamily}
-                      fontSize="12px"
-                      _focus={{
-                        borderColor: "#199800",
-                        boxShadow: "0 0 5px rgba(25, 152, 0, 0.5)",
-                      }}
-                    />
-                  </form>
-                </MotionBox>
-              )}
-            </AnimatePresence>
-          </Flex>
-        </Flex>
-      </Box>
+          </MotionBox>
+        )}
+      </AnimatePresence>
     </Box>
   );
 }

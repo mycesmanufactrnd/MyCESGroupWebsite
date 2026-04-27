@@ -7,7 +7,7 @@ const values = [
   {
     id: 0,
     title: "Integrity",
-    frontImage: "/images/core1.jpg",
+    frontImage: "/images/core1.png",
     backTitle: "Integrity",
     backText:
       "We act with honesty, transparency, and professionalism in everything we do.",
@@ -15,7 +15,7 @@ const values = [
   {
     id: 1,
     title: "Innovation",
-    frontImage: "/images/core2.jpg",
+    frontImage: "/images/aca1.png",
     backTitle: "Innovation",
     backText:
       "We embrace new ideas and technologies to deliver smarter, more effective solutions.",
@@ -23,7 +23,7 @@ const values = [
   {
     id: 2,
     title: "Excellence",
-    frontImage: "/images/core3.jpg",
+    frontImage: "/images/exc.png",
     backTitle: "Excellence",
     backText:
       "We are committed to high-quality work, safety, and continuous improvement.",
@@ -31,7 +31,7 @@ const values = [
   {
     id: 3,
     title: "Sustainability",
-    frontImage: "/aboutcore/1.jpg",
+    frontImage: "/portfolio/p13.jpg",
     backTitle: "Sustainability",
     backText:
       "We promote responsible energy use and environmentally conscious practices.",
@@ -39,7 +39,7 @@ const values = [
   {
     id: 4,
     title: "Collaboration",
-    frontImage: "/aboutcore/2.jpg",
+    frontImage: "/images/core4.png",
     backTitle: "Collaboration",
     backText:
       "We value teamwork, partnerships, and strong relationships with clients and communities.",
@@ -47,7 +47,7 @@ const values = [
   {
     id: 5,
     title: "Accountability",
-    frontImage: "/aboutcore/4.jpg",
+    frontImage: "/images/core7.jpeg",
     backTitle: "Accountability",
     backText:
       "We take responsibility for our actions, delivering on promises and measurable results.",
@@ -61,13 +61,8 @@ export default function OurCoreValues() {
     <Box bg="white" py={{ base: 20, md: 28 }} px={{ base: 6, md: 20 }}>
       {/* Header */}
       <Box textAlign="center" mb={16}>
-        <Heading fontSize={{ base: "3xl", md: "2.5xl" }} fontWeight="bold">
-          <Text as="span" color="#223c26">
-            Our{" "}
-          </Text>
-          <Text as="span" color="#223c26" fontWeight="bold">
-            Core Values
-          </Text>
+        <Heading fontSize="3xl" color="#1B4D2E" fontWeight="bold">
+          Core Values
         </Heading>
       </Box>
 
@@ -107,21 +102,28 @@ export default function OurCoreValues() {
                   bgPos="center"
                   backfaceVisibility="hidden"
                 >
-                  <Text
+                  <Box
                     position="absolute"
-                    bottom={6}
-                    w="100%"
-                    textAlign="center"
-                    color="white"
-                    fontSize="xl"
-                    fontWeight="medium"
-                  >
-                    {item.title}
-                  </Text>
+                    inset={0}
+                    bg="linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0.2))"
+                  />
                 </Box>
+                <Text
+                  fontFamily="{heading}"
+                  position="absolute"
+                  bottom={6}
+                  w="100%"
+                  textAlign="center"
+                  color="white"
+                  fontSize="md"
+                  fontWeight="semibold"
+                >
+                  {item.title}
+                </Text>
 
                 {/* BACK */}
                 <Box
+                  fontFamily="{body}"
                   position="absolute"
                   inset={0}
                   bg="white"
@@ -135,15 +137,6 @@ export default function OurCoreValues() {
                   textAlign="center"
                   boxShadow="lg"
                 >
-                  <Heading
-                    fontSize="xl"
-                    color="#0F2A1D"
-                    fontFamily="serif"
-                    fontWeight="medium"
-                    mb={4}
-                  >
-                    {item.backTitle}
-                  </Heading>
                   <Text color="gray.700" fontSize="md" lineHeight="1.8">
                     {item.backText}
                   </Text>

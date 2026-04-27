@@ -10,28 +10,28 @@ const darkGreen = "#0B5D3B";
 
 const services = [
   {
-    title: "Power Energy Logger (e.g., Chauvin Arnoux PEL 103)",
+    title: "Power Energy Logger",
     icon: FiActivity,
     items: [
       "A compact logger designed to measure and record electrical consumption and power quality across various building sectors. It provides critical data on energy usage patterns to identify potential savings and electrical inefficiencies.",
     ],
   },
   {
-    title: "Ultrasonic Flowmeter (Liquid)",
+    title: "Ultrasonic Flowmeter",
     icon: FiWind,
     items: [
       "A non-intrusive device used for measuring the flow rate of liquids within piping systems without cutting the pipes. It is essential for auditing chiller plants and water treatment systems to ensure optimal flow efficiency.",
     ],
   },
   {
-    title: "Flowmeter (Compressed Air)",
+    title: "Flowmeter",
     icon: FiCpu,
     items: [
       "Specifically engineered to measure the volume and flow rate of compressed air in industrial environments. This tool helps detect air leaks and monitors the performance of air compressor plants to reduce operational costs.",
     ],
   },
   {
-    title: "Boiler Flue Gas Analyzer (e.g., Testo 340)",
+    title: "Boiler Flue Gas Analyzer",
     icon: FiTool,
     items: [
       "A professional analyzer used to measure combustion efficiency and emission levels from industrial boilers and furnaces. It provides precise data on flue gas components to help maintenance teams optimize burner performance.",
@@ -79,7 +79,11 @@ export default function TechnicalServicesBreakdowner() {
       {/* SERVICES GRID */}
       <AnimatePresence>
         <Grid
-          templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }}
+          templateColumns={{
+            base: "1fr",
+            md: "repeat(2, 1fr)",
+            lg: "repeat(3, 1fr)",
+          }}
           gap={14}
         >
           {services.map((service, index) => {

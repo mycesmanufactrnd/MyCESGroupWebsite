@@ -1,30 +1,53 @@
 "use client";
 
-import { Box, Text, Heading, Flex, Image } from "@chakra-ui/react";
+import { Box, Text, Heading, Flex, Image, Button } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const MotionBox = motion(Box);
+const companyGreen = "#0B5D3B";
 
 const differentiators = [
   {
-    title: "Experienced Technical Team",
+    title: "Offices & Corporate Buildings",
     description:
-      "Our skilled energy professionals deliver accurate assessments and tailored recommendations for your facility.",
-    image: "/euservice/1.jpg",
+      "Maintain a clean and fresh indoor environment for employees and visitors, enhancing comfort and productivity.",
+    image: "/euservice/s1.jpg",
     imageLeft: true,
   },
   {
-    title: "Professional and Systematic Approach",
+    title: "Hospitals & Clinics",
     description:
-      "We follow a structured methodology to ensure consistent and reliable energy audit results.",
-    image: "/euservice/2.jpg",
+      "Improve air hygiene in sensitive environments to support patient care and reduce exposure to airborne contaminants.",
+    image: "/euservice/s2.jpg",
     imageLeft: false,
   },
   {
-    title: "Reliable Measurement & Reporting",
+    title: "Factories & Industrial",
     description:
-      "Using advanced tools, we provide precise measurements and clear reports on energy performance and savings opportunities.",
-    image: "/euservice/3.jpg",
+      "Control odors and improve air quality in production environments for a safer and more comfortable workspace.",
+    image: "/euservice/s3.jpg",
+    imageLeft: true,
+  },
+  {
+    title: "Schools & Universities",
+    description:
+      "Create a healthier learning environment by improving indoor air quality for students and staff.",
+    image: "/euservice/s4.jpg",
+    imageLeft: true,
+  },
+  {
+    title: "Public Transport & Vehicles",
+    description:
+      "Reduce odors and improve air freshness in buses, trains, and other transport environments.",
+    image: "/euservice/s5.jpg",
+    imageLeft: true,
+  },
+  {
+    title: "Homes & Residential Spaces",
+    description:
+      "Enhance everyday living with cleaner air and effective odor control in household environments.",
+    image: "/euservice/s6.jpg",
     imageLeft: true,
   },
 ];
@@ -45,11 +68,11 @@ export default function DifferentiatorsSection() {
           color="#15350f"
           mb={2}
         >
-          What Differentiates Us From The Rest ?
+          Suitable Applications
         </Heading>
+
         <Text textAlign="center" color="gray.500" mb={16}>
-          Our unique strengths that set us apart in the corporate services
-          landscape
+          Designed for versatile use across multiple environments and industries
         </Text>
       </MotionBox>
 
@@ -121,6 +144,32 @@ export default function DifferentiatorsSection() {
             </Flex>
           );
         })}
+      </Flex>
+
+      <Flex justify="flex-end" mt={10} mr="5%">
+        <Link href="/services/energy-audit" passHref>
+          <Button
+            bg="white"
+            color={companyGreen}
+            border="1px solid"
+            borderColor={companyGreen}
+            px={6}
+            py={5}
+            fontSize="sm"
+            fontWeight="medium"
+            borderRadius="md"
+            _hover={{
+              bg: companyGreen,
+              color: "white",
+            }}
+            _active={{
+              transform: "scale(0.98)",
+            }}
+            transition="all 0.2s ease"
+          >
+            Learn More →
+          </Button>
+        </Link>
       </Flex>
     </Box>
   );

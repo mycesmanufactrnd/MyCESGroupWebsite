@@ -12,21 +12,15 @@ export default function PortfolioHero() {
     <Box
       w="full"
       position="relative"
-      minH={{ base: "520px", md: "620px" }}
-      bgImage="url('/portfolio/1.jpg')"
+      minH={{ base: "70vh", md: "90vh" }}
+      bgImage="url('/portfolio/2.png')"
       bgSize="cover"
       bgPos="center"
       bgRepeat="no-repeat"
       display="flex"
       alignItems="center"
     >
-      {/* Dark overlay for readability */}
-      <Box
-        position="absolute"
-        inset={0}
-        bg="rgba(0,0,0,0.45)" // ✅ darker overlay
-        zIndex={0}
-      />
+      <Box position="absolute" inset={0} bg="rgba(0,0,0,0.45)" zIndex={0} />
 
       {/* Content */}
       <MotionBox
@@ -47,8 +41,9 @@ export default function PortfolioHero() {
       >
         {/* Heading */}
         <MotionHeading
+          fontFamily={"heading"}
           fontSize={{ base: "2xl", md: "3xl" }}
-          fontWeight="bold"       // ✅ bolder heading
+          fontWeight="bold" // ✅ bolder heading
           color="white"
           mb={6}
           textShadow="2px 2px 6px rgba(66, 66, 66, 0.7)" // subtle shadow
@@ -61,27 +56,8 @@ export default function PortfolioHero() {
             },
           }}
         >
-          Our Portfolio
+          Portfolio
         </MotionHeading>
-
-        {/* Description */}
-        <MotionText
-          fontSize={{ base: "md", md: "lg" }}
-          fontWeight="semibold"          // ✅ slightly bolder
-          color="white"
-          lineHeight="1.8"
-          textShadow="1px 1px 4px rgba(70, 70, 70, 0.5)" // subtle shadow
-          variants={{
-            hidden: { opacity: 0, y: 20 },
-            visible: {
-              opacity: 1,
-              y: 0,
-              transition: { duration: 0.9, ease: "easeOut" },
-            },
-          }}
-        >
-          MyCES Group is a multidisciplinary engineering and services company delivering integrated solutions across energy, infrastructure, digital systems, and facility management. Our portfolio highlights our expertise in driving efficiency, sustainability, and operational excellence across various industries.
-        </MotionText>
       </MotionBox>
     </Box>
   );

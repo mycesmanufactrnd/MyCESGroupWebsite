@@ -10,7 +10,7 @@ export default function ContactHero() {
     <MotionBox
       w="full"
       position="relative"
-      minH={{ base: "620px", md: "750px" }}
+      minH={{ base: "70vh", md: "90vh" }}
       display="flex"
       alignItems="center"
       justifyContent="center"
@@ -41,27 +41,13 @@ export default function ContactHero() {
       >
         <Heading
           fontSize={{ base: "3xl", md: "4xl" }}
-          fontWeight="bold"          // bolder heading
-          color="white"                   // contrasts overlay
+          fontWeight="bold" // bolder heading
+          color="white" // contrasts overlay
           mb={6}
           textShadow="2px 2px 6px rgba(62, 62, 62, 0.7)" // subtle shadow
         >
           Contact Us
         </Heading>
-
-        <Text
-          fontSize={{ base: "md", md: "lg" }}
-          fontWeight="semibold"           // slightly bolder content
-          color="white"                   // readable on overlay
-          lineHeight="1.8"
-          mb={8}
-          textShadow="1px 1px 4px rgba(56, 56, 56, 0.5)" // subtle shadow
-        >
-          We’re here to answer your questions and provide support. Reach out to
-          us for inquiries, consultations, or any assistance you need. Our team
-          is ready to help you achieve your energy efficiency and sustainability
-          goals.
-        </Text>
       </MotionBox>
     </MotionBox>
   );

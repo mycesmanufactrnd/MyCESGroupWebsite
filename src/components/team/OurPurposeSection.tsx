@@ -39,12 +39,11 @@ export default function OurPurposeSection() {
             lineHeight="1.9"
             maxW="1200px"
           >
-            Our purpose is to cultivate a collaborative and inclusive work
-            environment where individuals are empowered to grow professionally
-            and contribute meaningfully. Through open communication, mutual
-            respect, and shared responsibility, we align personal development
-            with organizational goals to achieve sustainable success and long-
-            term excellence.
+            Cultivate a collaborative and inclusive work environment where
+            individuals are empowered to grow professionally and contribute
+            meaningfully. Through open communication, mutual respect, and shared
+            responsibility, we align personal development with organizational
+            goals to achieve sustainable success and long- term excellence.
           </Text>
         </MotionBox>
 

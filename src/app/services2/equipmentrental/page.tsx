@@ -36,7 +36,7 @@ export default function EquipmentRentalPage() {
         <BackToTop />
       </Box>
 
-      <ScrollBullets8 />
+      {/* <ScrollBullets8 /> */}
     </>
   );
 }

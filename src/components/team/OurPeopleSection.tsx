@@ -31,25 +31,25 @@ export default function OurPeopleSection() {
           viewport={{ once: true, margin: "-80px" }}
         >
           <Heading
+            fontFamily="{heading}"
             fontSize={{ base: "1xl", md: "3xl" }}
             fontWeight="bold"
             color="#0F2A1D"
             mb={6}
           >
-            Our People
+            Meet the Team
           </Heading>
 
           <Text
+            fontFamily="{body}"
             fontSize={{ base: "md", md: "lg" }}
             color="gray.700"
             lineHeight="1.9"
             maxW="520px"
           >
-            At MyCES Group, our people are our greatest asset. We bring together
-            professionals with deep expertise, a collaborative mindset, and a
-            shared commitment to excellence. Through teamwork and innovation,
-            our people drive sustainable growth, deliver trusted solutions, and
-            continuously elevate the standards of our organization.
+            At MyCES Group, our team are our greatest strength. With deep
+            expertise and a collaborative mindset, they drive innovation,
+            deliver trusted solutions, and enable sustainable growth.
           </Text>
         </MotionBox>
 

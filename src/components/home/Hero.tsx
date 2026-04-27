@@ -1,6 +1,14 @@
 "use client";
 
-import { Box, Flex, Text, Heading, Image, chakra } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  Heading,
+  Image,
+  chakra,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { motion, Transition } from "framer-motion";
 import { FaPlay } from "react-icons/fa";
 import { useState, useEffect } from "react";
@@ -8,33 +16,27 @@ import { useState, useEffect } from "react";
 /* ================= SLIDE DATA ================= */
 const slides = [
   {
-    image: "home/2.jpg",
+    image: "home/eng1.png",
     title: "Leading the Future of Energy",
-    subText: "Innovative Solutions for Sustainable Energy Management",
+    subText: "Driving Sustainable Energy Innovation",
     blockBg: "#0F2A1D",
     blockDirection: "left",
   },
+  //
   {
-    image: "home/3.jpg",
+    image: "home/eng2.png",
     title: "Smart Energy & Infrastructure",
     subText: "Integrated Engineering and Energy Solutions",
     blockBg: "#163F2D",
     blockDirection: "right",
   },
-  {
-    image: "home/1.jpg",
-    title: "Driving Sustainable Performance",
-    subText: "Optimizing Assets, Energy, and Facilities",
-    blockBg: "#163F2D",
-    blockDirection: "left",
-  },
-  {
-    image: "home/6.jpg",
-    title: "Energy Intelligence Solutions",
-    subText: "Monitoring, Efficiency, and Sustainability",
-    blockBg: "#163F2D",
-    blockDirection: "right",
-  },
+  // {
+  //   image: "home/eng0.jpg",
+  //   title: "Driving Sustainable Performance",
+  //   subText: "Optimizing Assets, Energy, and Facilities",
+  //   blockBg: "#163F2D",
+  //   blockDirection: "left",
+  // },
   {
     image: "home/4.jpg",
     title: "Digitalizing Building Performance",
@@ -43,15 +45,15 @@ const slides = [
     blockDirection: "left",
   },
   {
-    image: "home/5.jpg",
-    title: "Integrated Engineering Excellence",
-    subText: "Supporting Growth Through Smart Solutions",
+    image: "home/aca1.png",
+    title: "Future Innovators in Robotics",
+    subText: "Building Future Innovators Through Robotics",
     blockBg: "#163F2D",
     blockDirection: "right",
   },
 ];
 
-/* ================= BACKGROUND VARIANTS WITH PROPER TYPING ================= */
+/* ================= BACKGROUND VARIANTS ================= */
 type VariantProps = {
   initial: Record<string, string | number>;
   animate: Record<string, string | number>;
@@ -62,17 +64,17 @@ const bgVariants: VariantProps[] = [
   {
     initial: { clipPath: "inset(0 100% 0 0)" },
     animate: { clipPath: "inset(0 0% 0 0)" },
-    transition: { duration: 1.2, ease: "easeInOut" },
+    transition: { duration: 2, ease: "easeInOut" },
   },
   {
     initial: { scale: 1.3, opacity: 0 },
     animate: { scale: 1, opacity: 1 },
-    transition: { duration: 1.2, ease: "easeOut" },
+    transition: { duration: 2, ease: "easeOut" },
   },
   {
     initial: { y: "-100%", opacity: 0 },
     animate: { y: "0%", opacity: 1 },
-    transition: { duration: 1.2, ease: "easeInOut" },
+    transition: { duration: 2, ease: "easeInOut" },
   },
 ];
 
@@ -87,6 +89,8 @@ export default function Hero() {
   const [playActive, setPlayActive] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
+  const isMobile = useBreakpointValue({ base: true, md: false });
 
   const nextSlide = () => setCurrent((p) => (p + 1) % slides.length);
   const prevSlide = () =>
@@ -106,7 +110,7 @@ export default function Hero() {
   return (
     <Box
       position="relative"
-      minH="90vh"
+      minH={{ base: "60vh", md: "90vh" }}
       overflow="hidden"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -127,10 +131,10 @@ export default function Hero() {
       {/* Dark Overlay for better text contrast */}
       <Box position="absolute" inset={0} bg="rgba(0,0,0,0.45)" />
 
-      {/* ===== ARROWS WITH CUSTOM IMAGES ===== */}
-      <chakra.button
+      {/* ===== ARROWS ===== */}
+      {/* <chakra.button
         position="absolute"
-        left={6}
+        left={4}
         top="50%"
         transform="translateY(-50%)"
         zIndex={3}
@@ -147,7 +151,7 @@ export default function Hero() {
 
       <chakra.button
         position="absolute"
-        right={6}
+        right={4}
         top="50%"
         transform="translateY(-50%)"
         zIndex={3}
@@ -160,7 +164,7 @@ export default function Hero() {
         _hover={{ transform: "translateY(-50%) scale(1.05)" }}
       >
         <Image src="images/hero1.png" alt="right" w={6} h={6} />
-      </chakra.button>
+      </chakra.button> */}
 
       {/* ===== TEXT CONTENT ===== */}
       <Flex
@@ -169,15 +173,16 @@ export default function Hero() {
         direction="column"
         justify="center"
         align="flex-start"
-        minH="90vh"
-        px={{ base: 35, md: 32 }}
-        pt={{ base: "6vh", md: "8vh" }}
+        minH={{ base: "60vh", md: "90vh" }}
+        px={{ base: 6, md: 32 }}
+        pt={{ base: "4vh", md: "8vh" }}
       >
         <Box maxW={{ base: "90%", md: "680px" }}>
           <MotionText
+            fontFamily="body"
             key={`sub-${current}`}
-            fontSize={{ base: "lg", md: "xl" }}
-            mb={4}
+            fontSize={{ base: "md", md: "xl" }}
+            mb={2}
             textTransform="uppercase"
             letterSpacing="wide"
             textAlign="left"
@@ -192,8 +197,8 @@ export default function Hero() {
           </MotionText>
 
           <MotionHeading
+            fontFamily="heading"
             key={`title-${current}`}
-            fontFamily="serif"
             fontSize={{ base: "2xl", md: "5xl" }}
             color="white"
             fontWeight="bold"
@@ -212,17 +217,17 @@ export default function Hero() {
       {/* ===== CTA BAR ===== */}
       <MotionFlex
         position="absolute"
-        bottom={{ base: 6, md: 10 }}
-        left="50%"
-        transform="translateX(-50%)"
-        w={{ base: "92%", md: "820px" }}
-        px={{ base: 6, md: 10 }}
-        py={5}
+        bottom={{ base: 4, md: 10 }}
+        left={{ base: 0, md: "30%" }}
+        transform={{ base: "none", md: "translateX(-50%)" }} // ← remove translate on mobile
+        w={{ base: "100%", md: "820px" }} // ← full width on mobile
+        px={{ base: 4, md: 10 }}
+        py={{ base: 3, md: 5 }}
         borderRadius="xl"
         align="center"
         justify="space-between"
         direction={{ base: "column", md: "row" }}
-        gap={{ base: 6, md: 0 }}
+        gap={{ base: 4, md: 0 }}
         zIndex={3}
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -231,8 +236,10 @@ export default function Hero() {
         <Flex
           flex="1"
           align="center"
-          justify="flex-end"
-          pr={{ base: 6, md: 100 }}
+          justify={{ base: "flex-start", md: "flex-end" }}
+          position={{ base: "relative", md: "static" }}
+          left={{ base: "40%", md: "auto" }}
+          transform={{ base: "translateX(-35%)", md: "none" }}
           gap={4}
           color="white"
           cursor="pointer"
@@ -241,8 +248,8 @@ export default function Hero() {
           {/* PLAY ICON */}
           <MotionBox
             position="relative"
-            w="64px"
-            h="64px"
+            w="56px"
+            h="56px"
             display="flex"
             alignItems="center"
             justifyContent="center"
@@ -265,8 +272,8 @@ export default function Hero() {
               }
             />
             <Box
-              w="52px"
-              h="52px"
+              w="44px"
+              h="44px"
               bg="white"
               borderRadius="full"
               display="flex"
@@ -278,10 +285,24 @@ export default function Hero() {
             </Box>
           </MotionBox>
 
-          {/* TEXT */}
-          <Box>
-            <Text fontWeight="medium">Click To Watch</Text>
-            <Text fontWeight="medium">Our Corporate Video</Text>
+          {/* TEXT - HIDE ON MOBILE */}
+          <Box display={{ base: "none", md: "block" }} textAlign="left">
+            <Text
+              fontFamily="heading"
+              fontWeight="semibold"
+              fontSize="md"
+              lineHeight="short"
+            >
+              Click To Watch
+            </Text>
+            <Text
+              fontFamily="heading"
+              fontWeight="semibold"
+              fontSize="md"
+              lineHeight="short"
+            >
+              Our Corporate Video
+            </Text>
           </Box>
         </Flex>
       </MotionFlex>
@@ -328,7 +349,6 @@ export default function Hero() {
             h={{ base: "50%", md: "450px" }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Use chakra.iframe instead of Box with as="iframe" */}
             <chakra.iframe
               src="/video/corporatemyces.mp4"
               w="100%"
@@ -336,7 +356,6 @@ export default function Hero() {
               borderRadius="md"
               allow="autoplay; fullscreen"
             />
-            {/* Close Button */}
             <Box
               position="absolute"
               top={2}

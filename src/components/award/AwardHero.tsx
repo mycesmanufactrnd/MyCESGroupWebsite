@@ -1,70 +1,63 @@
 "use client";
 
 import { Box, Heading, Text } from "@chakra-ui/react";
-import { motion, useViewportScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 
 const MotionBox = motion(Box);
+const MotionHeading = motion(Heading);
+const MotionText = motion(Text);
 
-export default function AwardHero() {
-  // Scroll hooks for subtle movement
-  const { scrollY } = useViewportScroll();
-  const yTransform = useTransform(scrollY, [0, 300], [0, -50]); // moves up on scroll
-
+export default function PortfolioHero() {
   return (
     <Box
       w="full"
       position="relative"
-      minH={{ base: "520px", md: "650px" }}
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      bgImage="url('/backgrounds/cert2.jpg')" // change to your award hero image
+      minH={{ base: "70vh", md: "90vh" }}
+      bgImage="url('/portfolio/2.png')"
       bgSize="cover"
       bgPos="center"
       bgRepeat="no-repeat"
-      bgAttachment="fixed" // static background
+      display="flex"
+      alignItems="center"
     >
-      {/* Overlay for better text readability */}
-      <Box
-        position="absolute"
-        inset={0}
-        bg="rgba(67, 66, 66, 0.23)"
-        zIndex={0}
-      />
+      <Box position="absolute" inset={0} bg="rgba(0,0,0,0.45)" zIndex={0} />
 
-      {/* Hero content */}
+      {/* Content */}
       <MotionBox
         position="relative"
         zIndex={1}
         maxW="900px"
-        textAlign="center"
+        mx="auto"
+        py={{ base: 28, md: 36 }}
         px={{ base: 6, md: 20 }}
-        py={{ base: 24, md: 36 }}
-        style={{ y: yTransform }} // scroll effect
-        initial={{ opacity: 0, y: 30 }} // entrance animation
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: "easeOut" }}
+        textAlign="center"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: { opacity: 1, transition: { staggerChildren: 0.25 } },
+        }}
       >
-        <Heading
+        {/* Heading */}
+        <MotionHeading
+          fontFamily={"heading"}
           fontSize={{ base: "2xl", md: "3xl" }}
-          fontWeight="bold"
+          fontWeight="bold" // ✅ bolder heading
           color="white"
-          mb={4}
+          mb={6}
+          textShadow="2px 2px 6px rgba(66, 66, 66, 0.7)" // subtle shadow
+          variants={{
+            hidden: { opacity: 0, y: 30 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: { duration: 0.8, ease: "easeOut" },
+            },
+          }}
         >
-          Our Professional Certificates
-        </Heading>
-
-        <Text
-          fontSize={{ base: "md", md: "lg" }}
-          color="white"
-          lineHeight="1.8"
-          mb={8}
-        >
-          MyCES Group takes pride in delivering excellence. Explore our awards
-          and recognitions that reflect our commitment to innovation,
-          sustainability, and outstanding performance in the energy efficiency
-          industry.
-        </Text>
+          Professional Certificate
+        </MotionHeading>
       </MotionBox>
     </Box>
   );

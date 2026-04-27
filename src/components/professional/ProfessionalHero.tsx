@@ -12,7 +12,7 @@ export default function ProfessionalHero() {
     <Box
       w="full"
       position="relative"
-      minH={{ base: "420px", md: "520px" }}
+      minH={{ base: "70vh", md: "90vh" }}
       bgImage="url('/professional/1.jpg')"
       bgSize="cover"
       bgPos="center"
@@ -48,7 +48,7 @@ export default function ProfessionalHero() {
         {/* Heading */}
         <MotionHeading
           fontSize={{ base: "2xl", md: "3xl" }}
-          fontWeight="bold"       // ✅ bolder heading
+          fontWeight="bold" // ✅ bolder heading
           color="white"
           mb={6}
           textShadow="2px 2px 6px rgba(66, 66, 66, 0.7)" // subtle shadow
@@ -63,24 +63,6 @@ export default function ProfessionalHero() {
         >
           Professional
         </MotionHeading>
-
-        {/* Description */}
-        <MotionText
-          fontSize={{ base: "md", md: "lg" }}
-          fontWeight="semibold"          // ✅ slightly bolder
-          color="white"
-          lineHeight="1.8"
-          textShadow="1px 1px 4px rgba(70, 70, 70, 0.5)" // subtle shadow
-          variants={{
-            hidden: { opacity: 0, y: 20 },
-            visible: {
-              opacity: 1,
-              y: 0,
-              transition: { duration: 0.9, ease: "easeOut" },
-            },
-          }}
-        >
-          At MYCES Group, we nurture skilled professionals passionate about engineering, energy management, and digital solutions. Our team works on innovative projects that enhance efficiency, sustainability, and technology, while providing opportunities for growth and career development.        </MotionText>
       </MotionBox>
     </Box>
   );

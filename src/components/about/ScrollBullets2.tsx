@@ -6,51 +6,50 @@ import { useEffect, useState } from "react";
 const sections = [
   { id: "our-story", label: "Our Story" },
   { id: "company-overview", label: "Company Overview" },
-  { id: "about-subsi", label: "List Subsidiaries" },
+  { id: "about-subsi", label: "Subsidiaries" },
   { id: "core-values", label: "Core Values" },
+  { id: "about-specialties", label: "Specialities" },
+  { id: "backtop", label: "Back" },
 ];
 
 export default function ScrollBullets2() {
   const [activeSection, setActiveSection] = useState("");
-  const [showBullets, setShowBullets] = useState(false);
+
   const [hovered, setHovered] = useState<string | null>(null);
 
   const handleScroll = (id: string) => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (el) {
+      el.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
   };
 
   useEffect(() => {
-    // Show bullets once the first section scrolls out
-    const hero = document.getElementById("our-story"); // top section
-    const heroObserver = new IntersectionObserver(
-      ([entry]) => setShowBullets(!entry.isIntersecting),
-      { threshold: 0.1 },
-    );
-    if (hero) heroObserver.observe(hero);
-
-    // Observe all sections to track active bullet
-    const sectionObserver = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) setActiveSection(entry.target.id);
+          const id = entry.target.id;
+
+          if (entry.isIntersecting) {
+            setActiveSection(id);
+          }
         });
       },
-      { rootMargin: "-50% 0px -50% 0px", threshold: 0 },
+      {
+        threshold: 0.4,
+      },
     );
 
     sections.forEach((sec) => {
       const el = document.getElementById(sec.id);
-      if (el) sectionObserver.observe(el);
+      if (el) observer.observe(el);
     });
 
-    return () => {
-      heroObserver.disconnect();
-      sectionObserver.disconnect();
-    };
+    return () => observer.disconnect();
   }, []);
-
-  if (!showBullets) return null;
 
   return (
     <VStack
@@ -59,27 +58,33 @@ export default function ScrollBullets2() {
       right="2rem"
       transform="translateY(-50%)"
       gap={4}
-      zIndex={100}
+      zIndex={9999}
     >
       {sections.map((sec) => (
         <Box
           key={sec.id}
           position="relative"
+          cursor="pointer"
           onMouseEnter={() => setHovered(sec.id)}
           onMouseLeave={() => setHovered(null)}
-          cursor="pointer"
           onClick={() => handleScroll(sec.id)}
         >
-          {/* Bullet */}
+          {/* BULLET */}
           <Box
-            w="12px"
-            h="12px"
+            w="10px"
+            h="10px"
             borderRadius="full"
-            bg={activeSection === sec.id ? "green.800" : "gray.400"}
-            transition="all 0.3s ease"
+            bg={activeSection === sec.id ? "#1B4D2E" : "gray.400"}
+            transform={activeSection === sec.id ? "scale(1.4)" : "scale(1)"}
+            transition="all 0.25s ease"
+            boxShadow={
+              activeSection === sec.id
+                ? "0 0 10px rgba(27, 77, 46, 0.6)"
+                : "none"
+            }
           />
 
-          {/* Tooltip */}
+          {/* TOOLTIP */}
           {hovered === sec.id && (
             <Box
               position="absolute"
@@ -91,14 +96,15 @@ export default function ScrollBullets2() {
               px={3}
               py={1}
               fontSize="xs"
-              whiteSpace="nowrap"
               borderRadius="md"
-              zIndex={10}
+              whiteSpace="nowrap"
             >
               {sec.label}
+
+              {/* arrow */}
               <Box
                 position="absolute"
-                right="-5px"
+                right="-4px"
                 top="50%"
                 transform="translateY(-50%) rotate(45deg)"
                 w="6px"
