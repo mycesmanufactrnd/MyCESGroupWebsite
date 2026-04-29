@@ -28,9 +28,9 @@ export default function ReemConsultancyPage() {
         <Reemimportance />
       </Box>
 
-      <Box id="reemconsultancy-contact">
+      {/* <Box id="reemconsultancy-contact">
         <ReemConsultancyContact />
-      </Box>
+      </Box> */}
 
       <Box id="backtop">
         <BackToTop />

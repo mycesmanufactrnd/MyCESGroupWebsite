@@ -13,7 +13,10 @@ export default function PortfolioHero() {
       w="full"
       position="relative"
       minH={{ base: "70vh", md: "90vh" }}
-      bgImage="url('/portfolio/2.png')"
+      bgImage={{
+        base: "url('/portfolio/23.png')",
+        md: "url('/portfolio/20.jpeg')",
+      }}
       bgSize="cover"
       bgPos="center"
       bgRepeat="no-repeat"

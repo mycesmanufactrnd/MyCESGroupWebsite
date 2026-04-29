@@ -19,7 +19,7 @@ export default function OurStorySection() {
       display="flex"
       alignItems="center"
       justifyContent="center"
-      bgImage="url('/euservice/eu2.jpg')"
+      bgImage="url('/portfolio/p13.jpg')"
       bgSize="cover"
       bgPos="center"
       bgRepeat="no-repeat"

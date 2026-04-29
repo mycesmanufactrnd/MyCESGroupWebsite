@@ -41,7 +41,7 @@ function HeaderP2Inner({ title, category }: ProjectHeaderProps2) {
         {/* Background Image */}
         <Box position="absolute" inset={0} zIndex={0}>
           <Image
-            src="/portfolio/p13.jpg"
+            src="/portfolio/emgs.jpeg"
             alt="SEMS"
             fill
             style={{ objectFit: "cover" }}

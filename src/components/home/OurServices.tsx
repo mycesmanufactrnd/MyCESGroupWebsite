@@ -19,7 +19,7 @@ const services = [
   {
     title: "Energy Audit",
     image: "/home/ea1.png",
-    href: "/services/energy-audit",
+    href: "/businessMyces/myces",
   },
   {
     title: "Equipment Rental",
@@ -32,7 +32,7 @@ const services = [
     href: "/services3/measurement",
   },
   {
-    title: "REM Consultancy",
+    title: "Energy Manager Consultancy",
     image: "/home/eng4.png",
     href: "/services5/reemconsultancy",
   },

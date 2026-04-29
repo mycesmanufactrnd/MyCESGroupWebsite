@@ -28,9 +28,9 @@ export default function EquipmentRentalPage() {
         <EquipmentRentalList />
       </Box>
 
-      <Box id="equipment-contact">
+      {/* <Box id="equipment-contact">
         <EquipmentRentalContact />
-      </Box>
+      </Box> */}
 
       <Box id="backtop">
         <BackToTop />

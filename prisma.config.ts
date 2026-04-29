@@ -6,4 +6,4 @@ export default defineConfig({
     url: process.env.DATABASE_URL || "https://fclvkmfausfiseoukhax.supabase.co", // Your connection string with pooler
   },
   schema: './prisma/schema.prisma', // Optional, as this is the default
-})
+})  

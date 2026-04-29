@@ -9,7 +9,7 @@ const reemCards = [
   {
     id: 0,
     title: "Legal Mandate",
-    frontImage: "/reemservice/2.jpg",
+    frontImage: "/reemservice/21.png",
     backTitle: "Legal Mandate",
     backText:
       "It is a compulsory requirement for facilities that consume 3 million kWh or more of electricity over a six-month period to appoint a REEM to comply with EMEER 2008.",
@@ -17,7 +17,7 @@ const reemCards = [
   {
     id: 1,
     title: "Financial Optimization",
-    frontImage: "/reemservice/3.jpg",
+    frontImage: "/reemservice/22.png",
     backTitle: "Financial Optimization",
     backText:
       "Consultants pinpoint specific areas of energy loss, allowing organizations to significantly lower their monthly utility bills and operational overhead.",
@@ -25,23 +25,23 @@ const reemCards = [
   {
     id: 2,
     title: "Regulatory Compliance",
-    frontImage: "/reemservice/4.jpg",
+    frontImage: "/reemservice/23.png",
     backTitle: "Regulatory Compliance",
     backText:
       "Having a REEM ensures that all mandatory energy reports are submitted accurately and on time to the Energy Commission (ST).",
   },
-  {
-    id: 3,
-    title: "Sustainable Operations",
-    frontImage: "/reemservice/5.jpg",
-    backTitle: "Sustainable Operations",
-    backText:
-      "They facilitate the implementation of green energy practices, helping companies meet environmental sustainability targets and improve their ESG standing.",
-  },
+  // {
+  //   id: 3,
+  //   title: "Sustainable Operations",
+  //   frontImage: "/reemservice/5.jpg",
+  //   backTitle: "Sustainable Operations",
+  //   backText:
+  //     "They facilitate the implementation of green energy practices, helping companies meet environmental sustainability targets and improve their ESG standing.",
+  // },
   {
     id: 4,
     title: "Expert Oversight",
-    frontImage: "/reemservice/6.jpg",
+    frontImage: "/reemservice/20.png",
     backTitle: "Expert Oversight",
     backText:
       "Their specialized knowledge provides professional assurance that the facility’s electrical systems are being monitored and maintained at peak efficiency.",
@@ -60,7 +60,7 @@ export default function Reemimportance() {
           fontWeight="bold"
           color={darkGreen}
         >
-          Why REM Consultancy is Essential
+          Why Energy Manager Consultancy is Essential
         </Heading>
         <Text mt={10} fontSize={{ base: "md", md: "lg" }} color="gray.600">
           Bridging the gap between regulatory compliance and sustainable energy
@@ -118,15 +118,28 @@ export default function Reemimportance() {
                   textAlign="center"
                   fontSize="xl"
                   p={4}
-                  boxShadow="0 8px 15px rgba(0,0,0,0.2)"
-                  transition="box-shadow 0.6s ease-in-out"
+                  borderRadius="xl"
+                  overflow="hidden"
+                  boxShadow="0 15px 35px rgba(0,0,0,0.45)"
                 >
-                  {card.title}
+                  {/* 🔥 overlay layer */}
+                  <Box
+                    position="absolute"
+                    inset={0}
+                    bg="linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6))"
+                    zIndex={0}
+                  />
+
+                  {/* content */}
+                  <Box position="relative" zIndex={1}>
+                    {card.title}
+                  </Box>
                 </Box>
 
                 {/* Back */}
                 <Box
                   position="absolute"
+                  borderRadius="xl"
                   inset={0}
                   bg="white"
                   backfaceVisibility="hidden"

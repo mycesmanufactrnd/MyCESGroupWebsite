@@ -32,10 +32,10 @@ export default function MeasurementPage() {
       <Box id="measurement-differentiators">
         <DifferentiatorsSection4 />
       </Box>
-
+      {/* 
       <Box id="measure-contact">
         <MeasurementVerificationContact />
-      </Box>
+      </Box> */}
 
       <Box id="backtop">
         <BackToTop />
