@@ -1,0 +1,19 @@
+services:
+  web:
+    build:
+      context: .
+      args:
+        # These are public/browser-safe keys — safe to have here
+        NEXT_PUBLIC_SUPABASE_URL: https://fclvkmfausfiseoukhax.supabase.co
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZjbHZrbWZhdXNmaXNlb3VraGF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwMDM5MjEsImV4cCI6MjA4ODU3OTkyMX0.De--AmkuSsAEAAMoPsFMrnJyeFuUrxHId4BxPiij8JY
+    container_name: myces-web
+    ports:
+      - "3005:3005"
+    env_file:
+      - .env
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+          cpus: "1.0"
