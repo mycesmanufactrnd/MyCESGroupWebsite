@@ -11,7 +11,7 @@ const deepGray = "#2D2D2D";
 const services = [
   {
     title: "Electrical Wiring & Installation",
-    image: "/portfolio/91.png",
+    image: "/basservice/1.jpg",
     primary:
       "We provide complete electrical wiring solutions for residential, commercial, and industrial projects.",
     secondary:
@@ -74,10 +74,7 @@ export default function ElectricalServices() {
           return (
             <Flex
               key={service.title}
-              direction={{
-                base: "column",
-                md: isImageLeft ? "row" : "row-reverse",
-              }}
+              direction={{ base: "column", md: isImageLeft ? "row" : "row-reverse" }}
               align="center"
               gap={{ base: 10, md: 20 }}
               mb={24}
@@ -101,11 +98,11 @@ export default function ElectricalServices() {
                   src={service.image}
                   alt={service.title}
                   w="100%"
-                  h="100%" // ✅ FILL CONTAINER
+                  h="100%"          // ✅ FILL CONTAINER
                   objectFit="cover" // ✅ CROPS EVENLY
                 />
               </MotionBox>
-
+              
               {/* TEXT BLOCK */}
               <Box flex="1">
                 {/* TITLE */}

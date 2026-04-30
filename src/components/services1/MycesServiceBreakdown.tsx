@@ -61,7 +61,7 @@ const differentiators = [
     title: "Sustainable Energy Management System (SEMS)",
     description:
       "Structured system to manage and continuously improve energy performance aligned with sustainability goals.",
-    image: "/portfolio/emgs.jpeg",
+    image: "/home/eng2.png",
     imageLeft: true,
   },
   {

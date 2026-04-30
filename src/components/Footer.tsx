@@ -60,7 +60,7 @@ export default function Footer() {
           {/* Column */}
           {[
             {
-              title: "ABOUT US",
+              title: "WHAT WE DO",
               links: [
                 { label: "Who We Are", href: "/about" },
                 {
@@ -75,7 +75,7 @@ export default function Footer() {
               title: "OUR BUSINESS",
               links: [
                 {
-                  label: "MyCES Group",
+                  label: "Myces Group",
                   href: "/businessMyces/myces",
                 },
                 {

@@ -155,7 +155,7 @@ export default function Act1Page() {
 
             {/* TITLE */}
             <Text mb={4} fontWeight="bold" textAlign="center">
-              Anti-Bribery and Corruption Policy
+              ABC Policy
             </Text>
 
             {/* IMAGE + NAV */}
