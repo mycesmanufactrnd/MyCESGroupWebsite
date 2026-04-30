@@ -42,7 +42,7 @@ const servicesPortfolio = [
     portfolios: [
       {
         title: "SUSTAINABLE ENERGY MANAGEMENT SYSTEM (SEMS)",
-        image: "/portfolio/p12.jpg",
+        image: "/portfolio/emgs.jpeg",
         href: "/subportfolio4?service=SUSTAINABLE%20ENERGY%20MANAGEMENT%20SYSTEM%20(SEMS)",
       },
     ],

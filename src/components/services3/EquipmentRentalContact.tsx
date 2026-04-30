@@ -107,17 +107,6 @@ export default function EquipmentRentalContact() {
                 </Link>
               </Text>
             </Box>
-
-            <Box>
-              <Text fontWeight="bold">Website:</Text>
-              <Link
-                href="https://www.mycesgroup.com"
-                color={darkGreen}
-                target="_blank"
-              >
-                www.mycesgroup.com
-              </Link>
-            </Box>
           </Stack>
         </MotionBox>
 

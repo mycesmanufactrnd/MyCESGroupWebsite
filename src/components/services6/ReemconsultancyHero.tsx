@@ -25,7 +25,7 @@ export default function ReemconsultancyHero() {
       w="full"
       position="relative"
       h={{ base: "550px", md: "650px" }}
-      bgImage="url('/backgrounds/reem1.jpg')"
+      bgImage="url('/reemservice/21.png')"
       bgSize="cover"
       bgPos="center"
       bgRepeat="no-repeat"
@@ -67,7 +67,7 @@ export default function ReemconsultancyHero() {
           lineHeight="1.3"
           textShadow="0 6px 24px rgba(0,0,0,0.45)" // professional readability
         >
-          Welcome to REM Consultancy Service
+          Energy Manager Consultancy
         </Heading>
       </MotionBox>
     </Box>

@@ -87,7 +87,7 @@ export default function MycesAcademyFocus() {
                 transition="transform 0.7s ease-in-out"
                 transformStyle="preserve-3d"
                 transform={isFlipped ? "rotateY(180deg)" : "rotateY(0deg)"}
-                boxShadow="0 12px 40px rgba(0,0,0,0.08)"
+                boxShadow="0 12px 40px rgba(0,0,0,0.2)"
                 borderRadius="16px"
                 cursor="pointer"
               >
@@ -102,11 +102,24 @@ export default function MycesAcademyFocus() {
                   display="flex"
                   flexDirection="column"
                   justifyContent="flex-end"
+                  borderRadius="16px"
+                  overflow="hidden"
+                  boxShadow="0 20px 45px rgba(0,0,0,0.45)" // 🔥 stronger shadow
+                  transition="all 0.4s ease"
+                  _hover={{
+                    transform: "translateY(-6px)",
+                    boxShadow: "0 30px 60px rgba(0,0,0,0.45)",
+                  }}
                 >
+                  {/* 🔥 overlay layer (VERY IMPORTANT for depth) */}
                   <Box
-                    bgGradient="linear(to-t, rgba(0,0,0,0.6), transparent)"
-                    p={6}
-                  >
+                    position="absolute"
+                    inset={0}
+                    bg="linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.2))"
+                    zIndex={0}
+                  />
+
+                  <Box position="relative" zIndex={1} p={6}>
                     <Text
                       fontSize="3xl"
                       fontWeight="extrabold"

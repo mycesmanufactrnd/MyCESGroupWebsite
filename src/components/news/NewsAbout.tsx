@@ -51,8 +51,8 @@ const newsData = [
     description:
       "Partnering with MSQH to advance healthcare accreditation with AI-powered tools",
     link: "https://www.facebook.com/share/p/1AyQV6vM7i/ ",
-    date: "2025-12-31",
-    displayDate: "December 31, 2025",
+    date: "2025-10-31",
+    displayDate: "October 31, 2025",
     category: "Partnership",
     featured: true,
   },

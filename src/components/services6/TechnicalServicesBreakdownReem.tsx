@@ -21,13 +21,13 @@ const services = [
       "A service focused on the timely and accurate submission of energy consumption data to the Energy Commission via the Energy Management Information System (EMIS) every six months.",
     ],
   },
-  {
-    title: "Energy Management System Review",
-    icon: FiCheckCircle,
-    items: [
-      "An expert evaluation of your facility’s current energy policies and procedures to ensure alignment with EMEER 2008 and international best practices.",
-    ],
-  },
+  // {
+  //   title: "Energy Management System Review",
+  //   icon: FiCheckCircle,
+  //   items: [
+  //     "An expert evaluation of your facility’s current energy policies and procedures to ensure alignment with EMEER 2008 and international best practices.",
+  //   ],
+  // },
   {
     title: "Energy Management System Support",
     icon: FiUsers,
@@ -70,7 +70,7 @@ export default function TechnicalServicesBreakdownReem() {
           fontWeight="bold"
           color={darkGreen}
         >
-          REM Consultancy Services Service Classification
+          Energy Manager Consultancy Services
         </Heading>
       </MotionBox>
 

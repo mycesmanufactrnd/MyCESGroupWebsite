@@ -60,7 +60,7 @@ export default function Footer() {
           {/* Column */}
           {[
             {
-              title: "WHAT WE DO",
+              title: "ABOUT US",
               links: [
                 { label: "Who We Are", href: "/about" },
                 {
@@ -75,7 +75,11 @@ export default function Footer() {
               title: "OUR BUSINESS",
               links: [
                 {
-                  label: "Biomedical Engineering",
+                  label: "MyCES Group",
+                  href: "/businessMyces/myces",
+                },
+                {
+                  label: "Biomedical",
                   href: "/services8/biomedical",
                 },
                 {
@@ -90,7 +94,7 @@ export default function Footer() {
             {
               title: "SERVICES",
               links: [
-                { label: "Energy Audit", href: "/services/energy-audit" },
+                { label: "Energy Audit", href: "/businessMyces/myces" },
                 { label: "Biomedical", href: "/services8/biomedical" },
                 {
                   label: "Equipment Rental",
@@ -105,10 +109,6 @@ export default function Footer() {
                   href: "/services3/measurement",
                 },
                 { label: "Robotic Class", href: "/services9/robotic" },
-                {
-                  label: "REM Consultancy",
-                  href: "/services5/reemconsultancy",
-                },
               ],
             },
             {
@@ -116,23 +116,19 @@ export default function Footer() {
               links: [
                 {
                   label: "EMS Certification",
-                  href: "/services7/emscertification",
+                  href: "/subportfolio4?service=SUSTAINABLE%20ENERGY%20MANAGEMENT%20SYSTEM%20(SEMS)",
                 },
                 {
-                  label: "Building Automation System",
+                  label: "Street Lighting",
                   href: "/services11/building",
                 },
                 {
-                  label: "Supply & Installation",
+                  label: "Electrical Wiring",
                   href: "/services11/building",
                 },
                 {
-                  label: "Testing & Maintenance",
-                  href: "/services11/building",
-                },
-                {
-                  label: "Smart Building Solutions",
-                  href: "/services11/building",
+                  label: "Energy Manager Consultancy",
+                  href: "/services5/reemconsultancy",
                 },
               ],
             },

@@ -41,7 +41,7 @@ export default function TechnicalServicesBreakdownds() {
       ref={ref}
       py={{ base: 20, md: 28 }}
       px={{ base: 6, md: 20 }}
-      maxW="1400px"
+      maxW="2000px"
       mx="auto"
       bg="rgba(232, 233, 230, 0.5)"
     >

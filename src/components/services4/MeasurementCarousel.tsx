@@ -7,10 +7,6 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 
 const MotionBox = motion(Box);
 
-type SafeIconButtonProps = React.ComponentProps<typeof IconButton> & {
-  icon: React.ReactElement;
-};
-
 const features = [
   {
     title: "Baseline Energy Measurement",
@@ -143,9 +139,6 @@ export default function MeasurementCarousel() {
 
         {/* Navigation */}
         <IconButton
-          {...({
-            icon: <ChevronLeftIcon boxSize={6} />,
-          } as SafeIconButtonProps)}
           aria-label="Previous"
           position="absolute"
           top="50%"
@@ -153,14 +146,14 @@ export default function MeasurementCarousel() {
           transform="translateY(-50%)"
           zIndex={10}
           onClick={prev}
-          bg="white"
+          bg="green.700"
           _hover={{ bg: "green.100" }}
           boxShadow="md"
-        />
+        >
+          <ChevronLeftIcon boxSize={6} />
+        </IconButton>
+
         <IconButton
-          {...({
-            icon: <ChevronRightIcon boxSize={6} />,
-          } as SafeIconButtonProps)}
           aria-label="Next"
           position="absolute"
           top="50%"
@@ -168,13 +161,15 @@ export default function MeasurementCarousel() {
           transform="translateY(-50%)"
           zIndex={10}
           onClick={next}
-          bg="white"
+          bg="green.700"
           _hover={{ bg: "green.100" }}
           boxShadow="md"
-        />
+        >
+          <ChevronRightIcon boxSize={6} />
+        </IconButton>
 
         {/* Pagination */}
-        <Flex justify="center" mt={10} gap={3}>
+        {/* <Flex justify="center" mt={10} gap={3}>
           {features.map((_, i) => (
             <Box
               key={i}
@@ -187,7 +182,7 @@ export default function MeasurementCarousel() {
               transition="all 0.3s"
             />
           ))}
-        </Flex>
+        </Flex> */}
       </Box>
     </Box>
   );
