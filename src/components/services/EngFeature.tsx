@@ -45,7 +45,7 @@ export default function EngFeature() {
               solutions, specializing in Indoor Air Quality (IAQ) and GermXit
               systems to create safer, healthier indoor environments. We combine
               advanced technology with engineering expertise to drive
-              compliance, and performance across industries.
+              compliance, efficiency, and performance across industries.
             </Text>
           </Box>
 

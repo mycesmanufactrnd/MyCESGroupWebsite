@@ -4,10 +4,12 @@ FROM node:22-alpine AS base
 FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
-COPY package*.json ./
-# --ignore-scripts skips the prisma generate postinstall; it runs in the builder
-# stage instead, where prisma.config.ts and full source are available
-RUN npm ci --ignore-scripts
+# Copy only package.json — NOT package-lock.json — so npm resolves fresh for
+# Alpine/musl and installs the correct platform binary for lightningcss
+COPY package.json ./
+COPY prisma ./prisma
+COPY prisma.config.ts ./
+RUN npm install
 
 # ---- Build ----
 FROM base AS builder
