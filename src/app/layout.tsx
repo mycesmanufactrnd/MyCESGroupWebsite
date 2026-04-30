@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Providers } from "./providers";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
+
+export const metadata: Metadata = {
+  verification: {
+    google: "X139nlCjpaps_HrnaeOIxBZjcdCc95kmygkEn9_4VC4",
+  },
+};
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
