@@ -1,9 +1,9 @@
+import 'dotenv/config'
 import { defineConfig } from '@prisma/config'
-import 'dotenv/config' // This loads variables from your .env file
 
 export default defineConfig({
+  schema: './prisma/schema.prisma',
   datasource: {
-    url: process.env.DATABASE_URL || "https://fclvkmfausfiseoukhax.supabase.co", // Your connection string with pooler
+    url: process.env.DATABASE_URL!,
   },
-  schema: './prisma/schema.prisma', // Optional, as this is the default
-})  
+})
