@@ -28,6 +28,7 @@ export default function LinkTree({
   title,
   profileImage,
 }: LinkTreeProps) {
+  
   const [year, setYear] = useState<number | null>(null);
 
   useEffect(() => {
