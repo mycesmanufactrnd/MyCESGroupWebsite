@@ -12,12 +12,15 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Create .env file
+      shell: powershell
       run: |
-        echo HR_EMAIL=${{ secrets.HR_EMAIL }} >> .env
-        echo EMAIL_USER=${{ secrets.EMAIL_PASS }} >> .env
-        echo Encryption=${{ vars.Encryption }} >> .env
-        echo SMTP_HOST=${{ vars.SMTP_HOST }} >> .env
-        echo SMTP_PORT=${{ vars.SMTP_PORT }} >> .env
+        $envFile = ".env"
+    
+        "HR_EMAIL=${{ secrets.HR_EMAIL }}" | Out-File -FilePath $envFile -Encoding utf8
+        "EMAIL_USER=${{ secrets.EMAIL_USER }}" | Out-File -FilePath $envFile -Encoding utf8 -Append
+        "Encryption=${{ vars.Encryption }}" | Out-File -FilePath $envFile -Encoding utf8 -Append
+        "SMTP_HOST=${{ vars.SMTP_HOST }}" | Out-File -FilePath $envFile -Encoding utf8 -Append
+        "SMTP_PORT=${{ vars.SMTP_PORT }}" | Out-File -FilePath $envFile -Encoding utf8 -Append
 
     - name: Build & Run
       run: |
