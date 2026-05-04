@@ -11,89 +11,9 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { CloseIcon } from "@chakra-ui/icons";
+import { teamMembers, TeamMember } from "./LinkTree/TeamMember";
 
 const MotionBox = motion(Box);
-
-// Define the TeamMember interface
-interface TeamMember {
-  name: string;
-  role: string;
-  image: string;
-  quote: string;
-}
-
-const teamMembers: TeamMember[] = [
-  {
-    name: "Mohd Faiz B. Hassan",
-    role: "Managing Director",
-    image: "/team/1.png",
-    quote:
-      "“Leading MYCES Group with integrity and strategic vision, ensuring sustainable growth, strong governance, and long-term value for our clients, partners, and communities.”",
-  },
-  {
-    name: "Muhammad Syamil B. Reizon @ Ridzwan",
-    role: "Associate Director",
-    image: "/team/7.png",
-    quote:
-      "“Driving operational excellence through collaboration, innovation, and disciplined execution to support MYCES Group’s strategic objectives.”",
-  },
-  {
-    name: "Nur Adibah Bt. Mohd Aslah",
-    role: "General Manager",
-    image: "/team/2.png",
-    quote:
-      "“Empowering teams and strengthening organizational performance through effective leadership, clear direction, and a commitment to continuous improvement.”",
-  },
-  {
-    name: "Muhammad Nur Iqbal B. Razemi",
-    role: "Chief of Operations",
-    image: "/team/14.png",
-    quote:
-      "“Committed to optimizing energy performance through technical expertise, regulatory compliance, and sustainable engineering solutions that support MYCES Group’s mission.”",
-  },
-  {
-    name: "Hishamudin B. Ibrahim",
-    role: "Project Advisor",
-    image: "/team/5.png",
-    quote:
-      "“Providing strategic guidance and industry insight to ensure projects are delivered efficiently, sustainably, and in alignment with long-term business goals.”",
-  },
-  {
-    name: "Nur Anis Syazwanie Bt. Mohd Zaidi",
-    role: "Chief Financial Officer",
-    image: "/team/4.jpeg",
-    quote:
-      "“Ensuring financial resilience and strategic resource management to support sustainable growth, transparency, and long-term organizational success.”",
-  },
-  {
-    name: "Hifzhan Ahmad B. Habibullah",
-    role: "Head of Project Engineering",
-    image: "/team/12.png",
-    quote:
-      "“Leading engineering excellence through precision, innovation, and quality-driven project execution to meet the highest industry standards.”",
-  },
-  {
-    name: "Mohd Zahiruddin B. Mohd Jamal",
-    role: "Head of Software Development",
-    image: "/team/3.png",
-    quote:
-      "“Driving digital innovation by delivering scalable, secure, and efficient software solutions that support the evolving needs of the business.”",
-  },
-  {
-    name: "Muhammad Amirul Hycarl B. Abu Bakar",
-    role: "Head of Electrical Project",
-    image: "/team/8.png",
-    quote:
-      "“Delivering reliable and efficient electrical solutions through technical expertise, safety compliance, and a commitment to project excellence.”",
-  },
-  {
-    name: "Muhammad Zulfazeli B. Abu Bakar",
-    role: "Technical Sales & Training Specialist",
-    image: "/team/11.png",
-    quote:
-      "“Fostering strategic partnerships and identifying growth opportunities to expand MYCES Group’s market presence and long-term value.”",
-  },
-];
 
 export default function MeetTheTeamSection() {
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
