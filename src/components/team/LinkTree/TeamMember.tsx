@@ -17,6 +17,7 @@ export const teamMembers: TeamMember[] = [
     name: "Mohd Faiz B. Hassan",
     role: "Managing Director",
     image: "/team/1.png",
+    facebook: "https://www.facebook.com/mycesgroup/",
     linkedin: "https://www.linkedin.com/in/mohd-faiz-hassan-911122206/",
     whatsapp: "http://wasap.my/60127758732/",
     quote:
@@ -27,6 +28,7 @@ export const teamMembers: TeamMember[] = [
     name: "Muhammad Syamil B. Reizon @ Ridzwan",
     role: "Associate Director",
     image: "/team/7.png",
+    facebook: "https://www.facebook.com/mycesgroup/",
     quote:
       "“Driving operational excellence through collaboration, innovation, and disciplined execution to support MYCES Group’s strategic objectives.”",
   },
@@ -35,6 +37,7 @@ export const teamMembers: TeamMember[] = [
     name: "Nur Adibah Bt. Mohd Aslah",
     role: "General Manager",
     image: "/team/2.png",
+    facebook: "https://www.facebook.com/mycesgroup/",
     quote:
       "“Empowering teams and strengthening organizational performance through effective leadership, clear direction, and a commitment to continuous improvement.”",
   },
@@ -43,6 +46,7 @@ export const teamMembers: TeamMember[] = [
     name: "Muhammad Nur Iqbal B. Razemi",
     role: "Chief of Operations",
     image: "/team/14.png",
+    facebook: "https://www.facebook.com/mycesgroup/",
     quote:
       "“Committed to optimizing energy performance through technical expertise, regulatory compliance, and sustainable engineering solutions that support MYCES Group’s mission.”",
   },
@@ -51,6 +55,7 @@ export const teamMembers: TeamMember[] = [
     name: "Hishamudin B. Ibrahim",
     role: "Project Advisor",
     image: "/team/5.png",
+    facebook: "https://www.facebook.com/mycesgroup/",
     quote:
       "“Providing strategic guidance and industry insight to ensure projects are delivered efficiently, sustainably, and in alignment with long-term business goals.”",
   },
@@ -59,6 +64,7 @@ export const teamMembers: TeamMember[] = [
     name: "Nur Anis Syazwanie Bt. Mohd Zaidi",
     role: "Chief Financial Officer",
     image: "/team/4.jpeg",
+    facebook: "https://www.facebook.com/mycesgroup/",
     quote:
       "“Ensuring financial resilience and strategic resource management to support sustainable growth, transparency, and long-term organizational success.”",
   },
@@ -67,6 +73,7 @@ export const teamMembers: TeamMember[] = [
     name: "Hifzhan Ahmad B. Habibullah",
     role: "Head of Project Engineering",
     image: "/team/12.png",
+    facebook: "https://www.facebook.com/mycesgroup/",
     quote:
       "“Leading engineering excellence through precision, innovation, and quality-driven project execution to meet the highest industry standards.”",
   },
@@ -75,6 +82,7 @@ export const teamMembers: TeamMember[] = [
     name: "Mohd Zahiruddin B. Mohd Jamal",
     role: "Head of Software Development",
     image: "/team/3.png",
+    facebook: "https://www.facebook.com/mycesgroup/",
     quote:
       "“Driving digital innovation by delivering scalable, secure, and efficient software solutions that support the evolving needs of the business.”",
   },
@@ -83,6 +91,7 @@ export const teamMembers: TeamMember[] = [
     name: "Muhammad Amirul Hycarl B. Abu Bakar",
     role: "Head of Electrical Project",
     image: "/team/8.png",
+    facebook: "https://www.facebook.com/mycesgroup/",
     quote:
       "“Delivering reliable and efficient electrical solutions through technical expertise, safety compliance, and a commitment to project excellence.”",
   },
@@ -91,6 +100,7 @@ export const teamMembers: TeamMember[] = [
     name: "Muhammad Zulfazeli B. Abu Bakar",
     role: "Technical Sales & Training Specialist",
     image: "/team/11.png",
+    facebook: "https://www.facebook.com/mycesgroup/",
     quote:
       "“Fostering strategic partnerships and identifying growth opportunities to expand MYCES Group’s market presence and long-term value.”",
   },
