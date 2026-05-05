@@ -19,7 +19,7 @@ const differentiators = [
     title: "Energy Audit",
     description:
       "Comprehensive analysis of energy consumption to identify inefficiencies and provide cost-saving improvement strategies.",
-    image: "/home/eng3.png",
+    image: "/mycesservice/eng1.png",
     imageLeft: true,
   },
   // {
@@ -47,14 +47,14 @@ const differentiators = [
     title: "Equipment Rental",
     description:
       "Flexible rental solutions providing access to specialized equipment without high upfront investment costs.",
-    image: "/mycesservice/bio1.png",
+    image: "/erservice/2.jpg",
     imageLeft: true,
   },
   {
     title: "Room Data Survey",
     description:
       "Accurate data collection and analysis for space optimization, planning, and energy efficiency improvements.",
-    image: "/mycesservice/eng1.png",
+    image: "/home/eng3.png",
     imageLeft: false,
   },
   {

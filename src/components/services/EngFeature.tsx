@@ -52,7 +52,7 @@ export default function EngFeature() {
           {/* RIGHT — Image */}
           <Box>
             <Image
-              src="/home/24.jpg"
+              src="/home/24.jpeg"
               alt="Team reviewing energy audit charts"
               borderRadius="2xl"
               w="full"

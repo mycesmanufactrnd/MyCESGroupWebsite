@@ -39,23 +39,12 @@ export const teamMembers: TeamMember[] = [
   {
     id: "x9t2l6v3",
     name: "Nur Adibah Bt. Mohd Aslah",
-    role: "General Manager",
+    role: "Project Director",
     image: "/team/2.png",
     website: "https://www.live.mycesgroup.com/",
     facebook: "https://www.facebook.com/mycesgroup/",
     quote:
       "“Empowering teams and strengthening organizational performance through effective leadership, clear direction, and a commitment to continuous improvement.”",
-  },
-  {
-    id: "wii7d9cw",
-    name: "Muhammad Haziq Bin Abdol Wahab",
-    role: "Facility Manager",
-    image: "/team/15.png",
-    linkedin: "https://www.linkedin.com/in/muhammad-haziq-a-b0b230153/",
-    website: "https://www.live.mycesgroup.com/",
-    facebook: "https://www.facebook.com/mycesgroup/",
-    quote:
-      "“Dedicated to ensuring efficient facility operations through proactive maintenance, safety compliance, and sustainable management practices that support MYCES Group’s mission.”",
   },
   {
     id: "k7w3n5b1",
@@ -81,7 +70,7 @@ export const teamMembers: TeamMember[] = [
   {
     id: "v6c1s9h3",
     name: "Nur Anis Syazwanie Bt. Mohd Zaidi",
-    role: "Chief Financial Officer",
+    role: "Finance Manager",
     image: "/team/4.jpeg",
     linkedin: "https://www.linkedin.com/in/anis-syazwanie-852715135/",
     website: "https://www.live.mycesgroup.com/",
@@ -100,6 +89,17 @@ export const teamMembers: TeamMember[] = [
     whatsapp: "http://wasap.my/60134584515/",
     quote:
       "“Leading engineering excellence through precision, innovation, and quality-driven project execution to meet the highest industry standards.”",
+  },
+  {
+    id: "wii7d9cw",
+    name: "Muhammad Haziq Bin Abdol Wahab",
+    role: "Facility Manager",
+    image: "/team/15.png",
+    linkedin: "https://www.linkedin.com/in/muhammad-haziq-a-b0b230153/",
+    website: "https://www.live.mycesgroup.com/",
+    facebook: "https://www.facebook.com/mycesgroup/",
+    quote:
+      "“Dedicated to ensuring efficient facility operations through proactive maintenance, safety compliance, and sustainable management practices that support MYCES Group’s mission.”",
   },
   {
     id: "z5n8k4p1",
