@@ -15,12 +15,27 @@ jobs:
       shell: powershell
       run: |
         $envFile = ".env"
-    
-        "HR_EMAIL=${{ secrets.HR_EMAIL }}" | Out-File -FilePath $envFile -Encoding utf8
+        
+        # Secrets
+        "DATABASE_URL=${{ secrets.DATABASE_URL }}" | Out-File -FilePath $envFile -Encoding utf8
+        "DIRECT_URL=${{ secrets.DIRECT_URL }}" | Out-File -FilePath $envFile -Encoding utf8 -Append
+        "SUPABASE_SERVICE_ROLE_KEY=${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" | Out-File -FilePath $envFile -Encoding utf8 -Append
+        "NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}" | Out-File -FilePath $envFile -Encoding utf8 -Append
+        "EMAIL_PASS=${{ secrets.EMAIL_PASS }}" | Out-File -FilePath $envFile -Encoding utf8 -Append
+        
+        # Configuration Variables 
+        "NEXT_PUBLIC_SUPABASE_URL=https://fclvkmfausfiseoukhax.supabase.co" | Out-File -FilePath $envFile -Encoding utf8 -Append
+        "HR_EMAIL=${{ secrets.HR_EMAIL }}" | Out-File -FilePath $envFile -Encoding utf8 -Append
         "EMAIL_USER=${{ secrets.EMAIL_USER }}" | Out-File -FilePath $envFile -Encoding utf8 -Append
-        "Encryption=${{ vars.Encryption }}" | Out-File -FilePath $envFile -Encoding utf8 -Append
         "SMTP_HOST=${{ vars.SMTP_HOST }}" | Out-File -FilePath $envFile -Encoding utf8 -Append
         "SMTP_PORT=${{ vars.SMTP_PORT }}" | Out-File -FilePath $envFile -Encoding utf8 -Append
+        "SMTP_SECURE=true" | Out-File -FilePath $envFile -Encoding utf8 -Append
+        
+        # PIC Emails
+        "EQUIPMENT_RENTAL_PIC_EMAIL=hello@mycesgroup.com" | Out-File -FilePath $envFile -Encoding utf8 -Append
+        "MV_PIC_EMAIL=hello@mycesgroup.com" | Out-File -FilePath $envFile -Encoding utf8 -Append
+        "REEM_PIC_EMAIL=hello@mycesgroup.com" | Out-File -FilePath $envFile -Encoding utf8 -Append
+        "EMS_PIC_EMAIL=hello@mycesgroup.com" | Out-File -FilePath $envFile -Encoding utf8 -Append
 
     - name: Build & Run
       run: |
