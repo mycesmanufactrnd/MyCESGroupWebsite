@@ -20,6 +20,7 @@ export const teamMembers: TeamMember[] = [
     image: "/team/1.png",
     website: "https://www.live.mycesgroup.com/",
     facebook: "https://www.facebook.com/mycesgroup/",
+    instagram: "https://www.instagram.com/mycesgroup?igsh=YXBjcGhydTYxazNs",
     linkedin: "https://www.linkedin.com/in/mohd-faiz-hassan-911122206/",
     whatsapp: "http://wasap.my/60127758732/",
     quote:
@@ -32,6 +33,7 @@ export const teamMembers: TeamMember[] = [
     image: "/team/7.png",
     website: "https://www.live.mycesgroup.com/",
     facebook: "https://www.facebook.com/mycesgroup/",
+    instagram: "https://www.instagram.com/mycesgroup?igsh=YXBjcGhydTYxazNs",
     whatsapp: "http://wasap.my/60126825589/",
     quote:
       "“Driving operational excellence through collaboration, innovation, and disciplined execution to support MYCES Group’s strategic objectives.”",
@@ -43,6 +45,8 @@ export const teamMembers: TeamMember[] = [
     image: "/team/2.png",
     website: "https://www.live.mycesgroup.com/",
     facebook: "https://www.facebook.com/mycesgroup/",
+    instagram: "https://www.instagram.com/mycesgroup?igsh=YXBjcGhydTYxazNs",
+    whatsapp: "http://wasap.my/60149125188/",
     quote:
       "“Empowering teams and strengthening organizational performance through effective leadership, clear direction, and a commitment to continuous improvement.”",
   },
@@ -54,6 +58,8 @@ export const teamMembers: TeamMember[] = [
     linkedin: "https://www.linkedin.com/in/iqbalrazemi/",
     website: "https://www.live.mycesgroup.com/",
     facebook: "https://www.facebook.com/mycesgroup/",
+    instagram: "https://www.instagram.com/mycesgroup?igsh=YXBjcGhydTYxazNs",
+    whatsapp: "http://wasap.my/60193925764/",
     quote:
       "“Committed to optimizing energy performance through technical expertise, regulatory compliance, and sustainable engineering solutions that support MYCES Group’s mission.”",
   },
@@ -64,6 +70,7 @@ export const teamMembers: TeamMember[] = [
     image: "/team/5.png",
     website: "https://www.live.mycesgroup.com/",
     facebook: "https://www.facebook.com/mycesgroup/",
+    instagram: "https://www.instagram.com/mycesgroup?igsh=YXBjcGhydTYxazNs",
     quote:
       "“Providing strategic guidance and industry insight to ensure projects are delivered efficiently, sustainably, and in alignment with long-term business goals.”",
   },
@@ -75,6 +82,7 @@ export const teamMembers: TeamMember[] = [
     linkedin: "https://www.linkedin.com/in/anis-syazwanie-852715135/",
     website: "https://www.live.mycesgroup.com/",
     facebook: "https://www.facebook.com/mycesgroup/",
+    instagram: "https://www.instagram.com/mycesgroup?igsh=YXBjcGhydTYxazNs",
     whatsapp: "http://wasap.my/60196000513/",
     quote:
       "“Ensuring financial resilience and strategic resource management to support sustainable growth, transparency, and long-term organizational success.”",
@@ -86,6 +94,7 @@ export const teamMembers: TeamMember[] = [
     image: "/team/12.png",
     website: "https://www.live.mycesgroup.com/",
     facebook: "https://www.facebook.com/mycesgroup/",
+    instagram: "https://www.instagram.com/mycesgroup?igsh=YXBjcGhydTYxazNs",
     whatsapp: "http://wasap.my/60134584515/",
     quote:
       "“Leading engineering excellence through precision, innovation, and quality-driven project execution to meet the highest industry standards.”",
@@ -98,6 +107,8 @@ export const teamMembers: TeamMember[] = [
     linkedin: "https://www.linkedin.com/in/muhammad-haziq-a-b0b230153/",
     website: "https://www.live.mycesgroup.com/",
     facebook: "https://www.facebook.com/mycesgroup/",
+    instagram: "https://www.instagram.com/mycesgroup?igsh=YXBjcGhydTYxazNs",
+    whatsapp: "http://wasap.my/60132042334/",
     quote:
       "“Dedicated to ensuring efficient facility operations through proactive maintenance, safety compliance, and sustainable management practices that support MYCES Group’s mission.”",
   },
@@ -108,10 +119,11 @@ export const teamMembers: TeamMember[] = [
     image: "/team/3.png",
     website: "https://www.live.mycesgroup.com/",
     facebook: "https://www.facebook.com/mycesgroup/",
+    instagram: "https://www.instagram.com/mycesgroup?igsh=YXBjcGhydTYxazNs",
     linkedin: "https://www.linkedin.com/in/zahiruddin-j-9957081a1/",
     whatsapp: "http://wasap.my/601165642468/",
     quote:
-      "“Driving digital innovation by delivering scalable, secure, and efficient software solutions that support the evolving needs of the business.”",
+    "“Driving digital innovation by delivering scalable, secure, and efficient software solutions that support the evolving needs of the business.”",
   },
   {
     id: "t1y7u3w9",
@@ -120,6 +132,8 @@ export const teamMembers: TeamMember[] = [
     image: "/team/8.png",
     website: "https://www.live.mycesgroup.com/",
     facebook: "https://www.facebook.com/mycesgroup/",
+    instagram: "https://www.instagram.com/mycesgroup?igsh=YXBjcGhydTYxazNs",
+    whatsapp: "http://wasap.my/601111887462/",
     quote:
       "“Delivering reliable and efficient electrical solutions through technical expertise, safety compliance, and a commitment to project excellence.”",
   },
@@ -130,6 +144,7 @@ export const teamMembers: TeamMember[] = [
     image: "/team/11.png",
     website: "https://www.live.mycesgroup.com/",
     facebook: "https://www.facebook.com/mycesgroup/",
+    instagram: "https://www.instagram.com/mycesgroup?igsh=YXBjcGhydTYxazNs",
     linkedin: "https://www.linkedin.com/in/zul-fazeli-423619107/",
     whatsapp: "http://wasap.my/60196861364/",
     quote:

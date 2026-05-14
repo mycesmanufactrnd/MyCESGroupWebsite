@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Box, Flex, Text, Image, Link } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { FiFacebook, FiGlobe, FiLinkedin, FiMessageCircle } from "react-icons/fi";
+import { FiFacebook, FiGlobe, FiInstagram, FiLinkedin, FiMessageCircle } from "react-icons/fi";
 import type { TeamMember } from "./TeamMember";
 import CompanyServices from "./CompanyServices";
 
@@ -45,6 +45,9 @@ export default function LinkTree({
       : []),
     ...(member?.facebook
       ? [{ icon: FiFacebook, href: member.facebook, label: "Facebook" }]
+      : []),
+    ...(member?.instagram
+      ? [{ icon: FiInstagram, href: member.instagram, label: "Instagram" }]
       : []),
     ...(member?.linkedin
       ? [{ icon: FiLinkedin, href: member.linkedin, label: "LinkedIn" }]
@@ -236,7 +239,7 @@ export default function LinkTree({
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
-              <Flex gap={5} mt={3} justify="center">
+              <Flex gap={4} mt={3} justify="center">
                 {socialLinks.map((social) => (
                   <Link
                     key={social.label}
