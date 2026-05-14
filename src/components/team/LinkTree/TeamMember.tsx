@@ -21,7 +21,7 @@ export const teamMembers: TeamMember[] = [
     website: "https://www.live.mycesgroup.com/",
     facebook: "https://www.facebook.com/mycesgroup/",
     instagram: "https://www.instagram.com/mycesgroup?igsh=YXBjcGhydTYxazNs",
-    linkedin: "https://www.linkedin.com/in/mohd-faiz-hassan-911122206/",
+    linkedin: "https://www.linkedin.com/company/myces-energy-consultant",
     whatsapp: "http://wasap.my/60127758732/",
     quote:
       "“Leading MYCES Group with integrity and strategic vision, ensuring sustainable growth, strong governance, and long-term value for our clients, partners, and communities.”",
@@ -34,6 +34,7 @@ export const teamMembers: TeamMember[] = [
     website: "https://www.live.mycesgroup.com/",
     facebook: "https://www.facebook.com/mycesgroup/",
     instagram: "https://www.instagram.com/mycesgroup?igsh=YXBjcGhydTYxazNs",
+    linkedin: "https://www.linkedin.com/company/myces-energy-consultant",
     whatsapp: "http://wasap.my/60126825589/",
     quote:
       "“Driving operational excellence through collaboration, innovation, and disciplined execution to support MYCES Group’s strategic objectives.”",
@@ -47,6 +48,7 @@ export const teamMembers: TeamMember[] = [
     facebook: "https://www.facebook.com/mycesgroup/",
     instagram: "https://www.instagram.com/mycesgroup?igsh=YXBjcGhydTYxazNs",
     whatsapp: "http://wasap.my/60149125188/",
+    linkedin: "https://www.linkedin.com/company/myces-energy-consultant",
     quote:
       "“Empowering teams and strengthening organizational performance through effective leadership, clear direction, and a commitment to continuous improvement.”",
   },
@@ -55,7 +57,7 @@ export const teamMembers: TeamMember[] = [
     name: "Muhammad Nur Iqbal B. Razemi",
     role: "Chief of Operations",
     image: "/team/14.png",
-    linkedin: "https://www.linkedin.com/in/iqbalrazemi/",
+    linkedin: "https://www.linkedin.com/company/myces-energy-consultant",
     website: "https://www.live.mycesgroup.com/",
     facebook: "https://www.facebook.com/mycesgroup/",
     instagram: "https://www.instagram.com/mycesgroup?igsh=YXBjcGhydTYxazNs",
@@ -71,6 +73,7 @@ export const teamMembers: TeamMember[] = [
     website: "https://www.live.mycesgroup.com/",
     facebook: "https://www.facebook.com/mycesgroup/",
     instagram: "https://www.instagram.com/mycesgroup?igsh=YXBjcGhydTYxazNs",
+    linkedin: "https://www.linkedin.com/company/myces-energy-consultant",
     quote:
       "“Providing strategic guidance and industry insight to ensure projects are delivered efficiently, sustainably, and in alignment with long-term business goals.”",
   },
@@ -79,7 +82,7 @@ export const teamMembers: TeamMember[] = [
     name: "Nur Anis Syazwanie Bt. Mohd Zaidi",
     role: "Finance Manager",
     image: "/team/4.jpeg",
-    linkedin: "https://www.linkedin.com/in/anis-syazwanie-852715135/",
+    linkedin: "https://www.linkedin.com/company/myces-energy-consultant",
     website: "https://www.live.mycesgroup.com/",
     facebook: "https://www.facebook.com/mycesgroup/",
     instagram: "https://www.instagram.com/mycesgroup?igsh=YXBjcGhydTYxazNs",
@@ -96,6 +99,7 @@ export const teamMembers: TeamMember[] = [
     facebook: "https://www.facebook.com/mycesgroup/",
     instagram: "https://www.instagram.com/mycesgroup?igsh=YXBjcGhydTYxazNs",
     whatsapp: "http://wasap.my/60134584515/",
+    linkedin: "https://www.linkedin.com/company/myces-energy-consultant",
     quote:
       "“Leading engineering excellence through precision, innovation, and quality-driven project execution to meet the highest industry standards.”",
   },
@@ -104,7 +108,7 @@ export const teamMembers: TeamMember[] = [
     name: "Muhammad Haziq Bin Abdol Wahab",
     role: "Facility Manager",
     image: "/team/15.png",
-    linkedin: "https://www.linkedin.com/in/muhammad-haziq-a-b0b230153/",
+    linkedin: "https://www.linkedin.com/company/myces-energy-consultant",
     website: "https://www.live.mycesgroup.com/",
     facebook: "https://www.facebook.com/mycesgroup/",
     instagram: "https://www.instagram.com/mycesgroup?igsh=YXBjcGhydTYxazNs",
@@ -120,10 +124,10 @@ export const teamMembers: TeamMember[] = [
     website: "https://www.live.mycesgroup.com/",
     facebook: "https://www.facebook.com/mycesgroup/",
     instagram: "https://www.instagram.com/mycesgroup?igsh=YXBjcGhydTYxazNs",
-    linkedin: "https://www.linkedin.com/in/zahiruddin-j-9957081a1/",
+    linkedin: "https://www.linkedin.com/company/myces-energy-consultant",
     whatsapp: "http://wasap.my/601165642468/",
     quote:
-    "“Driving digital innovation by delivering scalable, secure, and efficient software solutions that support the evolving needs of the business.”",
+      "“Driving digital innovation by delivering scalable, secure, and efficient software solutions that support the evolving needs of the business.”",
   },
   {
     id: "t1y7u3w9",
@@ -134,6 +138,7 @@ export const teamMembers: TeamMember[] = [
     facebook: "https://www.facebook.com/mycesgroup/",
     instagram: "https://www.instagram.com/mycesgroup?igsh=YXBjcGhydTYxazNs",
     whatsapp: "http://wasap.my/601111887462/",
+    linkedin: "https://www.linkedin.com/company/myces-energy-consultant",
     quote:
       "“Delivering reliable and efficient electrical solutions through technical expertise, safety compliance, and a commitment to project excellence.”",
   },
@@ -145,7 +150,7 @@ export const teamMembers: TeamMember[] = [
     website: "https://www.live.mycesgroup.com/",
     facebook: "https://www.facebook.com/mycesgroup/",
     instagram: "https://www.instagram.com/mycesgroup?igsh=YXBjcGhydTYxazNs",
-    linkedin: "https://www.linkedin.com/in/zul-fazeli-423619107/",
+    linkedin: "https://www.linkedin.com/company/myces-energy-consultant",
     whatsapp: "http://wasap.my/60196861364/",
     quote:
       "“Fostering strategic partnerships and identifying growth opportunities to expand MYCES Group’s market presence and long-term value.”",
