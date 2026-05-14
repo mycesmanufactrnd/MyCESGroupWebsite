@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Box, Flex, Text, Image, Link } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { FiFacebook, FiLinkedin, FiMessageCircle } from "react-icons/fi";
+import { FiFacebook, FiGlobe, FiInstagram, FiLinkedin, FiMessageCircle } from "react-icons/fi";
 import type { TeamMember } from "./TeamMember";
 import CompanyServices from "./CompanyServices";
 
@@ -28,6 +28,7 @@ export default function LinkTree({
   title,
   profileImage,
 }: LinkTreeProps) {
+
   const [year, setYear] = useState<number | null>(null);
 
   useEffect(() => {
@@ -39,8 +40,14 @@ export default function LinkTree({
   const displayImage = profileImage ?? member?.image ?? "/team/placeholder.png";
 
   const socialLinks: SocialLink[] = [
+    ...(member?.website
+      ? [{ icon: FiGlobe, href: member.website, label: "Website" }]
+      : []),
     ...(member?.facebook
       ? [{ icon: FiFacebook, href: member.facebook, label: "Facebook" }]
+      : []),
+    ...(member?.instagram
+      ? [{ icon: FiInstagram, href: member.instagram, label: "Instagram" }]
       : []),
     ...(member?.linkedin
       ? [{ icon: FiLinkedin, href: member.linkedin, label: "LinkedIn" }]
@@ -60,7 +67,6 @@ export default function LinkTree({
       px={4}
       py={8}
     >
-      {/* Company branding */}
       <MotionBox
         initial={{ y: -10, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}

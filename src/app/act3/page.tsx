@@ -48,7 +48,7 @@ export default function Act3Page() {
         ISO 41001 : 2018
       </Text>
 
-      {/* IMAGE VIEW */}
+      {/* IMAGE VIEWw */}
       <Flex justify="center" align="center">
         <Box
           w="100%"
@@ -97,7 +97,7 @@ export default function Act3Page() {
           position="fixed"
           inset={0}
           bg="blackAlpha.800"
-          zIndex={50}
+          zIndex={9999}
           display="flex"
           alignItems="center"
           justifyContent="center"

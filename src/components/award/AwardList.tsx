@@ -135,7 +135,7 @@ export default function AwardsList() {
           position="fixed"
           inset={0}
           bg="blackAlpha.800"
-          zIndex={50}
+          zIndex={9999}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -158,6 +158,7 @@ export default function AwardsList() {
               onClick={() => setSelectedAward(null)}
               aria-label="Close"
               size="sm"
+              zIndex={10000}
             >
               <CloseIcon />
             </IconButton>

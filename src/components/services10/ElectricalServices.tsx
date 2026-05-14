@@ -11,7 +11,7 @@ const deepGray = "#2D2D2D";
 const services = [
   {
     title: "Electrical Wiring & Installation",
-    image: "/portfolio/91.png",
+    image: "/portfolio/30.png",
     primary:
       "We provide complete electrical wiring solutions for residential, commercial, and industrial projects.",
     secondary:
@@ -40,14 +40,6 @@ const services = [
       "Beyond installation, we provide thorough testing and commissioning services to ensure systems function at optimum performance.",
     secondary:
       "We also offer preventive and corrective maintenance packages to extend equipment lifespan and minimize operational downtime.",
-  },
-  {
-    title: "Energy Efficiency & Smart Building Solutions",
-    image: "/basservice/5.jpg",
-    primary:
-      "As part of our commitment to sustainability, we deliver energy-saving solutions including automation and energy monitoring systems.",
-    secondary:
-      "Our optimized control strategies help clients reduce operational costs while supporting greener and more efficient building operations.",
   },
 ];
 

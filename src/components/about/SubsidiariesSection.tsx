@@ -38,7 +38,7 @@ const subsidiaries = [
   },
   {
     name: "MyCES Engineering",
-    image: "/home/eng1.png",
+    image: "/home/myces_eng.jpg",
     href: "/services/energy-audit",
   },
 ];

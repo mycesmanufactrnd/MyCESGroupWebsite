@@ -19,7 +19,7 @@ export default function OurStorySection() {
       display="flex"
       alignItems="center"
       justifyContent="center"
-      bgImage="url('/images/core2.jpg')"
+      bgImage="url('/images/core.jpeg')"
       bgSize="cover"
       bgPos="center"
       bgRepeat="no-repeat"

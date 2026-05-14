@@ -67,7 +67,7 @@ export default function Act2Page() {
           position="fixed"
           inset={0}
           bg="blackAlpha.800"
-          zIndex={50}
+          zIndex={9999}
           display="flex"
           alignItems="center"
           justifyContent="center"
